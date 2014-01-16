@@ -1,0 +1,41 @@
+import("FLCore")
+import("methods")
+exportClasses(
+	"FLCatch",
+	"FLCatches",
+	"FLFishery"
+)
+exportMethods(
+  "landings.n",
+  "landings.wt",
+  "landings.n<-",
+  "landings.wt<-",
+  "discards.n",
+  "discards.wt",
+  "discards.n<-",
+  "discards.wt<-",
+  "catch.sel",
+  "catch.sel<-",
+  "price",
+  "price<-",
+  "catch.q",
+  "catch.q<-",
+  "effort",
+  "vcost",
+  "fcost",
+  "effort<-",
+  "vcost<-",
+  "fcost<-",
+  "FLCatch",
+  "FLFishery",
+  "landings",
+  "discards",
+  "catch",
+  "catch",
+  "catch.n",
+  "catch.wt",
+  "landings.sel",
+  "discards.sel",
+  "discards.ratio",
+  "cost",
+	"revenue")

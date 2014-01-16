@@ -1,0 +1,12 @@
+Package: FLFishery
+Title: Draft of classes and methods for simpler fleet/fishery modelling
+Version: 0.1.20140116
+Author: Iago Mosqueira <iago.mosqueira-sanchez@jrc.ec.europa.eu>
+Description: FLFishery
+Depends: methods, R(>= 3.0.0)
+Imports: FLCore
+Maintainer: Iago Mosqueira <iago.mosqueira-sanchez@jrc.ec.europa.eu>
+License: GPL-2
+LazyLoad: Yes
+LazyData: No
+Collate: classes.R generics.R accessors.R coerce.R constructors.R methods.R
