@@ -36,7 +36,9 @@ setClass("FLCatch",
 		catch.q = FLPar(q=NA))
 ) # }}}
 
+# FLCatches {{{
 setClass("FLCatches", contains=c("FLlst"))
+# }}}
 
 # FLFishery {{{
 setClass("FLFishery",
