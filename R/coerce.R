@@ -7,5 +7,11 @@
 # Notes:
 
 # FLStock {{{
+
+setAs('FLStock', 'FLCatch',
+	function(from)
+	{
+	}
+)
 # }}}
 

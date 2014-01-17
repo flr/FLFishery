@@ -30,6 +30,15 @@ FLCatch()
 
 # revenue
 
-# harvest(FLFishery, FLBiol)
+# harvest(FLFishery)
+setMethod("harvest", signature(object="FLFishery"),
+	function(object, alpha=1, beta=1) {
+
+	res <- lapply(object, function(x) catch.q(x) * catch.sel(x) %*% effort(object))
+
+	return(res)
+	}
+)
 
 # harvest(FLBiol, FLFishery)
+#  harvest(FLBiol, catch.n, ini.f=)

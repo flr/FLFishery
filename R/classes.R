@@ -36,6 +36,15 @@ setClass("FLCatch",
 		catch.q = FLPar(q=NA))
 ) # }}}
 
+# dims[1:5]
+
+# iter 1 or N
+
+# catch.q params='q' and iter 1 or N
+# catch.q dims equal to flqs
+
+
+
 # FLCatches {{{
 setClass("FLCatches", contains=c("FLlst"),
 
@@ -59,6 +68,8 @@ setClass("FLCatches", contains=c("FLlst"),
 			return(paste("All FLCatch objects must share dimensions 2 to 5: ",
 				names(dmns)[!duplicated(dmns)][-1]))
 
+		# iters 1 or N
+
 		return(TRUE)
 	}
 ) # }}}
@@ -77,7 +88,13 @@ setClass("FLFishery",
 	
 	# VALIDITY
 	validity=function(object) {
-		# 
+		
+		# dims[2:5] of flqs match dims of flcs
+
+		# iters 1 or N
+
+		# effort, vcost and fcost, age='all'
+
 		return(TRUE)
 	}
 ) # }}}
