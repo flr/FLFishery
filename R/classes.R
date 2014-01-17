@@ -37,8 +37,31 @@ setClass("FLCatch",
 ) # }}}
 
 # FLCatches {{{
-setClass("FLCatches", contains=c("FLlst"))
-# }}}
+setClass("FLCatches", contains=c("FLlst"),
+
+	# VALIDITY
+	validity=function(object) {
+
+		# all object are FLCatch
+		if(any(!unlist(lapply(object, is, 'FLCatch'))))
+			return("Input objects must be of class 'FLCatch'")
+
+		dmns <- lapply(object, dims)
+
+		# quant == 'age'
+		qua <- unlist(lapply(dmns, '[', 'quant'))
+		if(length(unique(qua)) > 1)
+			return("FLCatch objects must have quant='age'")
+
+		# dims [c(2,3,4,5)] must be the same
+		dmns <- lapply(object, function(x) dimnames(landings.n(x))[-c(1, 6)])
+		if(sum(duplicated(dmns)) != (length(dmns) -1))
+			return(paste("All FLCatch objects must share dimensions 2 to 5: ",
+				names(dmns)[!duplicated(dmns)][-1]))
+
+		return(TRUE)
+	}
+) # }}}
 
 # FLFishery {{{
 setClass("FLFishery",
@@ -50,5 +73,11 @@ setClass("FLFishery",
 	prototype(
 		effort=FLQuant(),
 		vcost=FLQuant(),
-		fcost=FLQuant())
+		fcost=FLQuant()),
+	
+	# VALIDITY
+	validity=function(object) {
+		# 
+		return(TRUE)
+	}
 ) # }}}
