@@ -140,3 +140,7 @@ setReplaceMethod("fcost", signature(object="FLFishery", value="FLQuant"),
 		return(object)
 	}
 ) # }}}
+
+# FLFisheries {{{
+
+# }}}

@@ -11,6 +11,9 @@
 setAs('FLStock', 'FLCatch',
 	function(from)
 	{
+		FLCatch(landings.n=landings.n(from), landings.wt=landings.wt(from),
+			discards.n=discards.n(from), discards.wt=discards.wt(from),
+			catch.sel=harvest(from) %/% apply(harvest(from), 2:6, max))
 	}
 )
 # }}}

@@ -26,3 +26,7 @@ ef <- (harvest(tes)/(catch.q(ca) * catch.sel(ca)))[1,]
 dimnames(ef)$age <- 'all'
 
 fis <- FLFishery(TES=ca, effort=ef)
+
+
+all.equal(harvest(tes), harvest(fis)[[1]])
+

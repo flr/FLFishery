@@ -98,3 +98,31 @@ setClass("FLFishery",
 		return(TRUE)
 	}
 ) # }}}
+
+# FLFisheries
+
+# FLFisheries {{{
+setClass("FLFisheries", contains=c("FLlst"),
+
+	# VALIDITY
+	validity=function(object) {
+
+		# all object are FLFishery
+		if(any(!unlist(lapply(object, is, 'FLFishery'))))
+			return("Input objects must be of class 'FLFishery'")
+
+		dmns <- lapply(object, dims)
+
+		# quant == 'age'
+		qua <- unlist(lapply(dmns, '[', 'quant'))
+		if(length(unique(qua)) > 1)
+			return("FLFishery objects must have quant='age'")
+
+		# iters 1 or N
+
+		return(TRUE)
+	}
+) # }}}
+# catch
+
+# TODO fwd w/ 2 FLFishery
