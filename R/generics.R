@@ -12,6 +12,8 @@ setGeneric('FLCatches', function(object, ...) standardGeneric('FLCatches'))
 
 setGeneric('FLFishery', function(object, ...) standardGeneric('FLFishery'))
 
+setGeneric('FLFisheries', function(object, ...) standardGeneric('FLFisheries'))
+
 setGeneric('catch.sel', function(object, ...) standardGeneric('catch.sel'))
 
 setGeneric('catch.sel<-', function(object, ..., value) standardGeneric('catch.sel<-'))

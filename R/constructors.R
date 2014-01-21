@@ -152,3 +152,22 @@ setMethod("FLFishery", signature(object="missing"),
 		
 	}
 ) # }}}
+
+# FLFisheries {{{
+setMethod('FLFisheries', signature(object='list'),
+	function(object) {
+
+		return(new('FLFisheries', object))
+	}
+) 
+
+setMethod('FLFisheries', signature(object='missing'),
+	function(...) {
+
+		args <- list(...)
+
+		return(FLFisheries(args))
+	}
+)
+
+# }}}

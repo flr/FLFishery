@@ -2,3 +2,4 @@
 - Using above information to correctly set @range, no info on ages
 - BUILD FLC & FLF datasets
 - CHECK harvest(FLBiol)
+- WRITE fwd w/ 2 FLFishery

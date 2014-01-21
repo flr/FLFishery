@@ -143,4 +143,10 @@ setReplaceMethod("fcost", signature(object="FLFishery", value="FLQuant"),
 
 # FLFisheries {{{
 
-# }}}
+setMethod('landings.n', signature(object='FLFisheries'),
+	function(object) {
+
+		lapply(object, landings.n)
+
+	}
+) # }}}

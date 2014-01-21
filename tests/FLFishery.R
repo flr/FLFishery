@@ -36,3 +36,6 @@ fis <- FLFishery(FLCatches(TES=ca))
 
 all.equal(harvest(tes), harvest(fis)[[1]])
 
+
+fiss <- FLFisheries(LL=fis)
+

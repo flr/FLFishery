@@ -7,11 +7,6 @@
 # Notes:
 
 # FLCatch {{{
-
-# validity
-# - catch.q must have params='q'
-# -
-
 setClass("FLCatch",
 	representation(
 		"FLComp",
@@ -33,17 +28,18 @@ setClass("FLCatch",
 		discards.wt = FLQuant(),
 		catch.sel = FLQuant(),
 		price = FLQuant(),
-		catch.q = FLPar(q=NA))
+		catch.q = FLPar(q=NA)),
+	
+	# VALIDITY
+	validity=function(object) {
+	
+		# dims[1:5]
+		# iter 1 or N
+		# catch.q params='q' and iter 1 or N
+		# catch.q dims equal to flqs
+		return(TRUE)
+	}
 ) # }}}
-
-# dims[1:5]
-
-# iter 1 or N
-
-# catch.q params='q' and iter 1 or N
-# catch.q dims equal to flqs
-
-
 
 # FLCatches {{{
 setClass("FLCatches", contains=c("FLlst"),
@@ -99,30 +95,25 @@ setClass("FLFishery",
 	}
 ) # }}}
 
-# FLFisheries
-
 # FLFisheries {{{
 setClass("FLFisheries", contains=c("FLlst"),
 
 	# VALIDITY
 	validity=function(object) {
 
-		# all object are FLFishery
+		# all objects are FLFishery
 		if(any(!unlist(lapply(object, is, 'FLFishery'))))
 			return("Input objects must be of class 'FLFishery'")
 
-		dmns <- lapply(object, dims)
+		# dmns <- lapply(object, dims)
 
 		# quant == 'age'
-		qua <- unlist(lapply(dmns, '[', 'quant'))
-		if(length(unique(qua)) > 1)
-			return("FLFishery objects must have quant='age'")
+		# qua <- unlist(lapply(dmns, '[', 'quant'))
+		# if(length(unique(qua)) > 1)
+		# 	return("FLFishery objects must have quant='age'")
 
 		# iters 1 or N
 
 		return(TRUE)
 	}
 ) # }}}
-# catch
-
-# TODO fwd w/ 2 FLFishery
