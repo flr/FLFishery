@@ -73,7 +73,6 @@ setClass("FLCatches", contains=c("FLlst"),
 # FLFishery {{{
 setClass("FLFishery",
 	representation(
-		"FLCatches",
 		effort="FLQuant",
 		vcost="FLQuant",
 		fcost="FLQuant"),
@@ -81,6 +80,7 @@ setClass("FLFishery",
 		effort=FLQuant(),
 		vcost=FLQuant(),
 		fcost=FLQuant()),
+	contains=c('FLComp', 'FLCatches'),
 	
 	# VALIDITY
 	validity=function(object) {
