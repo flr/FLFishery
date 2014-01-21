@@ -8,8 +8,8 @@
 
 # FLCatch {{{
 setClass("FLCatch",
+	contains='FLComp',
 	representation(
-		"FLComp",
 		landings.n = "FLQuant",
 		landings.wt = "FLQuant",
 		discards.n = "FLQuant",
@@ -72,6 +72,7 @@ setClass("FLCatches", contains=c("FLlst"),
 
 # FLFishery {{{
 setClass("FLFishery",
+	contains=c('FLComp', 'FLCatches'),
 	representation(
 		effort="FLQuant",
 		vcost="FLQuant",
@@ -80,7 +81,6 @@ setClass("FLFishery",
 		effort=FLQuant(),
 		vcost=FLQuant(),
 		fcost=FLQuant()),
-	contains=c('FLComp', 'FLCatches'),
 	
 	# VALIDITY
 	validity=function(object) {
