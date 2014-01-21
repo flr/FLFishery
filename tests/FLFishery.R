@@ -27,6 +27,12 @@ dimnames(ef)$age <- 'all'
 
 fis <- FLFishery(TES=ca, effort=ef)
 
+fis <- FLFishery(new('FLCatches', list(TES=ca)), effort=ef)
+
+fis <- FLFishery(new('FLCatches', list(TES=ca)))
+
+fis <- FLFishery(FLCatches(TES=ca))
+
 
 all.equal(harvest(tes), harvest(fis)[[1]])
 

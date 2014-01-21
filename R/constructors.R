@@ -59,6 +59,25 @@ setMethod("FLCatch", signature(object="missing"),
 	}
 ) # }}}
 
+# FLCatches {{{
+setMethod('FLCatches', signature(object='list'),
+	function(object) {
+
+		return(new('FLCatches', object))
+	}
+) 
+
+setMethod('FLCatches', signature(object='missing'),
+	function(...) {
+
+		args <- list(...)
+
+		return(FLCatches(args))
+	}
+)
+
+# }}}
+
 # FLFishery() {{{
 
 # list

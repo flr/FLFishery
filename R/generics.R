@@ -8,6 +8,8 @@
 
 setGeneric('FLCatch', function(object, ...) standardGeneric('FLCatch'))
 
+setGeneric('FLCatches', function(object, ...) standardGeneric('FLCatches'))
+
 setGeneric('FLFishery', function(object, ...) standardGeneric('FLFishery'))
 
 setGeneric('catch.sel', function(object, ...) standardGeneric('catch.sel'))
