@@ -1,5 +1,3 @@
-- FLFishery() constructor to deal with different dimensions in multiple FLcatch objects and/or FLQuant slots and reshapping as appropriate.
-- Using above information to correctly set @range, no info on ages
 - BUILD FLC & FLF datasets
 - CHECK harvest(FLBiol)
-- WRITE fwd w/ 2 FLFishery
+- WRITE fwd in R w/ 2 FLFishery

@@ -6,9 +6,6 @@
 # Soundtrack:
 # Notes:
 
-# XX {{{
-# }}}
-
 library(FLFishery)
 
 load('./LP_ID30_AR_RC_SELF_UR0_TS60-1.RData')

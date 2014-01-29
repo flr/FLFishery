@@ -104,3 +104,5 @@ setMethod("revenue", signature("FLFishery"),
 # harvest(FLFishery, FLBiol)
 
 # harvest(FLBiol, FLFishery)
+
+
