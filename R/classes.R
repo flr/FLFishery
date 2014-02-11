@@ -42,7 +42,9 @@ setClass("FLCatch",
 ) # }}}
 
 # FLCatches {{{
-setClass("FLCatches", contains=c("FLlst"),
+setClass("FLCatches",
+	
+	contains=c("FLlst"),
 
 	# VALIDITY
 	validity=function(object) {

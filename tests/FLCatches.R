@@ -6,8 +6,9 @@
 # Soundtrack:
 # Notes:
 
-# XX {{{
-# }}}
+library(FLFishery)
+
+data(ple4)
 
 ca <- FLCatch(landings.n=landings.n(ple4), landings.wt=landings.wt(ple4),
 	discards.n=discards.n(ple4), discards.wt=discards.wt(ple4),
@@ -18,6 +19,6 @@ cas <- new("FLCatches", list(PLE=ca, SOL=ca))
 
 ## 
 
-object <- FLFishery(cas, effort=catch(ple4))
+catch <- FLFishery(cas, effort=catch(ple4))
 
-bi <- as(ple4, 'FLBiol')
+object <- as(ple4, 'FLBiol')

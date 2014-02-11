@@ -6,6 +6,8 @@ exportClasses(
 	"FLFishery"
 )
 exportMethods(
+	"[",
+	"[[<-",
   "landings.n",
   "landings.wt",
   "landings.n<-",

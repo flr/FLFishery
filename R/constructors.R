@@ -59,7 +59,7 @@ setMethod("FLCatch", signature(object="missing"),
 	}
 ) # }}}
 
-# FLCatches {{{
+# FLCatches () {{{
 setMethod('FLCatches', signature(object='list'),
 	function(object) {
 

@@ -6,6 +6,23 @@
 # Soundtrack:
 # Notes:
 
+# [, [[<- {{{
+setMethod('[', signature(x="FLFishery", i="ANY", j="missing"),
+	function(x, i) {
+		x@.Data <- x@.Data[i]
+		return(x)
+	}
+)
+
+setMethod('[[<-', signature(x="FLFishery", i="ANY", j="missing", value="FLCatch"),
+	function(x, i, value) {
+		x@.Data[[i]] <- value
+		return(x)
+	}
+)
+
+# }}}
+
 # landings, discards {{{
 setMethod("landings", signature(object="FLCatch"),
 	function(object) {
@@ -101,8 +118,18 @@ setMethod("revenue", signature("FLFishery"),
 	}
 ) # }}}
 
-# harvest(FLFishery, FLBiol)
+# plot {{{
+setMethod("plot", signature(x="FLCatch", y="missing"),
+	function(x, ...) {
 
-# harvest(FLBiol, FLFishery)
+		fqs <- FLQuants(Catch=catch(x), DiscardsRatio=discards.ratio(x), Price=price(x))
 
+		p <- plot(fqs)
 
+		p <- ggplot(data=catch(x), aes(x=year, y=data)) + geom_line() 
+
+		p + geom_bar(data=as.data.frame(discards(x)), aes(x=year, y=data), fill='red', colour='darkred', alpha=0.5, stat='identity')
+
+		plot(fqs)
+	})
+# {{{
