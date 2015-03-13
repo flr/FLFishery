@@ -78,7 +78,7 @@ setMethod("catch.wt", signature(object="FLCatch"),
 	function(object) {
 		return((landings.wt(object) * landings.n(object) +
 					 discards.wt(object) * discards.n(object)) /
-					 (landings.n(object) * discards.n(object)))
+					 (landings.n(object) + discards.n(object)))
 	}
 ) # }}}
 
