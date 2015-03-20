@@ -78,11 +78,14 @@ setClass("FLFishery",
 	representation(
 		effort="FLQuant",
 		vcost="FLQuant",
-		fcost="FLQuant"),
+		fcost="FLQuant",
+		ftime="FLQuant"),
 	prototype(
 		effort=FLQuant(),
 		vcost=FLQuant(),
-		fcost=FLQuant()),
+		fcost=FLQuant(),
+		ftime=FLQuant()
+		),
 	
 	# VALIDITY
 	validity=function(object) {
@@ -91,7 +94,7 @@ setClass("FLFishery",
 
 		# iters 1 or N
 
-		# effort, vcost and fcost, age='all'
+		# ftime, effort, vcost and fcost, age='all'
 
 		return(TRUE)
 	}
