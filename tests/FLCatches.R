@@ -20,5 +20,6 @@ cas <- new("FLCatches", list(PLE=ca, SOL=ca))
 ## 
 
 catch <- FLFishery(cas, effort=catch(ple4))
+catch <- FLFishery(cas)
 
 object <- as(ple4, 'FLBiol')

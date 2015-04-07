@@ -83,7 +83,7 @@ setMethod('FLCatches', signature(object='missing'),
 # list
 setMethod("FLFishery", signature(object="list"),
 	function(object, ...) {
-
+		
 		args <- list(...)
 
 		cas <- new("FLCatches", object)
@@ -116,7 +116,7 @@ setMethod("FLFishery", signature(object="list"),
 		}
 
 		# create new object
-		res <- new("FLFishery", cas, effort=flq, vcost=flq, fcost=flq)
+		res <- new("FLFishery", cas, effort=flq, vcost=flq, fcost=flq, ftime=flq)
 
 		# fill slots provided
 		for (i in names(args))
