@@ -1,12 +1,13 @@
 Package: FLFishery
-Title: Draft of classes and methods for simpler fleet/fishery modelling
-Version: 0.1.20140520
-Date: 2014-01-21
+Title: Classes and Methods for Simpler Fleet/Fishery Modelling
+Version: 0.1.20150528
+Date: 2015-05-28
 Author: Iago Mosqueira <iago.mosqueira-sanchez@jrc.ec.europa.eu>
 Description: FLFishery
 Depends:
 	R(>= 3.0.0),
-	methods,
+	methods
+Imports:
 	FLCore
 Suggests:
 	knitr
@@ -14,5 +15,5 @@ Maintainer: Iago Mosqueira <iago.mosqueira-sanchez@jrc.ec.europa.eu>
 License: GPL-2
 LazyLoad: Yes
 LazyData: No
-Collate: classes.R generics.R accessors.R coerce.R constructors.R methods.R
+Collate: classes.R generics.R accessors.R coerce.R constructors.R methods.R getPlural.R 
 VignetteBuilder: knitr
