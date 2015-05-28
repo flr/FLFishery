@@ -1,9 +1,10 @@
-import("FLCore")
 import("methods")
+import("FLCore")
 exportClasses(
 	"FLCatch",
 	"FLCatches",
-	"FLFishery"
+	"FLFishery",
+	"FLFisheries"
 )
 exportMethods(
 	"[",
