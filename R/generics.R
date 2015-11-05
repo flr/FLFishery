@@ -21,3 +21,7 @@ setGeneric('catch.sel<-', function(object, ..., value) standardGeneric('catch.se
 setGeneric('discards.ratio', function(object, ...) standardGeneric('discards.ratio'))
 
 setGeneric('cost', function(object, ...) standardGeneric('cost'))
+
+setGeneric('ccost', function(object, ...) standardGeneric('ccost'))
+
+setGeneric('profit', function(object, ...) standardGeneric('profit'))

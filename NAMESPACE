@@ -19,6 +19,7 @@ exportMethods(
   "discards.wt<-",
   "catch.sel",
   "catch.sel<-",
+  "ccost",
   "price",
   "price<-",
   "catch.q",

@@ -8,29 +8,25 @@
 
 library(FLFishery)
 
-load('./LP_ID30_AR_RC_SELF_UR0_TS60-1.RData')
-
-# Biol
-bio <- as(tes, 'FLBiol')
+data(ple4)
 
 # Catch
-ca <- as(tes, 'FLCatch')
+ca <- as(ple4, 'FLCatch')
 catch.q(ca) <- FLPar(q=0.25)
 
 # price
+price(ca) <- stock.wt(ple4) * 25
+units(price(ca)) <- 'euro'
 
-ef <- (harvest(tes)/(catch.q(ca) * catch.sel(ca)))[1,]
-dimnames(ef)$age <- 'all'
+# effort
+ef <- (harvest(ple4)/(catch.q(ca) * catch.sel(ca)))[1,]
+dimnames(ef) <- list(quant='all')
+units(ef) <- 'days'
 
-fis <- FLFishery(TES=ca, effort=ef)
+# FLFishery
+fis <- FLFishery(PLE=ca, effort=ef)
 
-fis <- FLFishery(new('FLCatches', list(TES=ca)), effort=ef)
+# boats.n
+fis@boats.n[] <- 25
 
-fis <- FLFishery(new('FLCatches', list(TES=ca)))
-
-fis <- FLFishery(FLCatches(TES=ca))
-
-
-
-fiss <- FLFisheries(LL=fis)
-
+revenue(fis)
