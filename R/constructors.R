@@ -116,7 +116,8 @@ setMethod("FLFishery", signature(object="list"),
 		}
 
 		# create new object
-		res <- new("FLFishery", cas, effort=flq, vcost=flq, fcost=flq, ftime=flq)
+		res <- new("FLFishery", cas, capacity=flq, effort=flq, hperiod=flq, vcost=flq,
+          fcost=flq, orevenue=flq)
 
 		# fill slots provided
 		for (i in names(args))

@@ -63,15 +63,15 @@ setMethod("catch", signature(object="FLFishery"),
   }
 ) # }}}
 
-# revenue {{{
-setMethod("revenue", signature("FLCatch"),
+# lrevenue {{{
+setMethod("lrevenue", signature("FLCatch"),
   function(object) {
     return(quantSums(price(object) * landings.n(object)))
   }
 )
-setMethod("revenue", signature("FLFishery"),
+setMethod("lrevenue", signature("FLFishery"),
   function(object) {
-    return(Reduce('%*%', lapply(object@.Data, revenue)))
+    return(Reduce('%*%', lapply(object@.Data, lrevenue)))
   }
 ) # }}}
 
@@ -95,6 +95,16 @@ setMethod("ccost", signature(object="FLFishery"),
     return(evalPredictModel(object, slot='crewshare'))
   }
 ) # }}}
+
+# ccost {{{
+setMethod("ccost", signature(object="FLFishery"),
+  function(object) {
+    return(evalPredictModel(object, slot='crewshare'))
+  }
+) # }}}
+
+# vcost * effort * capacity
+
 
 # ---
 
@@ -197,6 +207,3 @@ setMethod("evalPredictModel", signature(model="character", data="FLComp"),
   return(eval(model@model[[2]], res))
 }) # }}}
 
-evalPredictModel(fis@crewshare, fis)
-
-evalPredictModel('crewshare', fis)

@@ -76,32 +76,34 @@ setClass("FLCatches",
 setClass("FLFishery",
   contains=c("FLComp", "FLCatches"),
   representation(
+    capacity="FLQuant",
     effort="FLQuant",
-    ftime="FLQuant",
-    boats.n="FLQuant",
+    hperiod="FLQuant",
     vcost="FLQuant",
     fcost="FLQuant",
+    orevenue="FLQuant",
     crewshare="predictModel"),
   prototype(
+    capacity=FLQuant(dimnames=list(quant=c("all"))),
     effort=FLQuant(dimnames=list(quant=c("all"))),
-    ftime=FLQuant(dimnames=list(quant=c("start", "end"))),
-    boats.n=FLQuant(dimnames=list(quant=c("all"))),
+    hperiod=FLQuant(dimnames=list(quant=c("start", "end"))),
     vcost=FLQuant(dimnames=list(quant=c("all"))),
     fcost=FLQuant(dimnames=list(quant=c("all"))),
-    crewshare=predictModel(model=~fixed * crew + share * revenue, params=FLPar(fixed=0, crew=1, share=0.0))),
+    orevenue=FLQuant(dimnames=list(quant=c("all"))),
+    crewshare=predictModel(model=~fixed * crew + share * lrevenue,
+      params=FLPar(fixed=0, crew=1, share=0.0))),
   # VALIDITY
   validity=function(object) {
 
     # dims[2:5] of flqs match dims of flcs
 
-    # iters 1 or N
+    # iters 1 or N FLCs vs FLQs
 
-    # ftime, effort, vcost and fcost, age='all'
+    # FLQuant slots quant='age'
 
     return(TRUE)
   }
 ) # }}}
-
 
 # FLFisheries {{{
 setClass("FLFisheries", contains=c("FLlst"),

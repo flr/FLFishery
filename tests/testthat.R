@@ -8,6 +8,5 @@
 # Notes:
 
 library(testthat)
-library(yourpackage)
 
 test_check("FLFishery")

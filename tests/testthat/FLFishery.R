@@ -7,31 +7,57 @@
 #
 # Notes:
 
-# XX {{{
-# }}}
-
+library(FLCore)
 library(FLFishery)
 
-load('../LP_ID30_AR_RC_SELF_UR0_TS60-1.RData')
+data(ple4)
+
+context("FLFishery constructor")
+
+test_that("FLFishery() works on all inputs", {
+  expect_equal(str_length("a"), 1)
+  expect_equal(str_length("ab"), 2)
+  expect_equal(str_length("abc"), 3)
+})
 
 # Catch
-ca <- as(tes, 'FLCatch')
+ca <- as(ple4, 'FLCatch')
 catch.q(ca) <- FLPar(q=0.25)
 
 # price
+price(ca) <- landings.wt(ca) * 25
+units(price(ca)) <- 'euro'
 
-ef <- (harvest(tes)/(catch.q(ca) * catch.sel(ca)))[1,]
-dimnames(ef)$age <- 'all'
+# effort
+ef <- (harvest(ple4)/(catch.q(ca) * catch.sel(ca)))[1,]
 
 fis <- FLFishery(TES=ca, effort=ef)
 
 # CLASS
 
-fca <- as(ple4, "FLCatch")
+
+vcost <- FLQuant(dimnames=list(quant=c("fuelcost")))
+
 
 # CREATOR
 
 # ACCESSORS
 
+# ECONOMIC METHODS
+
+lrevenue(fis)
+
+vcost(fis)
+
+fcost(fis)
+
+ccost(fis)
+
+cost(fis)
+
+profit(fis)
 
 
+evalPredictModel(fis@crewshare, fis)
+
+evalPredictModel('crewshare', fis)
