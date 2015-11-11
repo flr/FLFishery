@@ -8,14 +8,14 @@
 # Notes:
 
 # [, [[<- {{{
-setMethod('[', signature(x="FLFishery", i="ANY", j="missing"),
+setMethod("[", signature(x="FLFishery", i="ANY", j="missing"),
 	function(x, i) {
 		x@.Data <- x@.Data[i]
 		return(x)
 	}
 )
 
-setMethod('[[<-', signature(x="FLFishery", i="ANY", j="missing", value="FLCatch"),
+setMethod("[[<-", signature(x="FLFishery", i="ANY", j="missing", value="FLCatch"),
 	function(x, i, value) {
 		x@.Data[[i]] <- value
 		return(x)
@@ -33,7 +33,7 @@ setMethod("landings", signature(object="FLCatch"),
 
 setMethod("landings", signature(object="FLFishery"),
   function(object) {
-    return(Reduce('%+%', lapply(object@.Data, landings)))
+    return(Reduce("%+%", lapply(object@.Data, landings)))
   }
 ) # }}}
 
@@ -46,7 +46,7 @@ setMethod("discards", signature(object="FLCatch"),
 
 setMethod("discards", signature(object="FLFishery"),
   function(object) {
-    return(Reduce('%+%', lapply(object@.Data, discards)))
+    return(Reduce("%+%", lapply(object@.Data, discards)))
   }
 ) # }}}
 
@@ -59,7 +59,7 @@ setMethod("catch", signature(object="FLCatch"),
 
 setMethod("catch", signature(object="FLFishery"),
   function(object) {
-    return(Reduce('%+%', lapply(object@.Data, catch)))
+    return(Reduce("%+%", lapply(object@.Data, catch)))
   }
 ) # }}}
 
@@ -71,7 +71,14 @@ setMethod("lrevenue", signature("FLCatch"),
 )
 setMethod("lrevenue", signature("FLFishery"),
   function(object) {
-    return(Reduce('%*%', lapply(object@.Data, lrevenue)))
+    return(Reduce("%*%", lapply(object@.Data, lrevenue)))
+  }
+) # }}}
+
+# revenue {{{
+setMethod("revenue", signature("FLFishery"),
+  function(object) {
+    return(lrevenue(object) + orevenue(object))
   }
 ) # }}}
 
@@ -92,14 +99,7 @@ setMethod("profit", signature("FLFishery"),
 # ccost {{{
 setMethod("ccost", signature(object="FLFishery"),
   function(object) {
-    return(evalPredictModel(object, slot='crewshare'))
-  }
-) # }}}
-
-# ccost {{{
-setMethod("ccost", signature(object="FLFishery"),
-  function(object) {
-    return(evalPredictModel(object, slot='crewshare'))
+    return(predict(object=object, slot='crewshare'))
   }
 ) # }}}
 
@@ -140,7 +140,7 @@ setMethod("plot", signature(x="FLCatch", y="missing"),
 
 		p <- ggplot(data=catch(x), aes(x=year, y=data)) + geom_line() 
 
-		p + geom_bar(data=as.data.frame(discards(x)), aes(x=year, y=data), fill='red', colour='darkred', alpha=0.5, stat='identity')
+		p + geom_bar(data=as.data.frame(discards(x)), aes(x=year, y=data), fill="red", colour="darkred", alpha=0.5, stat="identity")
 	})
 # }}}
 
@@ -153,57 +153,3 @@ setMethod("harvest", signature(object="FLFishery"),
 	return(res)
 	}
 ) # }}}
-
-
-# ---
-
-setGeneric('evalPredictModel', function(model, data, ...) standardGeneric('evalPredictModel'))
-
-# evalPredictModel {{{
-setMethod("evalPredictModel", signature(model="predictModel", data="FLComp"),
-  function(model, data) {
-
-    args <- all.names(model@model, functions=FALSE)
-
-    res <- as(model, 'list')
-
-    # MISSING args?
-    args <- args[!args %in% names(res)]
-
-    if(length(args) > 0 ) {
-
-      # CALL methods on object (inc. accessors)
-      for(i in args) {
-        res[[i]] <- do.call(i, list(data))
-      }
-  }
-
-  # RETURN
-  return(eval(model@model[[2]], res))
-}) # }}}
-
-# evalPredictModel {{{
-setMethod("evalPredictModel", signature(model="character", data="FLComp"),
-  function(model, data) {
-
-    model <- slot(data, model)
-
-    args <- all.names(model@model, functions=FALSE)
-
-    res <- as(model, 'list')
-
-    # MISSING args?
-    args <- args[!args %in% names(res)]
-
-    if(length(args) > 0 ) {
-
-      # CALL methods on object (inc. accessors)
-      for(i in args) {
-        res[[i]] <- do.call(i, list(data))
-      }
-  }
-
-  # RETURN
-  return(eval(model@model[[2]], res))
-}) # }}}
-

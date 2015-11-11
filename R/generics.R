@@ -29,4 +29,5 @@ setGeneric("profit", function(object, ...) standardGeneric("profit"))
 
 setGeneric("lrevenue", function(object, ...) standardGeneric("lrevenue"))
 
-setGeneric("predictModel", function(object, ...) standardGeneric("predictModel"))
+setGeneric("orevenue", function(object, ...) standardGeneric("orevenue"))
+setGeneric("orevenue<-", function(object, ..., value) standardGeneric("orevenue<-"))

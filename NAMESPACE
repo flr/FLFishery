@@ -50,6 +50,7 @@ exportMethods(
   "predictModel",
   "price",
   "price<-",
+  "profit",
   "show",
   "summary",
   "vcost",

@@ -14,12 +14,6 @@ data(ple4)
 
 context("FLFishery constructor")
 
-test_that("FLFishery() works on all inputs", {
-  expect_equal(str_length("a"), 1)
-  expect_equal(str_length("ab"), 2)
-  expect_equal(str_length("abc"), 3)
-})
-
 # Catch
 ca <- as(ple4, 'FLCatch')
 catch.q(ca) <- FLPar(q=0.25)
@@ -57,7 +51,4 @@ cost(fis)
 
 profit(fis)
 
-
-evalPredictModel(fis@crewshare, fis)
-
-evalPredictModel('crewshare', fis)
+predict(fis, 'crewshare')

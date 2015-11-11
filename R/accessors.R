@@ -115,6 +115,19 @@ setReplaceMethod("effort", signature(object="FLFishery", value="FLQuant"),
 	}
 )
 
+# orevenue
+setMethod("orevenue", signature(object="FLFishery"),
+	function(object) {
+		return(slot(object, "orevenue"))
+	}
+)
+setReplaceMethod("orevenue", signature(object="FLFishery", value="FLQuant"),
+	function(object, value) {
+		slot(object, "orevenue") <- value
+		return(object)
+	}
+)
+
 # vcost
 setMethod("vcost", signature(object="FLFishery"),
 	function(object) {
@@ -142,11 +155,8 @@ setReplaceMethod("fcost", signature(object="FLFishery", value="FLQuant"),
 ) # }}}
 
 # FLFisheries {{{
-
 setMethod('landings.n', signature(object='FLFisheries'),
 	function(object) {
-
 		lapply(object, landings.n)
-
 	}
 ) # }}}
