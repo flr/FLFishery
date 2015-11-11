@@ -62,6 +62,33 @@ setMethod("catch", signature(object="FLFishery"),
   }
 ) # }}}
 
+# catch.n {{{
+setMethod("catch.n", signature(object="FLCatch"),
+  function(object) {
+    return(landings.n(object) + discards.n(object))
+  }
+)
+
+setMethod("catch.n", signature(object="FLFishery"),
+  function(object) {
+    return(Reduce("%+%", lapply(object@.Data, catch.n)))
+  }
+) # }}}
+
+# catch.wt {{{
+setMethod("catch.wt", signature(object="FLCatch"),
+  function(object) {
+    return((landings.wt(object) * landings.n(object) + discards.wt(object) * discards.n(object)) /
+           catch.n(object))
+  }
+)
+
+setMethod("catch.n", signature(object="FLFishery"),
+  function(object) {
+    return(Reduce("%+%", lapply(object@.Data, catch.n)))
+  }
+) # }}}
+
 # lrevenue {{{
 setMethod("lrevenue", signature("FLCatch"),
   function(object) {
@@ -104,9 +131,6 @@ setMethod("ccost", signature(object="FLFishery"),
 
 # vcost * effort * capacity
 
-
-# ---
-
 # landings.sel, discards.sel {{{
 setMethod("landings.sel", signature(object="FLCatch"),
 	function(object) {
@@ -129,19 +153,6 @@ setMethod("discards.ratio", signature(object="FLCatch"),
 	}
 ) # }}}
 
-# plot {{{
-setMethod("plot", signature(x="FLCatch", y="missing"),
-	function(x, ...) {
-
-		fqs <- FLQuants(Catch=catch(x), DiscardsRatio=discards.ratio(x), Price=price(x))
-
-		p <- plot(fqs)
-
-		p <- ggplot(data=catch(x), aes(x=year, y=data)) + geom_line() 
-
-		p + geom_bar(data=as.data.frame(discards(x)), aes(x=year, y=data), fill="red", colour="darkred", alpha=0.5, stat="identity")
-	})
-# }}}
 
 # harvest(FLFishery) {{{
 setMethod("harvest", signature(object="FLFishery"),

@@ -5,16 +5,16 @@ Date: 2015-11-11
 Author: Iago Mosqueira <iago.mosqueira-sanchez@jrc.ec.europa.eu>
 Description: FLFishery
 Depends:
-	R(>= 3.2.0),
-	methods,
-	FLCore(>= 2.5.20151111)
+  R(>= 3.2.0),
+  methods,
+  FLCore(>= 2.5.20151111)
 Suggests:
-	knitr,
+  knitr,
   testthat
 Maintainer: Iago Mosqueira <iago.mosqueira-sanchez@jrc.ec.europa.eu>
 License: file LICENSE
 License_is_FOSS: yes
 LazyLoad: Yes
 LazyData: No
-Collate: generics.R classes.R accessors.R coerce.R constructors.R methods.R getPlural.R 
+Collate: FLFishery.R generics.R classes.R accessors.R coerce.R constructors.R methods.R getPlural.R plot.R
 VignetteBuilder: knitr
