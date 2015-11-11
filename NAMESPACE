@@ -46,8 +46,6 @@ exportMethods(
   "model<-",
   "params",
   "params<-",
-  "predict",
-  "predictModel",
   "price",
   "price<-",
   "profit",
