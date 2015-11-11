@@ -21,12 +21,30 @@ setAs('FLStock', 'FLCatch',
 # FLStock  -> FLFishery {{{
 
 setAs('FLStock', 'FLFishery',
-	function(from)
-	{
-		FLFishery(as(from, 'FLCatch'), effort=catch(from) / esb(from))
-	}
-)
-# }}}
+  function(from) {
+    FLFishery(as(from, 'FLCatch'), effort=catch(from) / esb(from))
+  }
+) # }}}
+
+# FLFishery -> FLFisheryFQ {{{
+setAs("FLFishery", "FLFisheryFQ",
+  function(from) {
+    return(new("FLFisheryFQ",
+      .Data=from@.Data,
+      names=names(from),
+      lock=from@lock,
+      name=name(from),
+      desc=desc(from),
+      range=range(from),
+      capacity=capacity(from),
+      effort=effort(from),
+      hperiod=hperiod(from),
+      vcost=vcost(from),
+      fcost=fcost(from),
+      orevenue=orevenue(from),
+      ccost=cost(from)))
+  }
+) # }}}
 
 
 asFLStock <- function(fbi, fca) {

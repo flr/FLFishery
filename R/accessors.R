@@ -102,6 +102,19 @@ setReplaceMethod("catch.q", signature(object="FLCatch", value="FLPar"),
 
 # FLFishery {{{
 
+# capacity
+setMethod("capacity", signature(object="FLFishery"),
+	function(object) {
+		return(slot(object, "capacity"))
+	}
+)
+setReplaceMethod("capacity", signature(object="FLFishery", value="FLQuant"),
+	function(object, value) {
+		slot(object, "capacity") <- value
+		return(object)
+	}
+)
+
 # effort
 setMethod("effort", signature(object="FLFishery"),
 	function(object) {
@@ -111,6 +124,19 @@ setMethod("effort", signature(object="FLFishery"),
 setReplaceMethod("effort", signature(object="FLFishery", value="FLQuant"),
 	function(object, value) {
 		slot(object, "effort") <- value
+		return(object)
+	}
+)
+
+# hperiod
+setMethod("hperiod", signature(object="FLFishery"),
+	function(object) {
+		return(slot(object, "hperiod"))
+	}
+)
+setReplaceMethod("hperiod", signature(object="FLFishery", value="FLQuant"),
+	function(object, value) {
+		slot(object, "hperiod") <- value
 		return(object)
 	}
 )
@@ -152,7 +178,22 @@ setReplaceMethod("fcost", signature(object="FLFishery", value="FLQuant"),
 		slot(object, "fcost") <- value
 		return(object)
 	}
-) # }}}
+) 
+
+# crewshare
+setMethod("crewshare", signature(object="FLFishery"),
+	function(object) {
+		return(slot(object, "crewshare"))
+	}
+)
+setReplaceMethod("crewshare", signature(object="FLFishery", value="predictModel"),
+	function(object, value) {
+		slot(object, "crewshare") <- value
+		return(object)
+	}
+)
+
+# }}}
 
 # FLFisheries {{{
 setMethod('landings.n', signature(object='FLFisheries'),

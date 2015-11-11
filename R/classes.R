@@ -105,6 +105,39 @@ setClass("FLFishery",
   }
 ) # }}}
 
+# FLFisheryFQ {{{
+setClass("FLFisheryFQ",
+  contains=c("FLComp", "FLCatches"),
+  representation(
+    capacity="FLQuant",
+    effort="FLQuant",
+    hperiod="FLQuant",
+    vcost="FLQuant",
+    fcost="FLQuant",
+    orevenue="FLQuant",
+    ccost="FLQuant"),
+  prototype(
+    capacity=FLQuant(dimnames=list(quant=c("all"))),
+    effort=FLQuant(dimnames=list(quant=c("all"))),
+    hperiod=FLQuant(dimnames=list(quant=c("start", "end"))),
+    vcost=FLQuant(dimnames=list(quant=c("all"))),
+    fcost=FLQuant(dimnames=list(quant=c("all"))),
+    orevenue=FLQuant(dimnames=list(quant=c("all"))),
+    ccost=FLQuant(dimnames=list(quant=c("all"))),
+      params=FLPar(fixed=0, crew=1, share=0.0)),
+  # VALIDITY
+  validity=function(object) {
+
+    # dims[2:5] of flqs match dims of flcs
+
+    # iters 1 or N FLCs vs FLQs
+
+    # FLQuant slots quant='age'
+
+    return(TRUE)
+  }
+) # }}}
+
 # FLFisheries {{{
 setClass("FLFisheries", contains=c("FLlst"),
 
