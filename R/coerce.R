@@ -1,10 +1,11 @@
-# coerce.R - DESC
-# coerce.R
+# coerce.R - Coercion to and from FLFishery classes.
+# FLFishery/R/coerce.R
 
-# Copyright 2003-2014 FLR Team. Distributed under the GPL 2 or later
-# Maintainer: Iago Mosqueira, JRC
-# Soundtrack:
-# Notes:
+# Copyright European Union, 2015 
+# Author: Iago Mosqueira (EC JRC) <iago.mosqueira@jrc.ec.europa.eu>
+#
+# Distributed under terms of the European Union Public Licence (EUPL) V.1.1.
+
 
 # FLStock  -> FLCatch {{{
 
@@ -47,6 +48,7 @@ setAs("FLFishery", "FLFisheryFQ",
 ) # }}}
 
 
+# asFLStock {{{
 asFLStock <- function(fbi, fca) {
 	
 	res <- FLStock(
@@ -64,5 +66,8 @@ asFLStock <- function(fbi, fca) {
 	
 	catch(res) <- computeCatch(res, 'all')
 
-}
+} 
+
+
+# }}}
 

@@ -1,10 +1,10 @@
 # classes.R - The FLFishery classes
 # FLFishery/R/classes.R
 
-# Copyright 2003-2014 FLR Team. Distributed under the GPL 2 or later
-# Maintainer: Iago Mosqueira, JRC
-# Soundtrack:
-# Notes:
+# Copyright European Union, 2015 
+# Author: Iago Mosqueira (EC JRC) <iago.mosqueira@jrc.ec.europa.eu>
+#
+# Distributed under terms of the European Union Public Licence (EUPL) V.1.1.
 
 # FLCatch {{{
 setClass("FLCatch",

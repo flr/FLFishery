@@ -1,11 +1,10 @@
 # methods.R - DESC
 # FLFishery/R/m.R
 
-# Copyright 2015 Iago Mosqueira (EC JRC) <iago.mosqueira@jrc.ec.europa.eu>
+# Copyright European Union, 2015 
+# Author: Iago Mosqueira (EC JRC) <iago.mosqueira@jrc.ec.europa.eu>
 #
-# Distributed under terms of the European Union Public Licence (EUPL) 1.1.
-#
-# Notes:
+# Distributed under terms of the European Union Public Licence (EUPL) V.1.1.
 
 # [, [[<- {{{
 setMethod("[", signature(x="FLFishery", i="ANY", j="missing"),

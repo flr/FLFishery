@@ -1,9 +1,10 @@
 # generics.R - DESC
 # FLFishery/R/generics.R
 
-# Copyright 2015 Iago Mosqueira (EC JRC) <iago.mosqueira@jrc.ec.europa.eu>
+# Copyright European Union, 2015 
+# Author: Iago Mosqueira (EC JRC) <iago.mosqueira@jrc.ec.europa.eu>
 #
-# Distributed under terms of the European Union Public Licence (EUPL) 1.1.
+# Distributed under terms of the European Union Public Licence (EUPL) V.1.1.
 
 # CONSTRUCTORS
 
