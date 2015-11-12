@@ -1,3 +1,3 @@
-- BUILD FLC & FLF datasets
-- CHECK harvest(FLBiol)
-- WRITE fwd in R w/ 2 FLFishery
+
+- GET example dataset: 2-3 fleets that sum all catches for a given stock (RP)
+- 

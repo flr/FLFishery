@@ -103,22 +103,22 @@ for sizing but not stored in any slot.
 Methods exist for various calculations based on values stored in the class:
 
 \describe{
- \item{\code{landings}}{Total landings as sum on 'age' of \code{landings.n}
+ \item{landings}{Total landings as sum on 'age' of \code{landings.n}
    times \code{landings.wt}.}
- \item{\code{discards}}{Total discards as sum on 'age' of \code{discards.n}
+ \item{discards}{Total discards as sum on 'age' of \code{discards.n}
    times \code{discards.wt}.}
-    \item{landings.sel:}{Selectivity at age in the landings as proportions
+ \item{landings.sel}{Selectivity at age in the landings as proportions
      over fully-selected ages, (\code{FLQuant}).}
-    \item{discards.sel:}{Selectivity at age in the discards as proportions
+ \item{discards.sel}{Selectivity at age in the discards as proportions
      over fully-selected ages, (\code{FLQuant}).}
- \item{\code{catch.n}}{Catch at age in numbers as \code{landings.n} plus
+ \item{catch.n}{Catch at age in numbers as \code{landings.n} plus
    \code{discards.n}.}
- \item{\code{catch.wt}}{Weighted average of \code{landings.wt} and
+ \item{catch.wt}{Weighted average of \code{landings.wt} and
    \code{discards.wt}.}
- \item{\code{catch}}{Total catch as sum of \code{landings} and
+ \item{catch}{Total catch as sum of \code{landings} and
    \code{discards}.}
- \item{\code{discards.ratio}}{Proportion at age of discards in catch.}
- \item{\code{plot}}{Standard plot for the FLCatch class.}
+ \item{discards.ratio}{Proportion at age of discards in catch.}
+ \item{plot}{Standard plot for the FLCatch class.}
 }
 }
 \examples{

@@ -104,7 +104,7 @@ setMethod("lrevenue", signature("FLFishery"),
 # revenue {{{
 setMethod("revenue", signature("FLFishery"),
   function(object) {
-    return(lrevenue(object) + orevenue(object))
+    return(quantSums(lrevenue(object)) + quantSums(orevenue(object)))
   }
 ) # }}}
 
@@ -118,14 +118,14 @@ setMethod("cost", signature("FLFishery"),
 # profit {{{
 setMethod("profit", signature("FLFishery"),
   function(object) {
-    return(revenue(object) - cost(object))
+    return(quantSums(revenue(object)) - quantSums(cost(object)))
   }
 ) # }}}
 
 # ccost {{{
 setMethod("ccost", signature(object="FLFishery"),
   function(object) {
-    return(predict(object=object, slot='crewshare'))
+    return(quantSums(predict(object=object, slot='crewshare')))
   }
 ) # }}}
 

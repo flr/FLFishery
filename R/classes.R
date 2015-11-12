@@ -71,22 +71,22 @@
 #' Methods exist for various calculations based on values stored in the class:
 #'
 #' \describe{
-#'  \item{\code{landings}}{Total landings as sum on 'age' of \code{landings.n}
+#'  \item{landings}{Total landings as sum on 'age' of \code{landings.n}
 #'    times \code{landings.wt}.}
-#'  \item{\code{discards}}{Total discards as sum on 'age' of \code{discards.n}
+#'  \item{discards}{Total discards as sum on 'age' of \code{discards.n}
 #'    times \code{discards.wt}.}
-#'     \item{landings.sel:}{Selectivity at age in the landings as proportions
+#'  \item{landings.sel}{Selectivity at age in the landings as proportions
 #'      over fully-selected ages, (\code{FLQuant}).}
-#'     \item{discards.sel:}{Selectivity at age in the discards as proportions
+#'  \item{discards.sel}{Selectivity at age in the discards as proportions
 #'      over fully-selected ages, (\code{FLQuant}).}
-#'  \item{\code{catch.n}}{Catch at age in numbers as \code{landings.n} plus
+#'  \item{catch.n}{Catch at age in numbers as \code{landings.n} plus
 #'    \code{discards.n}.}
-#'  \item{\code{catch.wt}}{Weighted average of \code{landings.wt} and
+#'  \item{catch.wt}{Weighted average of \code{landings.wt} and
 #'    \code{discards.wt}.}
-#'  \item{\code{catch}}{Total catch as sum of \code{landings} and
+#'  \item{catch}{Total catch as sum of \code{landings} and
 #'    \code{discards}.}
-#'  \item{\code{discards.ratio}}{Proportion at age of discards in catch.}
-#'  \item{\code{plot}}{Standard plot for the FLCatch class.}
+#'  \item{discards.ratio}{Proportion at age of discards in catch.}
+#'  \item{plot}{Standard plot for the FLCatch class.}
 #' }
 #'
 #' @author Iago Mosqueira, EC JRC.
@@ -146,26 +146,25 @@ setClass("FLCatch",
 
 # FLCatches {{{
 setClass("FLCatches",
-  
   contains=c("FLlst"),
 
   # VALIDITY
   validity=function(object) {
 
     # all object are FLCatch
-    if(any(!unlist(lapply(object, is, 'FLCatch'))))
+    if(any(!unlist(lapply(object, is, "FLCatch"))))
       return("Input objects must be of class 'FLCatch'")
 
     dmns <- lapply(object, dims)
 
     # quant == 'age'
-    qua <- unlist(lapply(dmns, '[', 'quant'))
+    qua <- unlist(lapply(dmns, "[", "quant"))
     if(length(unique(qua)) > 1)
       return("FLCatch objects must have quant='age'")
 
     # dims [c(2,3,4,5)] must be the same
     dmns <- lapply(object, function(x) dimnames(landings.n(x))[-c(1, 6)])
-    if(sum(duplicated(dmns)) != (length(dmns) -1))
+    if(sum(duplicated(dmns)) != (length(dmns) - 1))
       return(paste("All FLCatch objects must share dimensions 2 to 5: ",
         names(dmns)[!duplicated(dmns)][-1]))
 
@@ -176,6 +175,94 @@ setClass("FLCatches",
 ) # }}}
 
 # FLFishery {{{
+
+#' A class for homogeneous fishing fleets
+#'
+#' Fishing fleets consisting of a number of boats operating homogeneously can be
+#' modelled using the \code{FLFishery} class. All boats in the fleet must have a
+#' common gear configuration during each time step and area (no \emph{metiers}).
+#'
+#' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend
+#' odio ac rutrum luctus. Aenean placerat porttitor commodo. Pellentesque eget porta
+#' libero. Pellentesque molestie mi sed orci feugiat, non mollis enim tristique. 
+#' Suspendisse eu sapien vitae arcu lobortis ultrices vitae ac velit. Curabitur id 
+#' 
+#' @name FLFishery
+#' @rdname FLFishery
+#' @docType class
+#' @aliases FLFishery FLFishery-methods FLFishery-class
+#'
+#' @section Slots:
+#'
+#' \code{FLFishery} objects inherit from \code{FLCatches} woth a number of slots
+#' added.
+#'     \describe{
+#'     \item{.Data}{The list of \code{FLCatch} object with catch data per stock,
+#'       (\code{FLCatches}).}
+#'     \item{name}{Name of the object, e.g. species or stock code, (\code{character}).}
+#'     \item{desc}{Description of the data contents and origin, (\code{character}).}
+#'     \item{range}{Ranges of age and years, plusgroup, (\code{numeric}).}
+#'     \item{capacity}{Number of boats in the fleet, (\code{FLQuant}).}
+#'     \item{effort}{Mean effort per boat applied by the fleet, (\code{FLQuant}).}
+#'     \item{hperiod}{Start and end of fishing within each time step, as
+#'       proportions. An \code{FLQuant} object with dimnames
+#'       `quant=c('start', 'end')` in the first dimension.}
+#'     \item{vcost}{Variable costs per unit of effort, (\code{FLQuant}).}
+#'     \item{orevenue}{Revenues obtained from sources other than landings, (\code{FLQuant}).}
+#'     \item{crewshare}{Formula, parameter values and inputs to calculate the
+#'       crew costs, (\code{predictModel}).}
+#' }
+#'
+#' @section Validity:
+#'
+#'   \describe{
+#'     \item{VALIDITY}{Neque porro quisquam est qui dolorem ipsum.}
+#' }
+#'
+#' You can inspect the class validity function by using
+#'    \code{getValidity(getClassDef('FLFishery'))}
+#'
+#' @section Accessors:
+#' All slots in the class have accessor and replacement methods defined that
+#' allow retrieving and substituting individual slots.
+#'
+#' The values passed for replacement need to be of the class of that slot.
+#' A numeric vector can also be used when replacing FLQuant slots, and the
+#' vector will be used to substitute the values in the slot, but not its other
+#' attributes.
+#'
+#' @section Constructor:
+#' A construction method exists for this class that can take named arguments for
+#' any of its slots. All slots are then created to match the requirements of the
+#' class validity. If an unnamed \code{FLQuant} object is provided, this is used
+#' for sizing but not stored in any slot.
+#'
+#' @section Methods:
+#' Methods exist for various calculations based on values stored in the class:
+#'
+#' \describe{
+#'   \item{ccost}{Calculate the total crew costs by evaluating the formula in
+#'     \code{crewshare}.}
+#'   \item{cost}{Total costs, calculated.}
+#'   \item{lrevenue}{.}
+#'   \item{revenue}{.}
+#'   \item{profit}{.}
+#'   \item{landings}{.}
+#'   \item{discards}{.}
+#'   \item{catch}{.}
+#'   \item{catch.n}{.}
+#'   \item{catch.wt}{.}
+#'   \item{harvest}{.}
+#' }
+#'
+#' @author Iago Mosqueira, EC JRC.
+#' @seealso \link{FLCatches}
+#' @keywords classes
+#' @examples
+#'
+#' data(ple4)
+#' FLFishery(PLE=as(ple4, 'FLCatch'))
+
 setClass("FLFishery",
   contains=c("FLComp", "FLCatches"),
   representation(
@@ -248,7 +335,7 @@ setClass("FLFisheries", contains=c("FLlst"),
   validity=function(object) {
 
     # all objects are FLFishery
-    if(any(!unlist(lapply(object, is, 'FLFishery'))))
+    if(any(!unlist(lapply(object, is, "FLFishery"))))
       return("Input objects must be of class 'FLFishery'")
 
     # dmns <- lapply(object, dims)

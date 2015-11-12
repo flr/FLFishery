@@ -8,6 +8,7 @@ exportClasses(
   "predictModel"
 )
 exportMethods(
+  "$",
   "[",
   "[[<-",
   "FLCatch",

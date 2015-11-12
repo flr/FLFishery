@@ -6,6 +6,13 @@
 #
 # Distributed under terms of the European Union Public Licence (EUPL) V.1.1.
 
+# $
+setMethod("$", signature(x="FLQuant"),           
+  function(x, name) {
+    return(x[name,])
+  }
+)
+
 # FLCatch {{{
 
 # landings.n
@@ -117,15 +124,19 @@ setReplaceMethod("capacity", signature(object="FLFishery", value="FLQuant"),
 
 # effort
 setMethod("effort", signature(object="FLFishery"),
-	function(object) {
-		return(slot(object, "effort"))
-	}
+  function(object, compute=TRUE) {
+    if(compute) {
+      return(slot(object, "effort") * slot(object, "capacity"))
+    } else {
+      return(slot(object, "effort"))
+    }
+  }
 )
 setReplaceMethod("effort", signature(object="FLFishery", value="FLQuant"),
-	function(object, value) {
-		slot(object, "effort") <- value
-		return(object)
-	}
+  function(object, value) {
+    slot(object, "effort") <- value
+	return(object)
+  }
 )
 
 # hperiod
