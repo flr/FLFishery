@@ -1,7 +1,7 @@
 Package: FLFishery
 Title: Classes and Methods for Simpler Fleet/Fishery Modelling
-Version: 0.1.20151111
-Date: 2015-11-11
+Version: 0.1.20151113
+Date: 2015-11-13
 Author: Iago Mosqueira <iago.mosqueira-sanchez@jrc.ec.europa.eu>
 Description: FLFishery
 Depends:
