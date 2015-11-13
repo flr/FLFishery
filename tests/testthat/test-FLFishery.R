@@ -6,33 +6,54 @@
 #
 # Distributed under terms of the European Union Public Licence (EUPL) V.1.1.
 
-library(FLCore)
 library(FLFishery)
 
 data(ple4)
 
 context("FLFishery constructor")
 
-# Catch
-ca <- as(ple4, 'FLCatch')
+# catch, from ple4
+ca <- as(ple4, 'FLCatch')[,ac(2000:2005)]
 catch.q(ca) <- FLPar(q=0.25)
 
-# price
+# price, as wt * 25
 price(ca) <- landings.wt(ca) * 25
 units(price(ca)) <- 'euro'
 
-# effort
-ef <- (harvest(ple4)/(catch.q(ca) * catch.sel(ca)))[1,]
-ef <- FLQuant(c(189, 192), dimnames=list(quant=c("day", "night"), year=1957:2008),
-  units="day/boat")
+# capacity, runif 19-28 boats
+cap <- FLQuant(floor(runif(5, 19, 28)), dimnames=list(year=2000:2005),
+  units="boat")
 
+# effort, same number of days per year
+ef <- FLQuant(c(225, 212), dimnames=list(quant=c("day", "night"), year=2000:2005),
+  units="day / boat")
 
-fis <- FLFishery(TES=ca, effort=ef)
+# hperiod, start 1st Jan, end 31st Dec
+hp <- FLQuant(c(0,1), dimnames=list(quant=c("start", "end"), year=2000:2005))
 
-# capacity
-capacity(fis)[] <- 123
-units(capacity(fis)) <- 'boat'
-units(fis@effort) <- 'day/boat'
+# vcost
+vc <- FLQuant(c(1000, 10), dimnames=list(quant=c("fuel", "ice"), year=2000:2005),
+  units="euro / day / boat")
+
+# fcost
+fc <- FLQuant(c(10000, 5000), dimnames=list(quant=c("license", "dock"),
+  year=2000:2005), units="euro / boat")
+
+# orevenue
+or <- FLQuant(200, dimnames=list(quant=c("tourism"), year=2000:2005),
+  units="euro / boat")
+
+# crewshare
+cs <- predictModel(model=~fixed + share * lrevenue,
+  params=FLPar(fixed=300, share=0.05))
+
+# FLFishery
+fis <- FLFishery(PLE=ca, effort=ef, capacity=cap, hperiod=hp, vcost=vc,
+  fcost=fc, orevenue=or, crewshare=cs)
+
+model(crewshare(fis)) <- ~fixed + share * lrevenue - vcost$ice
+ccost(fis)
+cost(fis)
 
 # CLASS
 
@@ -40,16 +61,11 @@ units(fis@effort) <- 'day/boat'
 effort(fis)
 effort(fis, compute=FALSE)
 
-effort(fis)['day',]
-effort(fis)['day',] <- 2000
-
 effort(fis)$day
-
-vcost <- FLQuant(dimnames=list(quant=c("fuel")))
 
 crewshare(fis)
 
-eval((~effort$day*10)[[2]], list(effort=effort(fis)))
+ccost(fis)
 
 # CREATOR
 
@@ -68,5 +84,8 @@ ccost(fis)
 cost(fis)
 
 profit(fis)
+
+
+# predict
 
 predict(fis, 'crewshare')

@@ -36,6 +36,8 @@ setGeneric("orevenue<-", function(object, ..., value) standardGeneric("orevenue<
 setGeneric("crewshare", function(object, ...) standardGeneric("crewshare"))
 setGeneric("crewshare<-", function(object, ..., value) standardGeneric("crewshare<-"))
 
+setGeneric("orevenue", function(object, ...) standardGeneric("orevenue"))
+setGeneric("orevenue<-", function(object, ..., value) standardGeneric("orevenue<-"))
 
 # METHODS
 
@@ -52,4 +54,3 @@ setGeneric("ccost", function(object, ...) standardGeneric("ccost"))
 setGeneric("profit", function(object, ...) standardGeneric("profit"))
 
 setGeneric("lrevenue", function(object, ...) standardGeneric("lrevenue"))
-

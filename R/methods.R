@@ -92,19 +92,20 @@ setMethod("catch.n", signature(object="FLFishery"),
 # lrevenue {{{
 setMethod("lrevenue", signature("FLCatch"),
   function(object) {
-    return(quantSums(price(object) * landings.n(object)))
+    return(quantSums(price(object) * landings.n(object) * landings.wt(object)))
   }
 )
 setMethod("lrevenue", signature("FLFishery"),
   function(object) {
-    return(Reduce("%*%", lapply(object@.Data, lrevenue)))
+    return(Reduce("%+%", lapply(object@.Data, lrevenue)))
   }
 ) # }}}
 
 # revenue {{{
 setMethod("revenue", signature("FLFishery"),
   function(object) {
-    return(quantSums(lrevenue(object)) + quantSums(orevenue(object)))
+    return(quantSums(replace(lrevenue(object), is.na(lrevenue(object)), 0)) +
+      quantSums(replace(orevenue(object), is.na(orevenue(object)), 0)))
   }
 ) # }}}
 
@@ -129,8 +130,6 @@ setMethod("ccost", signature(object="FLFishery"),
   }
 ) # }}}
 
-# vcost * effort * capacity
-
 # landings.sel, discards.sel {{{
 setMethod("landings.sel", signature(object="FLCatch"),
 	function(object) {
@@ -152,7 +151,6 @@ setMethod("discards.ratio", signature(object="FLCatch"),
 		return(discards.n(object) / catch.n(object))
 	}
 ) # }}}
-
 
 # harvest(FLFishery) {{{
 setMethod("harvest", signature(object="FLFishery"),
