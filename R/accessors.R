@@ -109,6 +109,8 @@ setReplaceMethod("catch.q", signature(object="FLCatch", value="FLPar"),
 
 # FLFishery {{{
 
+# Direct accesors
+
 # capacity
 setMethod("capacity", signature(object="FLFishery"),
   function(object) {
@@ -119,23 +121,6 @@ setReplaceMethod("capacity", signature(object="FLFishery", value="FLQuant"),
   function(object, value) {
     slot(object, "capacity") <- value
     return(object)
-  }
-)
-
-# effort
-setMethod("effort", signature(object="FLFishery"),
-  function(object, compute=TRUE) {
-    if(compute) {
-      return(slot(object, "effort") %*% slot(object, "capacity"))
-    } else {
-      return(slot(object, "effort"))
-    }
-  }
-)
-setReplaceMethod("effort", signature(object="FLFishery", value="FLQuant"),
-  function(object, value) {
-    slot(object, "effort") <- value
-  return(object)
   }
 )
 
@@ -165,31 +150,58 @@ setReplaceMethod("orevenue", signature(object="FLFishery", value="FLQuant"),
   }
 )
 
+# Computation
+
+# effort
+setMethod("effort", signature(object="FLFishery"),
+  function(object, compute=TRUE) {
+    if(compute) {
+      return(slot(object, "effort") %*% slot(object, "capacity"))
+    } else {
+      return(slot(object, "effort"))
+    }
+  }
+)
+setReplaceMethod("effort", signature(object="FLFishery", value="FLQuant"),
+  function(object, value) {
+    slot(object, "effort") <- value
+  return(object)
+  }
+)
+
 # vcost
 setMethod("vcost", signature(object="FLFishery"),
-  function(object) {
-    return(slot(object, "vcost"))
+  function(object, compute=TRUE) {
+    if(compute) {
+      return(slot(object, "vcost") %*% effort(object))
+    } else {
+      return(slot(object, "vcost"))
+    }
   }
 )
 setReplaceMethod("vcost", signature(object="FLFishery", value="FLQuant"),
   function(object, value) {
     slot(object, "vcost") <- value
-    return(object)
+  return(object)
   }
 )
 
 # fcost
 setMethod("fcost", signature(object="FLFishery"),
-  function(object) {
-    return(slot(object, "fcost"))
+  function(object, compute=TRUE) {
+    if(compute) {
+      return(slot(object, "fcost") %*% capacity(object))
+    } else {
+      return(slot(object, "fcost"))
+    }
   }
 )
 setReplaceMethod("fcost", signature(object="FLFishery", value="FLQuant"),
   function(object, value) {
     slot(object, "fcost") <- value
-    return(object)
+  return(object)
   }
-) 
+)
 
 # crewshare
 setMethod("crewshare", signature(object="FLFishery"),
@@ -199,7 +211,7 @@ setMethod("crewshare", signature(object="FLFishery"),
 )
 setReplaceMethod("crewshare", signature(object="FLFishery", value="predictModel"),
   function(object, value) {
-    slot(object, "crewshare") <- value
+       slot(object, "crewshare") <- value
     return(object)
   }
 )
