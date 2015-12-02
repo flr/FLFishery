@@ -18,7 +18,7 @@ catch.q(ca) <- FLPar(q=0.25)
 
 # price, as wt * 25
 price(ca) <- landings.wt(ca) * 25
-units(price(ca)) <- 'euro'
+units(price(ca)) <- 'euro / kg'
 
 # capacity, runif 19-28 boats
 cap <- FLQuant(floor(runif(5, 19, 28)), dimnames=list(year=2000:2005),
@@ -48,10 +48,14 @@ cs <- predictModel(model=~fixed + share * lrevenue,
   params=FLPar(fixed=300, share=0.05))
 
 # FLFishery
-fis <- FLFishery(PLE=ca, effort=ef, capacity=cap, hperiod=hp, vcost=vc,
+fis <- FLFishery(PLE=ca, SOL=ca, effort=ef, capacity=cap, hperiod=hp, vcost=vc,
   fcost=fc, orevenue=or, crewshare=cs)
 
-model(crewshare(fis)) <- ~fixed + share * lrevenue - vcost$ice
+fis <- FLFishery(PLE=ca, SOL=ca, effort=ef, capacity=cap, vcost=vc,
+  fcost=fc, orevenue=or, crewshare=cs)
+
+# $
+model(crewshare(fis)) <- ~fixed + share * lrevenue - vcost$ice / 100
 ccost(fis)
 cost(fis)
 
@@ -62,6 +66,8 @@ effort(fis)
 effort(fis, compute=FALSE)
 
 effort(fis)$day
+
+quantSums(effort(fis))
 
 crewshare(fis)
 
