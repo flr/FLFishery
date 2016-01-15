@@ -55,7 +55,7 @@ fis <- FLFishery(PLE=ca, SOL=ca, effort=ef, capacity=cap, vcost=vc,
   fcost=fc, orevenue=or, crewshare=cs)
 
 # $
-model(crewshare(fis)) <- ~fixed + share * lrevenue - vcost$ice / 100
+#model(crewshare(fis)) <- ~fixed + share * lrevenue - vcost$ice / 100
 ccost(fis)
 cost(fis)
 
@@ -94,4 +94,4 @@ profit(fis)
 
 # predict
 
-predict(fis, 'crewshare')
+# predict(fis, 'crewshare')

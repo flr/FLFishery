@@ -126,7 +126,7 @@ setMethod("profit", signature("FLFishery"),
 # ccost {{{
 setMethod("ccost", signature(object="FLFishery"),
   function(object) {
-    return(quantSums(predict(object=object, slot='crewshare')))
+    return(quantSums(FLCore:::evalPredictModel(object=object, slot='crewshare')))
   }
 ) # }}}
 

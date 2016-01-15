@@ -48,9 +48,7 @@ setMethod("FLCatch", signature(object="missing"),
 
     # No FLQuant passed
     if(sum(idx) == 0)
-      return(
-             FLCatch(object=FLQuant(quant='age'), ...)
-             )
+      return(FLCatch(object=FLQuant(quant='age'), ...))
 
     # else
     object <- args[[names(args)[idx][1]]]
@@ -112,11 +110,14 @@ setMethod("FLFishery", signature(object="list"),
       flq <- args[[names(idq)[idq][1]]]
       flq[] <- NA
     } else {
-      flq <- FLQuant(dimnames=c(list(age='all'), dimnames(landings.n(cas[[1]]))[-1]))
+      flq <- FLQuant(dimnames=c(list(quant='all'), dimnames(landings.n(cas[[1]]))[-1]))
     }
 
+    # hperiod
+    hper <- FLQuant(dimnames=c(list(quant=c("start", "end")), dimnames(flq)[-1]))
+
     # create new object
-    res <- new("FLFishery", cas, capacity=flq, effort=flq, hperiod=flq, vcost=flq,
+    res <- new("FLFishery", cas, capacity=flq, effort=flq, hperiod=hper, vcost=flq,
           fcost=flq, orevenue=flq)
 
     # fill slots provided
@@ -147,11 +148,14 @@ setMethod("FLFishery", signature(object="missing"),
       return(new("FLFishery"))
 
     # FIND FLCatch objects
-    idc <- lapply(args, is, 'FLCatch')
+    idc <- unlist(lapply(args, is, 'FLCatch'))
 
-    cas <- new("FLCatches", args[unlist(idc)])
-
-    args <- args[!unlist(idc)]
+    # NONE
+    if(sum(idc) == 0)
+      stop("At least one 'FLCatch' or 'FLCatches' object must be provided")
+ 
+    cas <- new("FLCatches", args[idc])
+    args <- args[!idc]
 
     return(do.call("FLFishery", c(list(object=cas), args)))
     

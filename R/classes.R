@@ -285,6 +285,10 @@ setClass("FLFishery",
   # VALIDITY
   validity=function(object) {
 
+    # hperiod quant=c("start", "end")
+    if(!identical(dimnames(object@hperiod)[['quant']], c("start", "end")))
+      return("dimnames[['quant']] of @hperiod must be c('start', 'end')")
+
     # dims[2:5] of flqs match dims of flcs
 
     # iters 1 or N FLCs vs FLQs

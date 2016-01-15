@@ -7,7 +7,7 @@ Description: FLFishery
 Depends:
   R(>= 3.2.0),
   methods,
-  FLCore(>= 2.5.20151111)
+  FLCore
 Suggests:
   knitr,
   testthat
