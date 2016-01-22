@@ -1,20 +1,19 @@
-% The FLFishery package for modelling fishing fleets
-% Iago Mosqueira & Finlay Scott EC JRC\protect\thanks{
-	European Commission\\
-	Joint Research Center\\
-	IPSC - Maritime Affairs Unit G04\\
-	Ispra, Italy\\
-	\url{https://fishreg.jrc.ec.europa.eu/}} - FLR Project
-% `r format(as.Date(system("git log -1 --format=%ci ggplotFL.Rmd", intern=TRUE)), "%B %Y")`
-
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{The FLFishery package for modelling fishing fleets}
--->
+---
+title:  "The FLFishery package for modelling fishing fleets"
+author: Iago Mosqueira, Finlay Scott - European Commission Joint Research Center
+date: "`r format(as.Date(system('git log -1 --format=%ci ggplotFL.Rmd', intern=TRUE)), '%B %Y')`"
+tags: [FLR, fishery]
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{FLFishery}
+  %\VignetteDepends{reshape2}
+  \usepackage[utf8]{inputenc}
+---
 
 ```{r, setup, echo=FALSE, results='hide', message=FALSE}
 library(knitr)
-opts_chunk$set(dev='pdf', cache=TRUE, fig.width=4.5, fig.height=4.5, tidy=TRUE)
+opts_chunk$set(dev='png', cache=TRUE, fig.width=4.5, fig.height=4.5, tidy=TRUE)
 options(width=50)
 ```
 
@@ -24,7 +23,20 @@ library(FLFishery)
 
 # Classes
 
+A number of S4 classes are defined in the `FLFishery` package, built around other classes in the FLR system. They represent different parts of the fishery system, all related to the activities of the fishing fleets we are modelling.
+
 ## FLCatch
+
+The `FLCatch` class contains information on the removals from a single population a fleet is responsible for. Those catches are considered here to be a combination of landings and discards.
+
+### Slots
+
+- `landings.n` Landings at age in numbers (`1`)
+- `landings.wt` Mean weight at age in the landings (`kg`)
+- `discards.n` Discards at age in numbers (`1`)
+- `discards.wt` Mean weight at age in the discards (`kg`)
+- `catch.sel` Combined total selectivity of the gear or gears used by this fleet (`NA`)
+- `price` Price of landings by unit of weight (`eur/kg`)
 
 ## FLCatches
 
@@ -34,9 +46,13 @@ library(FLFishery)
 
 # Methods
 
-## plot
+## Plot
 
-## coercion
+## Coercion
+
+## Calculations
+
+## Economics
 
 # Examples
 
@@ -44,8 +60,8 @@ library(FLFishery)
 
 # More information
 
-* You can submit bug reports, questions or suggestions on `FLFishery` at the `FLFishery` issue page ^[<https://github.com/flr/FLFishery/issues>], or on the *FLR* mailing list.
-* Or send a pull request to <https://github.com/flr/FLFishery/>
+* You can submit bug reports, questions or suggestions on `FLFishery` at the `FLFishery` issue page ^[<https://github.com/iagomosqueira/FLFishery/issues>], or on the *FLR* mailing list.
+* Or send a pull request to <https://github.com/iagomosqueira/FLFishery/>
 * For more information on the FLR Project for Quantitative Fisheries Science in R, visit the FLR webpage ^[<http://flr-project.org>].
 * The latest version of `FLFishery` can always be installed using the `devtools` package, by calling
 ```{r, devtools, echo=TRUE, eval=FALSE}
