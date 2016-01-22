@@ -4,8 +4,7 @@ exportClasses(
   "FLCatch",
   "FLCatches",
   "FLFishery",
-  "FLFisheries",
-  "predictModel"
+  "FLFisheries"
 )
 exportMethods(
   "$",
