@@ -162,10 +162,10 @@ setClass("FLCatches",
     if(length(unique(qua)) > 1)
       return("FLCatch objects must have quant='age'")
 
-    # dims [c(2,3,4,5)] must be the same
-    dmns <- lapply(object, function(x) dimnames(landings.n(x))[-c(1, 6)])
+    # dims [c(2,4,5)] must be the same - units can be different
+    dmns <- lapply(object, function(x) dimnames(landings.n(x))[-c(1,3,6)])
     if(sum(duplicated(dmns)) != (length(dmns) - 1))
-      return(paste("All FLCatch objects must share dimensions 2 to 5: ",
+      return(paste("All FLCatch objects must share dimensions 2, 4 and 5: ",
         names(dmns)[!duplicated(dmns)][-1]))
 
     # iters 1 or N
