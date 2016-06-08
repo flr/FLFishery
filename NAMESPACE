@@ -35,6 +35,8 @@ exportMethods(
   "effort<-",
   "fcost",
   "fcost<-",
+  "hperiod",
+  "hperiod<-",
   "landings",
   "landings.n",
   "landings.n<-",
