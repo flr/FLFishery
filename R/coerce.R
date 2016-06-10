@@ -10,11 +10,13 @@
 # FLStock  -> FLCatch {{{
 
 setAs('FLStock', 'FLCatch',
-	function(from)
-	{
-		FLCatch(landings.n=landings.n(from), landings.wt=landings.wt(from),
+	function(from) {
+
+		FLCatch(name=name(from), desc=desc(from), landings.n=landings.n(from), landings.wt=landings.wt(from),
 			discards.n=discards.n(from), discards.wt=discards.wt(from),
-			catch.sel=catch.sel(from))
+			catch.sel=catch.sel(from),
+      # catch.q
+      catch.q=FLPar(alpha=c(harvest(from)[1,1] / catch.sel(from)[1,1]), beta=0))
 	}
 )
 # }}}
@@ -23,7 +25,15 @@ setAs('FLStock', 'FLCatch',
 
 setAs('FLStock', 'FLFishery',
   function(from) {
-    FLFishery(as(from, 'FLCatch'), effort=catch(from) / esb(from))
+
+    res <- FLFishery(as(from, 'FLCatch'))
+    
+    names(res) <- desc(res) <- name(from)
+
+    effort(res)[] <- c((harvest(from) / (catch.q(res[[1]])['alpha',] * catch.sel(res[[1]])))[1,])
+    capacity(res)[] <- 1
+
+    return(res)
   }
 ) # }}}
 
@@ -47,7 +57,6 @@ setAs("FLFishery", "FLFisheryFQ",
   }
 ) # }}}
 
-
 # asFLStock {{{
 asFLStock <- function(fbi, fca) {
 	
@@ -70,4 +79,3 @@ asFLStock <- function(fbi, fca) {
 
 
 # }}}
-

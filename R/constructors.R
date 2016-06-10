@@ -114,7 +114,7 @@ setMethod("FLFishery", signature(object="list"),
     }
 
     # hperiod
-    hper <- FLQuant(dimnames=c(list(quant=c("start", "end")), dimnames(flq)[-1]))
+    hper <- FLQuant(c(0,1), dimnames=c(list(quant=c("start", "end")), dimnames(flq)[-1]))
 
     # create new object
     res <- new("FLFishery", cas, capacity=flq, effort=flq, hperiod=hper, vcost=flq,
