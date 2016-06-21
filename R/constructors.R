@@ -164,9 +164,9 @@ setMethod("FLFishery", signature(object="missing"),
 
 # FLFisheries() {{{
 setMethod('FLFisheries', signature(object='list'),
-  function(object) {
+  function(object, desc=character(1)) {
 
-    return(new('FLFisheries', object))
+    return(new('FLFisheries', object, desc=desc))
   }
 ) 
 
@@ -177,6 +177,4 @@ setMethod('FLFisheries', signature(object='missing'),
 
     return(FLFisheries(args))
   }
-)
-
-# }}}
+) # }}}

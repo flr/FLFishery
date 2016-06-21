@@ -334,7 +334,6 @@ setClass("FLFisheryFQ",
 
 # FLFisheries {{{
 setClass("FLFisheries", contains=c("FLlst"),
-
   # VALIDITY
   validity=function(object) {
 
