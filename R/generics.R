@@ -21,23 +21,23 @@ setGeneric("FLFisheries", function(object, ...) standardGeneric("FLFisheries"))
 setGeneric("capacity", function(object, ...) standardGeneric("capacity"))
 setGeneric("capacity<-", function(object, ..., value) standardGeneric("capacity<-"))
 
-setGeneric("hperiod", function(object, ...) standardGeneric("hperiod"))
-setGeneric("hperiod<-", function(object, ..., value) standardGeneric("hperiod<-"))
-
-setGeneric("vcost", function(object, ...) standardGeneric("vcost"))
-setGeneric("vcost<-", function(object, ..., value) standardGeneric("vcost<-"))
+setGeneric("crewshare", function(object, ...) standardGeneric("crewshare"))
+setGeneric("crewshare<-", function(object, ..., value) standardGeneric("crewshare<-"))
 
 setGeneric("fcost", function(object, ...) standardGeneric("fcost"))
 setGeneric("fcost<-", function(object, ..., value) standardGeneric("fcost<-"))
 
-setGeneric("orevenue", function(object, ...) standardGeneric("orevenue"))
-setGeneric("orevenue<-", function(object, ..., value) standardGeneric("orevenue<-"))
-
-setGeneric("crewshare", function(object, ...) standardGeneric("crewshare"))
-setGeneric("crewshare<-", function(object, ..., value) standardGeneric("crewshare<-"))
+setGeneric("hperiod", function(object, ...) standardGeneric("hperiod"))
+setGeneric("hperiod<-", function(object, ..., value) standardGeneric("hperiod<-"))
 
 setGeneric("orevenue", function(object, ...) standardGeneric("orevenue"))
 setGeneric("orevenue<-", function(object, ..., value) standardGeneric("orevenue<-"))
+
+setGeneric("price", function(object, ...) standardGeneric("price"))
+setGeneric("price<-", function(object, ..., value) standardGeneric("price<-"))
+
+setGeneric("vcost", function(object, ...) standardGeneric("vcost"))
+setGeneric("vcost<-", function(object, ..., value) standardGeneric("vcost<-"))
 
 # METHODS
 
@@ -54,3 +54,5 @@ setGeneric("ccost", function(object, ...) standardGeneric("ccost"))
 setGeneric("profit", function(object, ...) standardGeneric("profit"))
 
 setGeneric("lrevenue", function(object, ...) standardGeneric("lrevenue"))
+
+setGeneric("revenue", function(object, ...) standardGeneric("revenue"))

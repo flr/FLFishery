@@ -7,6 +7,8 @@
 #
 # Notes:
 
-library(testthat)
 
+library(FLFishery)
+
+library(testthat)
 test_check("FLFishery")

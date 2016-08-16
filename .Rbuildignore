@@ -5,3 +5,4 @@ gh-pages/
 man-roxygen/
 Makefile
 .git/
+vignettes/*_cache

@@ -15,7 +15,7 @@
 #' numbers, with the corresponding mean weights at age.
 #' 
 #' This is class is used inside \code{FLFishery} to store the catches of
-#' a single stock species caught obtained by that fleet.
+#' a single stock or species caught by that fleet.
 #' 
 #' @name FLCatch
 #' @rdname FLCatch
@@ -131,7 +131,7 @@ setClass("FLCatch",
     discards.wt = FLQuant(),
     catch.sel = FLQuant(),
     price = FLQuant(),
-    catch.q = FLPar(a=NA, b=NA)),
+    catch.q = FLPar(a=NA, b=0, e=1)),
 
   # VALIDITY
   validity=function(object) {
@@ -140,11 +140,56 @@ setClass("FLCatch",
     # iter 1 or N
     # catch.q iter 1 or N
     # catch.q dims equal to flqs
+
     return(TRUE)
   }
 ) # }}}
 
 # FLCatches {{{
+
+#' List class for FLFishery catch data
+#'
+#' This is class is used inside \code{FLFishery} to store the catches of
+#' all species caught by that fleet. It is not meant to be used directly.
+#' 
+#' @name FLCatch
+#' @rdname FLCatch
+#' @docType class
+#' @aliases FLCatches FLCatches-class FLCatches-methods
+#'
+#' @section Validity:
+#'
+#'   \describe{
+#'     \item{Length of dimensions 2:5}{All elements must be of class \code{FLCatch}}
+#'     \item{Length of dimensions 2, 4 and 5}{All \code{FLQuant} slots must share
+#'       dimensions 2, 4 and 5 (year, season and area).}
+#'     \item{quant must 'age'}{The 1st dimension in elements must be 'age'.}
+#'   }
+#'
+#' You can inspect the class validity function by using
+#'    \code{getValidity(getClassDef('FLCatches'))}
+#'
+#' @section Accessors:
+#' Elements in the classes can be extracted and replaced using the list subset
+#' operators,'[', '[<-', '[[' and '[[<-'.
+#'
+#' The values passed for replacement need to be of the class FLCatch.
+#'
+#' @section Constructor:
+#' A construction method exists for this class that can take named arguments for
+#' any of its elements. 
+#'
+#' @section Methods:
+#' Methods exist for various operations with elements stored in the class:
+#'
+#' \describe{
+#'  \item{plot}{Standard plot for the FLCatches class.}
+#' }
+#'
+#' @author Iago Mosqueira, EC JRC.
+#' @seealso \link{FLCatch}, \link{FLFishery}
+#' @keywords classes
+
 setClass("FLCatches",
   contains=c("FLlst"),
 

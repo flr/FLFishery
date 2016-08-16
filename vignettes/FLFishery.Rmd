@@ -1,13 +1,12 @@
 ---
 title:  "The FLFishery package for modelling fishing fleets"
 author: Iago Mosqueira, Finlay Scott - European Commission Joint Research Center
-date: "`r format(as.Date(system('git log -1 --format=%ci ggplotFL.Rmd', intern=TRUE)), '%B %Y')`"
+date: "`r format(Sys.time(), '%B, %Y')`"
 tags: [FLR, fishery]
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteIndexEntry{FLFishery}
-  %\VignetteDepends{reshape2}
   \usepackage[utf8]{inputenc}
 ---
 
@@ -21,9 +20,15 @@ options(width=50)
 library(FLFishery)
 ```
 
+# Introduction
+
+# Design
+
 # Classes
 
 A number of S4 classes are defined in the `FLFishery` package, built around other classes in the FLR system. They represent different parts of the fishery system, all related to the activities of the fishing fleets we are modelling.
+
+- UML classes diagram
 
 ## FLCatch
 
@@ -66,7 +71,7 @@ The `FLCatch` class contains information on the removals from a single populatio
 * The latest version of `FLFishery` can always be installed using the `devtools` package, by calling
 ```{r, devtools, echo=TRUE, eval=FALSE}
 	library(devtools)
-	install_github('FLFishery', 'flr')
+	install_github('iagomosqueira/FLFishery')
 ```
 
 ## Software Versions
@@ -74,6 +79,7 @@ The `FLCatch` class contains information on the removals from a single populatio
 * `r version$version.string`
 * FLFishery: `r packageVersion('FLFishery')`
 * FLCore: `r packageVersion('FLCore')`
+* ggplotFL: `r packageVersion('ggplotFL')`
 * **Compiled**: `r date()`
 * **Git Hash**: `r system("git log --pretty=format:'%h' -n 1", intern=TRUE)`
 
