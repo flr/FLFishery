@@ -14,7 +14,7 @@ setAs('FLStock', 'FLCatch',
 
 		FLCatch(name=name(from), desc=desc(from), landings.n=landings.n(from), landings.wt=landings.wt(from),
 			discards.n=discards.n(from), discards.wt=discards.wt(from),
-			catch.sel=catch.sel(from),
+			catch.sel=predictModel(FLQuants(catch.sel=catch.sel(from)), model=~catch.sel),
       # catch.q
       catch.q=FLPar(alpha=c(harvest(from)[1,1] / catch.sel(from)[1,1]), beta=0))
 	}

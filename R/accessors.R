@@ -67,45 +67,78 @@ setReplaceMethod("discards.wt", signature(object="FLCatch", value="FLQuant"),
   }
 )
 
-# catch.sel
-setMethod("catch.sel", signature(object="FLCatch"),
-  function(object) {
-    return(slot(object, "catch.sel"))
+# catch.sel {{{
+setMethod('catch.sel', signature('FLCatch'),
+  function(object, compute=TRUE) {
+    if(compute)
+      return(evalPredictModel(object, slot='catch.sel'))
+    else
+      return(object@catch.sel)
   }
-)
-setReplaceMethod("catch.sel", signature(object="FLCatch", value="FLQuant"),
+) # }}}
+
+# catch.sel<- predictModel
+setReplaceMethod('catch.sel', signature(object='FLCatch', value='predictModel'),
   function(object, value) {
-    slot(object, "catch.sel") <- value
+    object@catch.sel <- value
     return(object)
   }
 )
 
-# price
-setMethod("price", signature(object="FLCatch"),
-  function(object) {
-    return(slot(object, "price"))
-  }
-)
-setReplaceMethod("price", signature(object="FLCatch", value="FLQuant"),
+# catch.sel<- FLQuant: change to catch.sel@.Data['catch.sel']
+setReplaceMethod('catch.sel', signature(object='FLCatch', value='FLQuant'),
   function(object, value) {
-    slot(object, "price") <- value
+    object@catch.sel@.Data <- FLQuants(catch.sel=value)
     return(object)
   }
 )
 
-# catch.q
-setMethod("catch.q", signature(object="FLCatch"),
-  function(object) {
-    return(slot(object, "catch.q"))
-  }
-)
-setReplaceMethod("catch.q", signature(object="FLCatch", value="FLPar"),
+# catch.sel<- FLQuants: assign to @.Data
+setReplaceMethod('catch.sel', signature(object='FLCatch', value='FLQuants'),
   function(object, value) {
-    slot(object, "catch.q") <- value
+    object@catch.sel@.Data <- value
     return(object)
   }
 )
-# }}}
+
+# catch.sel<- formula:
+setReplaceMethod('catch.sel', signature(object='FLCatch', value='formula'),
+  function(object, ..., value) {
+    object@catch.sel@model <- value
+    return(object)
+  }
+)
+
+# catch.sel<- params:
+setReplaceMethod('catch.sel', signature(object='FLCatch', value='FLPar'),
+  function(object, value) {
+    object@catch.sel@params <- value
+    return(object)
+  }
+) 
+
+# catch.sel<- list:
+setReplaceMethod('catch.sel', signature(object='FLCatch', value='list'),
+  function(object, value) {
+    
+    # FLQuants
+    idx <- unlist(lapply(value, is, 'FLQuants'))
+    if(sum(idx) > 1)
+      stop("More than one element in the list is of class 'FLQuants'")
+    
+    object@catch.sel@.Data <- value[idx][[1]]
+    object@catch.sel@names <- names(value[idx][[1]])
+
+    # params & modes
+    idx <- !idx
+
+    if(sum(idx) > 0)
+    for(i in names(value[idx]))
+      slot(object@catch.sel, i) <- value[[i]]
+
+    return(object)
+  }
+) # }}}
 
 # FLFishery {{{
 
