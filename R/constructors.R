@@ -24,7 +24,7 @@ setMethod("FLCatch", signature(object="FLQuant"),
       discards.n=object,
       discards.wt=object,
       catch.sel=predictModel(FLQuants(catch.sel=object), model=~catch.sel),
-      price=object,
+      price=predictModel(FLQuants(price=object), model=~price),
       catch.q=FLPar(q=NA),
       range=c(min=dmn$min, max=dmn$max,  plusgroup=dmn$max, minyear=dmn$minyear,
         maxyear=dmn$maxyear)

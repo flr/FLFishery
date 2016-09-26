@@ -38,3 +38,5 @@ test_that("FLCatch(flq) works", {
   expect_true(all(is.na(landings.n(flc))))
 })
 # }}}
+
+

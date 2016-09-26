@@ -75,7 +75,7 @@ setMethod('catch.sel', signature('FLCatch'),
     else
       return(object@catch.sel)
   }
-) # }}}
+)
 
 # catch.sel<- predictModel
 setReplaceMethod('catch.sel', signature(object='FLCatch', value='predictModel'),
@@ -139,6 +139,81 @@ setReplaceMethod('catch.sel', signature(object='FLCatch', value='list'),
     return(object)
   }
 ) # }}}
+
+# price {{{
+setMethod('price', signature('FLCatch'),
+  function(object, compute=TRUE) {
+    if(compute)
+      return(evalPredictModel(object, slot='price'))
+    else
+      return(object@price)
+  }
+)
+
+# price<- predictModel
+setReplaceMethod('price', signature(object='FLCatch', value='predictModel'),
+  function(object, value) {
+    object@price <- value
+    return(object)
+  }
+)
+
+# price<- FLQuant: change to price@.Data['price']
+setReplaceMethod('price', signature(object='FLCatch', value='FLQuant'),
+  function(object, value) {
+    object@price@.Data <- FLQuants(price=value)
+    return(object)
+  }
+)
+
+# price<- FLQuants: assign to @.Data
+setReplaceMethod('price', signature(object='FLCatch', value='FLQuants'),
+  function(object, value) {
+    object@price@.Data <- value
+    return(object)
+  }
+)
+
+# price<- formula:
+setReplaceMethod('price', signature(object='FLCatch', value='formula'),
+  function(object, ..., value) {
+    object@price@model <- value
+    return(object)
+  }
+)
+
+# price<- params:
+setReplaceMethod('price', signature(object='FLCatch', value='FLPar'),
+  function(object, value) {
+    object@price@params <- value
+    return(object)
+  }
+) 
+
+# price<- list:
+setReplaceMethod('price', signature(object='FLCatch', value='list'),
+  function(object, value) {
+    
+    # FLQuants
+    idx <- unlist(lapply(value, is, 'FLQuants'))
+    if(sum(idx) > 1)
+      stop("More than one element in the list is of class 'FLQuants'")
+    
+    object@price@.Data <- value[idx][[1]]
+    object@price@names <- names(value[idx][[1]])
+
+    # params & modes
+    idx <- !idx
+
+    if(sum(idx) > 0)
+    for(i in names(value[idx]))
+      slot(object@price, i) <- value[[i]]
+
+    return(object)
+  }
+) # }}}
+
+# }}}
 
 # FLFishery {{{
 

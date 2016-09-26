@@ -118,7 +118,7 @@ setClass("FLCatch",
     discards.n = "FLQuant",
     discards.wt = "FLQuant",
     catch.sel = "predictModel",
-    price = "FLQuant",
+    price = "predictModel",
     catch.q = "FLPar"),
   prototype(
     name = character(0),
@@ -130,7 +130,7 @@ setClass("FLCatch",
     discards.n = FLQuant(),
     discards.wt = FLQuant(),
     catch.sel = predictModel(FLQuants(catch.sel=FLQuant()), model=~catch.sel, params=FLPar()),
-    price = FLQuant(),
+    price = predictModel(FLQuants(price=FLQuant()), model=~price, params=FLPar()),
     catch.q = FLPar(a=NA, b=0, e=1)),
 
   # VALIDITY
