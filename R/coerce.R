@@ -37,10 +37,10 @@ setAs('FLStock', 'FLFishery',
   }
 ) # }}}
 
-# FLFishery -> FLFisheryFQ {{{
-setAs("FLFishery", "FLFisheryFQ",
+# FLFishery -> FLFisherycpp {{{
+setAs("FLFishery", "FLFisherycpp",
   function(from) {
-    return(new("FLFisheryFQ",
+    return(new("FLFisherycpp",
       .Data=from@.Data,
       names=names(from),
       lock=from@lock,
@@ -53,7 +53,7 @@ setAs("FLFishery", "FLFisheryFQ",
       vcost=vcost(from),
       fcost=fcost(from),
       orevenue=orevenue(from),
-      ccost=cost(from)))
+      crewshare=crewshare(from)))
   }
 ) # }}}
 

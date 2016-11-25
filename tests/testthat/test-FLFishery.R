@@ -94,3 +94,8 @@ profit(fis)
 # predict
 
 # predict(fis, 'crewshare')
+
+# 
+
+ficp <- as(fis, 'FLFisherycpp')
+

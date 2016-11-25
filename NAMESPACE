@@ -47,6 +47,8 @@ exportMethods(
   "lrevenue",
   "model",
   "model<-",
+  "orevenue",
+  "orevenue<-",
   "params",
   "params<-",
   "price",

@@ -344,8 +344,9 @@ setClass("FLFishery",
   }
 ) # }}}
 
-# FLFisheryFQ {{{
-setClass("FLFisheryFQ",
+# FLFisherycpp {{{
+
+setClass("FLFisherycpp",
   contains=c("FLComp", "FLCatches"),
   representation(
     capacity="FLQuant",
@@ -354,18 +355,21 @@ setClass("FLFisheryFQ",
     vcost="FLQuant",
     fcost="FLQuant",
     orevenue="FLQuant",
-    ccost="FLQuant"),
+    crewshare="FLQuant"),
   prototype(
-    capacity=FLQuant(dimnames=list(quant=c("all"))),
-    effort=FLQuant(dimnames=list(quant=c("all"))),
-    hperiod=FLQuant(dimnames=list(quant=c("start", "end"))),
-    vcost=FLQuant(dimnames=list(quant=c("all"))),
-    fcost=FLQuant(dimnames=list(quant=c("all"))),
-    orevenue=FLQuant(dimnames=list(quant=c("all"))),
-    ccost=FLQuant(dimnames=list(quant=c("all"))),
-      params=FLPar(fixed=0, crew=1, share=0.0)),
+    capacity=FLQuant(1, dimnames=list(quant=c("all"))),
+    effort=FLQuant(NA, dimnames=list(quant=c("all"))),
+    hperiod=FLQuant(c(0, 1), dimnames=list(quant=c("start", "end"))),
+    vcost=FLQuant(NA, dimnames=list(quant=c("all"))),
+    fcost=FLQuant(NA, dimnames=list(quant=c("all"))),
+    orevenue=FLQuant(NA, dimnames=list(quant=c("all"))),
+    crewshare=FLQuant(NA, dimnames=list(quant=c("all")))),
   # VALIDITY
   validity=function(object) {
+
+    # hperiod quant=c("start", "end")
+    if(!identical(dimnames(object@hperiod)[['quant']], c("start", "end")))
+      return("dimnames[['quant']] of @hperiod must be c('start', 'end')")
 
     # dims[2:5] of flqs match dims of flcs
 
