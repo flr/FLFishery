@@ -387,7 +387,7 @@ setClass("FLFisheries", contains=c("FLlst"),
   validity=function(object) {
 
     # all objects are FLFishery
-    if(any(!unlist(lapply(object, is, "FLFishery"))))
+    if(any(!unlist(lapply(object, function(x) is(x, "FLFishery") | is(x, "FLFisherycpp")))))
       return("Input objects must be of class 'FLFishery'")
 
     # dmns <- lapply(object, dims)
