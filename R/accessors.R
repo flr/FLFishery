@@ -92,6 +92,12 @@ setReplaceMethod("price", signature(object="FLCatch", value="FLQuant"),
     return(object)
   }
 )
+setReplaceMethod("price", signature(object="FLCatch", value="numeric"),
+  function(object, value) {
+    slot(object, "price")[] <- value
+    return(object)
+  }
+)
 
 # catch.q
 setMethod("catch.q", signature(object="FLCatch"),

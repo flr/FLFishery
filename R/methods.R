@@ -14,14 +14,20 @@ setMethod("[", signature(x="FLFishery", i="ANY", j="missing"),
 	}
 )
 
-setMethod("[[<-", signature(x="FLFishery", i="ANY", j="missing", value="FLCatch"),
+setMethod("[[<-", signature(x="FLFishery", i="integer", j="missing", value="FLCatch"),
 	function(x, i, value) {
 		x@.Data[[i]] <- value
 		return(x)
 	}
 )
 
-# }}}
+setMethod("[[<-", signature(x="FLFishery", i="character", j="missing", value="FLCatch"),
+	function(x, i, value) {
+    idx <- match(i, names(x))
+		x@.Data[[idx]] <- value
+		return(x)
+	}
+) # }}}
 
 # landings {{{
 setMethod("landings", signature(object="FLCatch"),
