@@ -14,7 +14,7 @@ setMethod("[", signature(x="FLFishery", i="ANY", j="missing"),
 	}
 )
 
-setMethod("[[<-", signature(x="FLFishery", i="integer", j="missing", value="FLCatch"),
+setMethod("[[<-", signature(x="FLFishery", i="numeric", j="missing", value="FLCatch"),
 	function(x, i, value) {
 		x@.Data[[i]] <- value
 		return(x)

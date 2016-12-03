@@ -8,7 +8,6 @@ exportClasses(
   "FLFisheries"
 )
 exportMethods(
-  "$",
   "[",
   "[[<-",
   "FLCatch",
