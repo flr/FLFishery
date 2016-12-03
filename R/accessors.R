@@ -6,13 +6,6 @@
 #
 # Distributed under terms of the European Union Public Licence (EUPL) V.1.1.
 
-# $
-setMethod("$", signature(x="FLQuant"),           
-  function(x, name) {
-    return(x[name,])
-  }
-)
-
 # FLCatch {{{
 
 # landings.n
@@ -24,6 +17,12 @@ setMethod("landings.n", signature(object="FLCatch"),
 setReplaceMethod("landings.n", signature(object="FLCatch", value="FLQuant"),
   function(object, value) {
     slot(object, "landings.n") <- value
+    return(object)
+  }
+)
+setReplaceMethod("landings.n", signature(object="FLCatch", value="numeric"),
+  function(object, value) {
+    slot(object, "landings.n")[] <- value
     return(object)
   }
 )
@@ -40,6 +39,12 @@ setReplaceMethod("landings.wt", signature(object="FLCatch", value="FLQuant"),
     return(object)
   }
 )
+setReplaceMethod("landings.wt", signature(object="FLCatch", value="numeric"),
+  function(object, value) {
+    slot(object, "landings.wt")[] <- value
+    return(object)
+  }
+)
 
 # discards.n
 setMethod("discards.n", signature(object="FLCatch"),
@@ -50,6 +55,12 @@ setMethod("discards.n", signature(object="FLCatch"),
 setReplaceMethod("discards.n", signature(object="FLCatch", value="FLQuant"),
   function(object, value) {
     slot(object, "discards.n") <- value
+    return(object)
+  }
+)
+setReplaceMethod("discards.n", signature(object="FLCatch", value="numeric"),
+  function(object, value) {
+    slot(object, "discards.n")[] <- value
     return(object)
   }
 )
@@ -66,6 +77,12 @@ setReplaceMethod("discards.wt", signature(object="FLCatch", value="FLQuant"),
     return(object)
   }
 )
+setReplaceMethod("discards.wt", signature(object="FLCatch", value="numeric"),
+  function(object, value) {
+    slot(object, "discards.wt")[] <- value
+    return(object)
+  }
+)
 
 # catch.sel
 setMethod("catch.sel", signature(object="FLCatch"),
@@ -76,6 +93,12 @@ setMethod("catch.sel", signature(object="FLCatch"),
 setReplaceMethod("catch.sel", signature(object="FLCatch", value="FLQuant"),
   function(object, value) {
     slot(object, "catch.sel") <- value
+    return(object)
+  }
+)
+setReplaceMethod("catch.sel", signature(object="FLCatch", value="numeric"),
+  function(object, value) {
+    slot(object, "catch.sel")[] <- value
     return(object)
   }
 )
@@ -111,6 +134,12 @@ setReplaceMethod("catch.q", signature(object="FLCatch", value="FLPar"),
     return(object)
   }
 )
+setReplaceMethod("catch.q", signature(object="FLCatch", value="numeric"),
+  function(object, value) {
+    slot(object, "catch.q")[] <- value
+    return(object)
+  }
+)
 # }}}
 
 # FLFishery {{{
@@ -129,6 +158,12 @@ setReplaceMethod("capacity", signature(object="FLFishery", value="FLQuant"),
     return(object)
   }
 )
+setReplaceMethod("capacity", signature(object="FLFishery", value="numeric"),
+  function(object, value) {
+    slot(object, "capacity")[] <- value
+    return(object)
+  }
+)
 
 # hperiod
 setMethod("hperiod", signature(object="FLFishery"),
@@ -142,6 +177,12 @@ setReplaceMethod("hperiod", signature(object="FLFishery", value="FLQuant"),
     return(object)
   }
 )
+setReplaceMethod("hperiod", signature(object="FLFishery", value="numeric"),
+  function(object, value) {
+    slot(object, "hperiod")[] <- value
+    return(object)
+  }
+)
 
 # orevenue
 setMethod("orevenue", signature(object="FLFishery"),
@@ -152,6 +193,12 @@ setMethod("orevenue", signature(object="FLFishery"),
 setReplaceMethod("orevenue", signature(object="FLFishery", value="FLQuant"),
   function(object, value) {
     slot(object, "orevenue") <- value
+    return(object)
+  }
+)
+setReplaceMethod("orevenue", signature(object="FLFishery", value="numeric"),
+  function(object, value) {
+    slot(object, "orevenue")[] <- value
     return(object)
   }
 )
@@ -224,7 +271,6 @@ setReplaceMethod("crewshare", signature(object="FLFishery", value="predictModel"
     return(object)
   }
 )
-
 # }}}
 
 # FLFisheries {{{
