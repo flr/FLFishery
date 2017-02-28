@@ -2,7 +2,7 @@
 # FLFishery/R/FLFishery.R
 
 # Copyright European Union, 2015
-# Author: Iago Mosqueira (EC JRC) <iago.mosqueira@jrc.ec.europa.eu>
+# Author: Iago Mosqueira (EC JRC) <iago.mosqueira@ec.europa.eu>
 #
 # Distributed under the terms of the European Union Public Licence (EUPL) V.1.1.
 
@@ -13,9 +13,9 @@
 #' discards data from fishing fleets catching individuals of one or more stocks.
 #'
 #' @author
-#' Iago Mosqueira (EC JRC) \email{iago.mosqueira@@jrc.ec.europa.eu}
+#' Iago Mosqueira (EC JRC) \email{iago.mosqueira@@ec.europa.eu}
 #'
-#' Maintainer: Iago Mosqueira (EC JRC) \email{iago.mosqueira@@jrc.ec.europa.eu}
+#' Maintainer: Iago Mosqueira (EC JRC) \email{iago.mosqueira@@ec.europa.eu}
 #' @name FLFishery
 #' @docType package
 #' @import FLCore
