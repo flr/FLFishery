@@ -322,7 +322,9 @@ setClass("FLFishery",
     capacity=FLQuant(1, dimnames=list(quant=c("all"))),
     effort=FLQuant(NA, dimnames=list(quant=c("all"))),
     hperiod=FLQuant(c(0, 1), dimnames=list(quant=c("start", "end"))),
+    # vcost = effort * landings * Z
     vcost=FLQuant(NA, dimnames=list(quant=c("all"))),
+    # fcost = capacity * X
     fcost=FLQuant(NA, dimnames=list(quant=c("all"))),
     orevenue=FLQuant(NA, dimnames=list(quant=c("all"))),
     crewshare=predictModel(model=~fixed * crew + share * lrevenue,

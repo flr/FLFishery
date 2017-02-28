@@ -23,8 +23,18 @@ setMethod("[[<-", signature(x="FLFishery", i="numeric", j="missing", value="FLCa
 
 setMethod("[[<-", signature(x="FLFishery", i="character", j="missing", value="FLCatch"),
 	function(x, i, value) {
+
+    # MATCH with existing,
     idx <- match(i, names(x))
-		x@.Data[[idx]] <- value
+    # otherwise it is new
+    if(is.na(idx)) {
+      idx <- i
+      nms <- c(names(x), i)
+		  x@.Data[[idx]] <- value
+      names(x) <- nms
+    } else {
+		  x@.Data[[idx]] <- value
+    }
 		return(x)
 	}
 ) # }}}

@@ -1,22 +1,35 @@
 Package: FLFishery
 Title: Classes and Methods for Simpler Fleet/Fishery Modelling
-Version: 0.1.0.20161125
-Date: 2016-11-25
-Author: Iago Mosqueira <iago.mosqueira-sanchez@jrc.ec.europa.eu>
-Description: A set of classes and methods for modelling of fleet dynamics. Fisheries are homogeneus in selectivity and spatio-temporal distribution of activities, i.e. no metiers.
+Version: 0.1.1.9000
+Date: 2017-02-28
+Authors@R: c(
+  person("Iago", "Mosqueira", email = "iago.mosqueira@jrc.ec.europa.eu", role = c("cre", "aut")))
+Description: A set of classes and methods for modelling of fleet dynamics.
+    Fisheries are homogeneus in selectivity and spatio-temporal distribution of
+    activities, i.e. no metiers.
 Depends:
-  R(>= 3.3.0),
-  methods,
-  FLCore,
-  ggplotFL
+    R(>= 3.3.0),
+    methods,
+    FLCore,
+    ggplotFL
 Suggests:
-  knitr,
-  testthat
+    knitr,
+    testthat
 Additional_repositories: http://flr-project.org/R
 Maintainer: Iago Mosqueira <iago.mosqueira@jrc.ec.europa.eu>
 License: file LICENSE
 License_is_FOSS: yes
 LazyLoad: Yes
 LazyData: No
-Collate: FLFishery.R generics.R classes.R accessors.R coerce.R constructors.R methods.R getPlural.R plot.R
+Collate:
+    FLFishery.R
+    generics.R
+    classes.R
+    accessors.R
+    coerce.R
+    constructors.R
+    methods.R
+    getPlural.R
+    plot.R
 VignetteBuilder: knitr
+RoxygenNote: 6.0.1
