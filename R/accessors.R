@@ -273,6 +273,144 @@ setReplaceMethod("crewshare", signature(object="FLFishery", value="predictModel"
 )
 # }}}
 
+# FLFisherycpp {{{
+
+# Direct accesors
+
+# capacity
+setMethod("capacity", signature(object="FLFisherycpp"),
+  function(object) {
+    return(slot(object, "capacity"))
+  }
+)
+setReplaceMethod("capacity", signature(object="FLFisherycpp", value="FLQuant"),
+  function(object, value) {
+    slot(object, "capacity") <- value
+    return(object)
+  }
+)
+setReplaceMethod("capacity", signature(object="FLFisherycpp", value="numeric"),
+  function(object, value) {
+    slot(object, "capacity")[] <- value
+    return(object)
+  }
+)
+
+# hperiod
+setMethod("hperiod", signature(object="FLFisherycpp"),
+  function(object) {
+    return(slot(object, "hperiod"))
+  }
+)
+setReplaceMethod("hperiod", signature(object="FLFisherycpp", value="FLQuant"),
+  function(object, value) {
+    slot(object, "hperiod") <- value
+    return(object)
+  }
+)
+setReplaceMethod("hperiod", signature(object="FLFisherycpp", value="numeric"),
+  function(object, value) {
+    slot(object, "hperiod")[] <- value
+    return(object)
+  }
+)
+
+# orevenue
+setMethod("orevenue", signature(object="FLFisherycpp"),
+  function(object) {
+    return(slot(object, "orevenue"))
+  }
+)
+setReplaceMethod("orevenue", signature(object="FLFisherycpp", value="FLQuant"),
+  function(object, value) {
+    slot(object, "orevenue") <- value
+    return(object)
+  }
+)
+setReplaceMethod("orevenue", signature(object="FLFisherycpp", value="numeric"),
+  function(object, value) {
+    slot(object, "orevenue")[] <- value
+    return(object)
+  }
+)
+
+# effort
+setMethod("effort", signature(object="FLFisherycpp"),
+  function(object) {
+    return(slot(object, "effort"))
+  }
+)
+setReplaceMethod("effort", signature(object="FLFisherycpp", value="FLQuant"),
+  function(object, value) {
+    slot(object, "effort") <- value
+    return(object)
+  }
+)
+setReplaceMethod("effort", signature(object="FLFisherycpp", value="numeric"),
+  function(object, value) {
+    slot(object, "effort")[] <- value
+    return(object)
+  }
+)
+
+# vcost
+setMethod("vcost", signature(object="FLFisherycpp"),
+  function(object) {
+    return(slot(object, "vcost"))
+  }
+)
+setReplaceMethod("vcost", signature(object="FLFisherycpp", value="FLQuant"),
+  function(object, value) {
+    slot(object, "vcost") <- value
+    return(object)
+  }
+)
+setReplaceMethod("vcost", signature(object="FLFisherycpp", value="numeric"),
+  function(object, value) {
+    slot(object, "vcost")[] <- value
+    return(object)
+  }
+)
+
+# fcost
+setMethod("fcost", signature(object="FLFisherycpp"),
+  function(object) {
+    return(slot(object, "fcost"))
+  }
+)
+setReplaceMethod("fcost", signature(object="FLFisherycpp", value="FLQuant"),
+  function(object, value) {
+    slot(object, "fcost") <- value
+    return(object)
+  }
+)
+setReplaceMethod("fcost", signature(object="FLFisherycpp", value="numeric"),
+  function(object, value) {
+    slot(object, "fcost")[] <- value
+    return(object)
+  }
+)
+
+# crewshare
+setMethod("crewshare", signature(object="FLFisherycpp"),
+  function(object) {
+    return(slot(object, "crewshare"))
+  }
+)
+setReplaceMethod("crewshare", signature(object="FLFisherycpp", value="FLQuant"),
+  function(object, value) {
+    slot(object, "crewshare") <- value
+    return(object)
+  }
+)
+setReplaceMethod("crewshare", signature(object="FLFisherycpp", value="numeric"),
+  function(object, value) {
+    slot(object, "crewshare")[] <- value
+    return(object)
+  }
+)
+# }}}
+
 # FLFisheries {{{
 setMethod('landings.n', signature(object='FLFisheries'),
   function(object) {
