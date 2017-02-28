@@ -15,8 +15,8 @@ context("FLFishery constructor")
 ca <- as(ple4, 'FLCatch')[,ac(2000:2005)]
 catch.q(ca) <- FLPar(q=0.25)
 
-# price, as wt * 25
-price(ca) <- landings.wt(ca) * 25
+# price, as wt * 150
+price(ca) <- landings.wt(ca) * 150
 units(price(ca)) <- 'euro / kg'
 
 # capacity, runif 19-28 boats
@@ -79,6 +79,8 @@ ccost(fis)
 # ECONOMIC METHODS
 
 lrevenue(fis)
+
+orevenue(fis)
 
 vcost(fis)
 
