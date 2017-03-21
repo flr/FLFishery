@@ -24,6 +24,8 @@ exportMethods(
   "catch.wt",
   "ccost",
   "cost",
+  "crewshare",
+  "crewshare<-",
   "discards",
   "discards.n",
   "discards.n<-",

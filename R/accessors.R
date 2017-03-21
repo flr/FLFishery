@@ -260,7 +260,7 @@ setReplaceMethod("fcost", signature(object="FLFishery", value="FLQuant"),
 setMethod("crewshare", signature(object="FLFishery"),
   function(object, compute=TRUE) {
     if(compute)
-      return(evalPredictModel(object, slot="crewshare"))
+      return(evalPredictModel(object, slot=object@crewshare))
     else
       return(object@crewshare)
   }
