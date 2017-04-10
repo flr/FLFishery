@@ -11,12 +11,12 @@
 
 setAs('FLStock', 'FLCatch',
 	function(from) {
-
+        sel <- sweep(harvest(from), 2:6, apply(harvest(from), 2:6, max), "/")
 		FLCatch(name=name(from), desc=desc(from), landings.n=landings.n(from), landings.wt=landings.wt(from),
 			discards.n=discards.n(from), discards.wt=discards.wt(from),
-			catch.sel=catch.sel(from),
+			catch.sel= sel,
       # catch.q
-      catch.q=FLPar(alpha=c(harvest(from)[1,1] / catch.sel(from)[1,1]), beta=0))
+      catch.q=FLPar(alpha=1))
 	}
 )
 # }}}

@@ -120,6 +120,9 @@ setMethod("FLFishery", signature(object="list"),
     res <- new("FLFishery", cas, capacity=flq, effort=flq, hperiod=hper, vcost=flq,
           fcost=flq, orevenue=flq)
 
+    # Fill desc with something, anything
+    res@desc <- ""
+
     # fill slots provided
     for (i in names(args))
       slot(res, i) <- args[[i]]
