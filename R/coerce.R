@@ -16,7 +16,7 @@ setAs('FLStock', 'FLCatch',
 			discards.n=discards.n(from), discards.wt=discards.wt(from),
 			catch.sel= sel,
       # catch.q
-      catch.q=FLPar(alpha=1))
+      catch.q=FLPar(alpha=1, beta=0))
 	}
 )
 # }}}
