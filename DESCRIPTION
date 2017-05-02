@@ -1,7 +1,7 @@
 Package: FLFishery
 Title: Classes and Methods for Simpler Fleet/Fishery Modelling
-Version: 0.1.1.9000
-Date: 2017-02-28
+Version: 0.1.1.9001
+Date: 2017-03-22
 Authors@R: c(
   person("Iago", "Mosqueira", email = "iago.mosqueira@jrc.ec.europa.eu", role = c("cre", "aut")))
 Description: A set of classes and methods for modelling of fleet dynamics.
@@ -10,7 +10,7 @@ Description: A set of classes and methods for modelling of fleet dynamics.
 Depends:
     R(>= 3.3.0),
     methods,
-    FLCore,
+    FLCore(>= 2.6.1),
     ggplotFL
 Suggests:
     knitr,
