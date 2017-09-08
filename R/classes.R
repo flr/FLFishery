@@ -20,7 +20,7 @@
 #' @name FLCatch
 #' @rdname FLCatch
 #' @docType class
-#' @aliases FLCatch FLCatch-class FLCatch-methods FLCatch,FLQuant-method FLCatch,missing-method landings.n,FLCatch-method name,FLCatch-method desc,FLCatch-method range,FLCatch-method landings.n,FLCatch-method landings.wt,FLCatch-method discards.n,FLCatch-method discards.wt,FLCatch-method catch.sel,FLCatch-method price,FLCatch-method catch.q,FLCatch-method name<-,FLCatch,character-method desc<-,FLCatch,character-method range<-,FLCatch,numeric-method landings.n<-,FLCatch,FLQuant-method landings.wt<-,FLCatch,FLQuant-method discards.n<-,FLCatch,FLQuant-method discards.wt<-,FLCatch,FLQuant-method catch.sel<-,FLCatch,FLQuant-method price<-,FLCatch,FLQuant-method catch.q<-,FLCatch,FLPar-method discards.sel,FLCatch-method landings.sel,FLCatch-method discards,FLCatch-method catch,FLCatch-method catch.n,FLCatch-method catch.wt,FLCatch-method landings,FLCatch-method discards.ratio,FLCatch-method
+#' @aliases FLCatch FLCatch-class FLCatch-methods landings.n,FLCatch-method name,FLCatch-method desc,FLCatch-method range,FLCatch-method landings.n,FLCatch-method landings.wt,FLCatch-method discards.n,FLCatch-method discards.wt,FLCatch-method catch.sel,FLCatch-method price,FLCatch-method catch.q,FLCatch-method name<-,FLCatch,character-method desc<-,FLCatch,character-method range<-,FLCatch,numeric-method landings.n<-,FLCatch,FLQuant-method landings.wt<-,FLCatch,FLQuant-method discards.n<-,FLCatch,FLQuant-method discards.wt<-,FLCatch,FLQuant-method catch.sel<-,FLCatch,FLQuant-method price<-,FLCatch,FLQuant-method catch.q<-,FLCatch,FLPar-method discards.sel,FLCatch-method landings.sel,FLCatch-method discards,FLCatch-method catch,FLCatch-method catch.n,FLCatch-method catch.wt,FLCatch-method landings,FLCatch-method discards.ratio,FLCatch-method
 #'
 #' @section Slots:
 #'     \describe{
@@ -152,8 +152,8 @@ setClass("FLCatch",
 #' This is class is used inside \code{FLFishery} to store the catches of
 #' all species caught by that fleet. It is not meant to be used directly.
 #' 
-#' @name FLCatch
-#' @rdname FLCatch
+#' @name FLCatches
+#' @rdname FLCatches
 #' @docType class
 #' @aliases FLCatches FLCatches-class FLCatches-methods
 #'
@@ -227,15 +227,17 @@ setClass("FLCatches",
 #' modelled using the \code{FLFishery} class. All boats in the fleet must have a
 #' common gear configuration during each time step and area (no \emph{metiers}).
 #'
-#' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend
-#' odio ac rutrum luctus. Aenean placerat porttitor commodo. Pellentesque eget porta
-#' libero. Pellentesque molestie mi sed orci feugiat, non mollis enim tristique. 
-#' Suspendisse eu sapien vitae arcu lobortis ultrices vitae ac velit. Curabitur id 
-#' 
+#' What do you say what I can ever do for you
+#' What are we gonna do to pass the time
+#' What do you care when you find that life's unfair
+#' Equality is just a state of mind
+#' Believe whatever is right what's right for you tonight
+#' You know where to draw the line 
+#'
 #' @name FLFishery
 #' @rdname FLFishery
 #' @docType class
-#' @aliases FLFishery FLFishery-methods FLFishery-class
+#' @aliases FLFishery FLFishery-methods FLFishery-class vcost,FLFishery-method vcost<-,FLFishery,FLQuant-method catch.n,FLFishery-method catch,FLFishery-method ccost,FLFishery-method cost,FLFishery-method crewshare,FLFishery-method crewshare<-,FLFishery,predictModel-method profit,FLFishery-method orevenue,FLFishery-method orevenue<-,FLFishery,FLQuant-method orevenue<-,FLFishery,numeric-method lrevenue,FLFishery-method landings,FLFishery-method hperiod,FLFishery-method hperiod<-,FLFishery,FLQuant-method hperiod<-,FLFishery,numeric-method fcost<-,FLFishery,FLQuant-method fcost,FLFishery-method effort<-,FLFishery,FLQuant-method effort,FLFishery,ANY-method discards,FLFishery-method [[<-,FLFishery,character,missing,FLCatch-method [[<-,FLFishery,numeric,missing,FLCatch-method [,FLFishery,ANY,missing,ANY-method
 #'
 #' @section Slots:
 #'
@@ -253,16 +255,13 @@ setClass("FLCatches",
 #'       proportions. An \code{FLQuant} object with dimnames
 #'       `quant=c('start', 'end')` in the first dimension.}
 #'     \item{vcost}{Variable costs per unit of effort, (\code{FLQuant}).}
+#'     \item{fcost}{Variable costs per unit of effort, (\code{FLQuant}).}
 #'     \item{orevenue}{Revenues obtained from sources other than landings, (\code{FLQuant}).}
 #'     \item{crewshare}{Formula, parameter values and inputs to calculate the
 #'       crew costs, (\code{predictModel}).}
 #' }
 #'
 #' @section Validity:
-#'
-#'   \describe{
-#'     \item{VALIDITY}{Neque porro quisquam est qui dolorem ipsum.}
-#' }
 #'
 #' You can inspect the class validity function by using
 #'    \code{getValidity(getClassDef('FLFishery'))}
@@ -348,6 +347,90 @@ setClass("FLFishery",
 
 # FLFisherycpp {{{
 
+#' An internal class for homogeneous fishing fleets
+#'
+#' The same as the FLFishery class but all predictModel slots have been turned into FLQuant objects.
+#' The class is used for passing to C++ FLR objects.
+#'
+#'What have you done what's in your mind what do you need
+#' Where shall we go to let it out
+#' What have you seen, we don't know where you've been
+#' Life so often blows your candle out
+#' Believe in what is right, what's right for you tonight
+#' Who knows what the fuck it's all about 
+#'
+#' @name FLFisherycpp
+#' @rdname FLFisherycpp
+#' @docType class
+#' @aliases FLFisherycpp FLFisherycpp-methods FLFisherycpp-class vcost,FLFisherycpp-method vcost<-,FLFisherycpp,FLQuant-method vcost<-,FLFisherycpp,numeric-method crewshare,FLFisherycpp-method crewshare<-,FLFisherycpp,FLQuant-method crewshare<-,FLFisherycpp,numeric-method hperiod,FLFisherycpp-method hperiod<-,FLFisherycpp,FLQuant-method hperiod<-,FLFisherycpp,numeric-method fcost<-,FLFisherycpp,FLQuant-method fcost<-,FLFisherycpp,numeric-method fcost,FLFisherycpp-method orevenue<-,FLFisherycpp,FLQuant-method orevenue<-,FLFisherycpp,numeric-method orevenue,FLFisherycpp-method effort,FLFisherycpp,ANY-method effort<-,FLFisherycpp,FLQuant-method effort<-,FLFisherycpp,numeric-method
+#'
+#' @section Slots:
+#'
+#' \code{FLFisherycpp} objects inherit from \code{FLCatches} woth a number of slots
+#' added.
+#'     \describe{
+#'     \item{.Data}{The list of \code{FLCatch} object with catch data per stock,
+#'       (\code{FLCatches}).}
+#'     \item{name}{Name of the object, e.g. species or stock code, (\code{character}).}
+#'     \item{desc}{Description of the data contents and origin, (\code{character}).}
+#'     \item{range}{Ranges of age and years, plusgroup, (\code{numeric}).}
+#'     \item{capacity}{Number of boats in the fleet, (\code{FLQuant}).}
+#'     \item{effort}{Mean effort per boat applied by the fleet, (\code{FLQuant}).}
+#'     \item{hperiod}{Start and end of fishing within each time step, as
+#'       proportions. An \code{FLQuant} object with dimnames
+#'       `quant=c('start', 'end')` in the first dimension.}
+#'     \item{vcost}{Variable costs per unit of effort, (\code{FLQuant}).}
+#'     \item{fcost}{Variable costs per unit of effort, (\code{FLQuant}).}
+#'     \item{orevenue}{Revenues obtained from sources other than landings, (\code{FLQuant}).}
+#'     \item{crewshare}{Formula, parameter values and inputs to calculate the
+#'       crew costs, (\code{FLQuant}).}
+#' }
+#'
+#' @section Validity:
+#'
+#' You can inspect the class validity function by using
+#'    \code{getValidity(getClassDef('FLFishery'))}
+#'
+#' @section Accessors:
+#' All slots in the class have accessor and replacement methods defined that
+#' allow retrieving and substituting individual slots.
+#'
+#' The values passed for replacement need to be of the class of that slot.
+#' A numeric vector can also be used when replacing FLQuant slots, and the
+#' vector will be used to substitute the values in the slot, but not its other
+#' attributes.
+#'
+#' @section Constructor:
+#' A construction method exists for this class that can take named arguments for
+#' any of its slots. All slots are then created to match the requirements of the
+#' class validity. If an unnamed \code{FLQuant} object is provided, this is used
+#' for sizing but not stored in any slot.
+#'
+#' @section Methods:
+#' Methods exist for various calculations based on values stored in the class:
+#'
+#' \describe{
+#'   \item{ccost}{Calculate the total crew costs by evaluating the formula in
+#'     \code{crewshare}.}
+#'   \item{cost}{Total costs, calculated.}
+#'   \item{lrevenue}{.}
+#'   \item{revenue}{.}
+#'   \item{profit}{.}
+#'   \item{landings}{.}
+#'   \item{discards}{.}
+#'   \item{catch}{.}
+#'   \item{catch.n}{.}
+#'   \item{catch.wt}{.}
+#'   \item{harvest}{.}
+#' }
+#'
+#' @author Iago Mosqueira, EC JRC.
+#' @seealso \link{FLCatches}
+#' @keywords classes
+#' @examples
+#'
+#' data(ple4)
+#' FLFishery(PLE=as(ple4, 'FLCatch'))
 setClass("FLFisherycpp",
   contains=c("FLComp", "FLCatches"),
   representation(
@@ -383,6 +466,28 @@ setClass("FLFisherycpp",
   }
 ) # }}}
 
+#' List class for FLFishery objects
+#'
+#' This is a containuer class for \code{FLFishery} objects.
+#' 
+#' @name FLFisheries
+#' @rdname FLFisheries
+#' @docType class
+#' @aliases FLFisheries FLFisheries-class FLFisheries-methods
+#'
+#' @section Accessors:
+#' Elements in the classes can be extracted and replaced using the list subset
+#' operators,'[', '[<-', '[[' and '[[<-'.
+#'
+#' The values passed for replacement need to be of the class FLFishery.
+#'
+#' @section Constructor:
+#' A construction method exists for this class that can take named arguments for
+#' any of its elements. 
+#'
+#' @author Finlay Scott, EC JRC.
+#' @seealso \link{FLCatch}, \link{FLFishery}
+#' @keywords classes
 # FLFisheries {{{
 setClass("FLFisheries", contains=c("FLlst"),
   # VALIDITY

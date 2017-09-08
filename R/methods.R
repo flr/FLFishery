@@ -106,6 +106,8 @@ setMethod("catch.n", signature(object="FLFishery"),
 ) # }}}
 
 # lrevenue {{{
+#' @rdname FLCatch
+#' @aliases lrevenue,FLCatch-method
 setMethod("lrevenue", signature("FLCatch"),
   function(object) {
     return(quantSums(price(object) * landings.n(object) * landings.wt(object)))

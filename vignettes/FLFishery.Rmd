@@ -16,19 +16,21 @@ opts_chunk$set(dev='png', cache=TRUE, fig.width=4.5, fig.height=4.5, tidy=TRUE)
 options(width=50)
 ```
 
-```{r, load, echo=FALSE, results='hide', message=FALSE}
+```{r, load, echo=FALSE, results='hide', message=FALSE, warnings=FALSE}
 library(FLFishery)
 ```
 
 # Introduction
+
+The __FLFishery__ package contains classes for modelling fishing activity.
+At the moment, it is mainly used by the __FLasher__ package for performing projections.
+Other than the classes, the package currently has limited functionality.
 
 # Design
 
 # Classes
 
 A number of S4 classes are defined in the `FLFishery` package, built around other classes in the FLR system. They represent different parts of the fishery system, all related to the activities of the fishing fleets we are modelling.
-
-- UML classes diagram
 
 ## FLCatch
 
@@ -45,23 +47,53 @@ The `FLCatch` class contains information on the removals from a single populatio
 
 ## FLCatches
 
+The `FLCatches` class is a list of named `FLCatch` objects.
+Each `FLCatch` in the list may catch from a different stock and have a different selectivity pattern etc.
+
 ## FLFishery
+
+A `FLFishery` is made up of an `FLCatches` slot to represent the catches of that fishery.
+The `FLFishery` also has an *effort* slot to store fishing effort. The same fishing effort is applied to all `FLCatch` objects in the `FLCatches` list.
 
 ## FLFisheries
 
-# Methods
+A list of `FLFishery` objects. Essentially, it is a container class.
 
-## Plot
+# Coercion
 
-## Coercion
+It is possible to make `FLCatch` and `FLFishery` objects from an `FLStock`.
+This can be useful if you are making these objects from the results of a stock assessment.
 
-## Calculations
+For example, to make an `FLCatch` from an `FLStock`:
 
-## Economics
+```{r, coerceFLStoFLC}
+# Load an FLStock
+data(ple4)
+# Make an FLCatch
+flc <- as(ple4, "FLCatch")
+summary(flc)
+```
 
-# Examples
+The *catch.sel* slot takes the selectivity pattern from the *harvest* slot of the `FLStock`.
 
-# References
+A similar method can be used to make an `FLFishery` from an `FLStock`.
+
+```{r, coerceFLStoFLF}
+# Load an FLStock
+data(ple4)
+# Make an FLFishery
+flf <- as(ple4, "FLFishery")
+```
+
+The `FLCatches` slot of the `FLFishery` can be accessed using the [[ ]] accessor:
+
+```{r}
+summary(flf[[1]])
+```
+
+# Economics
+
+The `FLCatch` and `FLFishery` classes both contain slots for storing basic economic information.
 
 # More information
 

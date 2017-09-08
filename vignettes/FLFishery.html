@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -69,10 +69,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">The FLFishery package for modelling fishing fleets</h1>
 <h4 class="author"><em>Iago Mosqueira, Finlay Scott - European Commission Joint Research Center</em></h4>
-<h4 class="date"><em>24 June, 2016</em></h4>
+<h4 class="date"><em>settembre, 2017</em></h4>
 
 
 
+<pre><code>## Warning: replacing previous import 'ggplot2::%+%'
+## by 'FLCore::%+%' when loading 'ggplotFL'</code></pre>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>The <strong>FLFishery</strong> package contains classes for modelling fishing activity. At the moment, it is mainly used by the <strong>FLasher</strong> package for performing projections.</p>
+</div>
+<div id="design" class="section level1">
+<h1>Design</h1>
+</div>
 <div id="classes" class="section level1">
 <h1>Classes</h1>
 <p>A number of S4 classes are defined in the <code>FLFishery</code> package, built around other classes in the FLR system. They represent different parts of the fishery system, all related to the activities of the fishing fleets we are modelling.</p>
@@ -93,34 +102,72 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="flcatches" class="section level2">
 <h2>FLCatches</h2>
+<p>The <code>FLCatches</code> class is a list of named <code>FLCatch</code> objects. Each <code>FLCatch</code> in the list may catch from a different stock and have a different selectivity pattern etc.</p>
 </div>
 <div id="flfishery" class="section level2">
 <h2>FLFishery</h2>
+<p>A <code>FLFishery</code> is made up of an <code>FLCatches</code> slot to represent the catches of that fishery. The <code>FLFishery</code> also has an <em>effort</em> slot to store fishing effort. The same fishing effort is applied to all <code>FLCatch</code> objects in the <code>FLCatches</code> list.</p>
 </div>
 <div id="flfisheries" class="section level2">
 <h2>FLFisheries</h2>
+<p>A list of <code>FLFishery</code> objects. Essentially, it is a container class.</p>
 </div>
 </div>
-<div id="methods" class="section level1">
-<h1>Methods</h1>
-<div id="plot" class="section level2">
-<h2>Plot</h2>
+<div id="coercion" class="section level1">
+<h1>Coercion</h1>
+<p>It is possible to make <code>FLCatch</code> and <code>FLFishery</code> objects from an <code>FLStock</code>. This can be useful if you are making these objects from the results of a stock assessment.</p>
+<p>For example, to make an <code>FLCatch</code> from an <code>FLStock</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load an FLStock</span>
+<span class="kw">data</span>(ple4)
+<span class="co"># Make an FLCatch</span>
+flc &lt;-<span class="st"> </span><span class="kw">as</span>(ple4, <span class="st">&quot;FLCatch&quot;</span>)
+<span class="kw">summary</span>(flc)</code></pre></div>
+<pre><code>## An object of class &quot;FLCatch&quot;
+## 
+## Name: Plaice in IV 
+## Description: Imported from a VPA file. ( N:\Projecten\ICE [...] 
+## Quant: age 
+## Dims:  age   year    unit    season  area    iter
+##  10  52  1   1   1   1   
+## 
+## Range:  min  max pgroup  minyear maxyear 
+##  1   10  10  1957    2008    
+## 
+## landings.n    : [ 10 52 1 1 1 1 ], units =  10^3 
+## landings.wt   : [ 10 52 1 1 1 1 ], units =  kg 
+## discards.n    : [ 10 52 1 1 1 1 ], units =  10^3 
+## discards.wt   : [ 10 52 1 1 1 1 ], units =  kg 
+## catch.sel     : [ 10 52 1 1 1 1 ], units =  f 
+## price         : [ 10 52 1 1 1 1 ], units =  10^3</code></pre>
+<p>The <em>catch.sel</em> slot takes the selectivity pattern from the <em>harvest</em> slot of the <code>FLStock</code>.</p>
+<p>A similar method can be used to make an <code>FLFishery</code> from an <code>FLStock</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load an FLStock</span>
+<span class="kw">data</span>(ple4)
+<span class="co"># Make an FLFishery</span>
+flf &lt;-<span class="st"> </span><span class="kw">as</span>(ple4, <span class="st">&quot;FLFishery&quot;</span>)</code></pre></div>
+<p>The <code>FLCatches</code> slot of the <code>FLFishery</code> can be accessed using the [[ ]] accessor:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(flf[[<span class="dv">1</span>]])</code></pre></div>
+<pre><code>## An object of class &quot;FLCatch&quot;
+## 
+## Name: Plaice in IV 
+## Description: Imported from a VPA file. ( N:\Projecten\ICE [...] 
+## Quant: age 
+## Dims:  age   year    unit    season  area    iter
+##  10  52  1   1   1   1   
+## 
+## Range:  min  max pgroup  minyear maxyear 
+##  1   10  10  1957    2008    
+## 
+## landings.n    : [ 10 52 1 1 1 1 ], units =  10^3 
+## landings.wt   : [ 10 52 1 1 1 1 ], units =  kg 
+## discards.n    : [ 10 52 1 1 1 1 ], units =  10^3 
+## discards.wt   : [ 10 52 1 1 1 1 ], units =  kg 
+## catch.sel     : [ 10 52 1 1 1 1 ], units =  f 
+## price         : [ 10 52 1 1 1 1 ], units =  10^3</code></pre>
 </div>
-<div id="coercion" class="section level2">
-<h2>Coercion</h2>
-</div>
-<div id="calculations" class="section level2">
-<h2>Calculations</h2>
-</div>
-<div id="economics" class="section level2">
-<h2>Economics</h2>
-</div>
-</div>
-<div id="examples" class="section level1">
-<h1>Examples</h1>
-</div>
-<div id="references" class="section level1">
-<h1>References</h1>
+<div id="economics" class="section level1">
+<h1>Economics</h1>
+<p>The <code>FLCatch</code> and <code>FLFishery</code> classes both contain slots for storing basic economic information.</p>
 </div>
 <div id="more-information" class="section level1">
 <h1>More information</h1>
@@ -131,20 +178,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>The latest version of <code>FLFishery</code> can always be installed using the <code>devtools</code> package, by calling</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw">install_github</span>(<span class="st">&quot;FLFishery&quot;</span>, <span class="st">&quot;flr&quot;</span>)</code></pre></div>
+<span class="kw">install_github</span>(<span class="st">&quot;iagomosqueira/FLFishery&quot;</span>)</code></pre></div>
 <div id="software-versions" class="section level2">
 <h2>Software Versions</h2>
 <ul>
-<li>R version 3.3.0 (2016-05-03)</li>
-<li>FLFishery: 0.1.0.9000</li>
-<li>FLCore: 2.5.20160120.1</li>
-<li><strong>Compiled</strong>: Fri Jun 24 09:56:57 2016</li>
-<li><strong>Git Hash</strong>: 34f32be</li>
+<li>R version 3.4.1 (2017-06-30)</li>
+<li>FLFishery: 0.1.1.9001</li>
+<li>FLCore: 2.6.4.9000</li>
+<li>ggplotFL: 2.5.9.9003</li>
+<li><strong>Compiled</strong>: Wed Sep 6 16:57:58 2017</li>
+<li><strong>Git Hash</strong>: 05b1863</li>
 </ul>
 </div>
 <div id="knitr-options" class="section level2">
 <h2><code>knitr</code> options</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">opts_chunk$<span class="kw">set</span>(<span class="dt">dev =</span> <span class="st">&quot;png&quot;</span>, <span class="dt">cache =</span> <span class="ot">TRUE</span>, <span class="dt">fig.width =</span> <span class="fl">4.5</span>, 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">dev =</span> <span class="st">&quot;png&quot;</span>, <span class="dt">cache =</span> <span class="ot">TRUE</span>, <span class="dt">fig.width =</span> <span class="fl">4.5</span>, 
     <span class="dt">fig.height =</span> <span class="fl">4.5</span>, <span class="dt">tidy =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </div>
 </div>
@@ -163,7 +211,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

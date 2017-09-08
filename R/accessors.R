@@ -9,6 +9,8 @@
 # FLCatch {{{
 
 # landings.n
+#' @rdname FLCatch
+#' @aliases landings.n,FLCatch-method
 setMethod("landings.n", signature(object="FLCatch"),
   function(object) {
     return(slot(object, "landings.n"))
@@ -20,6 +22,9 @@ setReplaceMethod("landings.n", signature(object="FLCatch", value="FLQuant"),
     return(object)
   }
 )
+
+#' @rdname FLCatch
+#' @aliases landings.n<-,FLCatch,numeric-method
 setReplaceMethod("landings.n", signature(object="FLCatch", value="numeric"),
   function(object, value) {
     slot(object, "landings.n")[] <- value
@@ -39,6 +44,9 @@ setReplaceMethod("landings.wt", signature(object="FLCatch", value="FLQuant"),
     return(object)
   }
 )
+
+#' @rdname FLCatch
+#' @aliases landings.n<-,FLCatch,numeric-method
 setReplaceMethod("landings.wt", signature(object="FLCatch", value="numeric"),
   function(object, value) {
     slot(object, "landings.wt")[] <- value
@@ -58,6 +66,9 @@ setReplaceMethod("discards.n", signature(object="FLCatch", value="FLQuant"),
     return(object)
   }
 )
+
+#' @rdname FLCatch
+#' @aliases discards.n<-,FLCatch,numeric-method
 setReplaceMethod("discards.n", signature(object="FLCatch", value="numeric"),
   function(object, value) {
     slot(object, "discards.n")[] <- value
@@ -77,6 +88,9 @@ setReplaceMethod("discards.wt", signature(object="FLCatch", value="FLQuant"),
     return(object)
   }
 )
+
+#' @rdname FLCatch
+#' @aliases discards.wt<-,FLCatch,numeric-method
 setReplaceMethod("discards.wt", signature(object="FLCatch", value="numeric"),
   function(object, value) {
     slot(object, "discards.wt")[] <- value
@@ -96,6 +110,9 @@ setReplaceMethod("catch.sel", signature(object="FLCatch", value="FLQuant"),
     return(object)
   }
 )
+
+#' @rdname FLCatch
+#' @aliases catch.q<-,FLCatch,numeric-method
 setReplaceMethod("catch.sel", signature(object="FLCatch", value="numeric"),
   function(object, value) {
     slot(object, "catch.sel")[] <- value
@@ -115,6 +132,9 @@ setReplaceMethod("price", signature(object="FLCatch", value="FLQuant"),
     return(object)
   }
 )
+
+#' @rdname FLCatch
+#' @aliases price<-,FLCatch,numeric-method
 setReplaceMethod("price", signature(object="FLCatch", value="numeric"),
   function(object, value) {
     slot(object, "price")[] <- value
@@ -134,6 +154,8 @@ setReplaceMethod("catch.q", signature(object="FLCatch", value="FLPar"),
     return(object)
   }
 )
+#' @rdname FLCatch
+#' @aliases catch.q<-,FLCatch,numeric-method
 setReplaceMethod("catch.q", signature(object="FLCatch", value="numeric"),
   function(object, value) {
     slot(object, "catch.q")[] <- value
@@ -412,6 +434,8 @@ setReplaceMethod("crewshare", signature(object="FLFisherycpp", value="numeric"),
 # }}}
 
 # FLFisheries {{{
+#' @rdname FLFisheries
+#' @aliases landings.n,FLFisheries-method
 setMethod('landings.n', signature(object='FLFisheries'),
   function(object) {
     lapply(object, landings.n)

@@ -12,6 +12,8 @@ Depends:
     methods,
     FLCore(>= 2.6.1),
     ggplotFL
+Imports:
+    ggplot2
 Suggests:
     knitr,
     testthat

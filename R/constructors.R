@@ -7,6 +7,8 @@
 # Distributed under terms of the European Union Public Licence (EUPL) V.1.1.
 
 # FLCatch() {{{
+#' @rdname FLCatch
+#' @aliases FLCatch,FLQuant-method
 setMethod("FLCatch", signature(object="FLQuant"),
   function(object, ...) {
     
@@ -37,6 +39,8 @@ setMethod("FLCatch", signature(object="FLQuant"),
   }
 )
 
+#' @rdname FLCatch
+#' @aliases FLCatch,missing-method
 setMethod("FLCatch", signature(object="missing"),
   function(object, ...) {
 
@@ -58,6 +62,8 @@ setMethod("FLCatch", signature(object="missing"),
 ) # }}}
 
 # FLCatches() {{{
+#' @rdname FLCatches
+#' @aliases FLCatches,list-method
 setMethod('FLCatches', signature(object='list'),
   function(object) {
 
@@ -65,6 +71,8 @@ setMethod('FLCatches', signature(object='list'),
   }
 ) 
 
+#' @rdname FLCatches
+#' @aliases FLCatches,missing-method
 setMethod('FLCatches', signature(object='missing'),
   function(...) {
 
@@ -79,6 +87,8 @@ setMethod('FLCatches', signature(object='missing'),
 # FLFishery() {{{
 
 # list
+#' @rdname FLFishery
+#' @aliases FLFishery,list-method
 setMethod("FLFishery", signature(object="list"),
   function(object, ...) {
     
@@ -132,6 +142,8 @@ setMethod("FLFishery", signature(object="list"),
 )
 
 # FLCatch
+#' @rdname FLFishery
+#' @aliases FLFishery,FLCatch-method
 setMethod("FLFishery", signature(object="FLCatch"),
   function(object, ...) {
 
@@ -141,6 +153,8 @@ setMethod("FLFishery", signature(object="FLCatch"),
 )
 
 # missing
+#' @rdname FLFishery
+#' @aliases FLFishery,missing-method
 setMethod("FLFishery", signature(object="missing"),
   function(object, ...) {
 
@@ -165,6 +179,9 @@ setMethod("FLFishery", signature(object="missing"),
   }
 ) # }}}
 
+#' @rdname FLFisheries
+#' @param desc Description
+#' @aliases FLFisheries,list-method
 # FLFisheries() {{{
 setMethod('FLFisheries', signature(object='list'),
   function(object, desc=character(1)) {
@@ -173,6 +190,8 @@ setMethod('FLFisheries', signature(object='list'),
   }
 ) 
 
+#' @rdname FLFisheries
+#' @aliases FLFisheries,missing-method
 setMethod('FLFisheries', signature(object='missing'),
   function(...) {
 

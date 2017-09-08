@@ -8,9 +8,14 @@
 
 # FLCatch {{{
 #' @rdname FLCatch
+#' @param y whatever
+#' @param x whatever
 #' @aliases plot,FLCatch,missing-method
 setMethod("plot", signature(x="FLCatch", y="missing"),
 	function(x, ...) {
+        # Stupidness to appease check
+        year <- NULL
+        data <- NULL
 
 		fqs <- FLQuants(Catch=catch(x), DiscardsRatio=discards.ratio(x), Price=price(x))
 
