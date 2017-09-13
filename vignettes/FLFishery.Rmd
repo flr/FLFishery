@@ -7,12 +7,11 @@ output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteIndexEntry{FLFishery}
-  \usepackage[utf8]{inputenc}
 ---
 
 ```{r, setup, echo=FALSE, results='hide', message=FALSE}
 library(knitr)
-opts_chunk$set(dev='png', cache=TRUE, fig.width=4.5, fig.height=4.5, tidy=TRUE)
+opts_chunk$set(dev='png', fig.width=4.5, fig.height=4.5, tidy=TRUE)
 options(width=50)
 ```
 
