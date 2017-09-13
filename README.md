@@ -1,38 +1,36 @@
 # FLFishery
 
-- Version: 0.1.1.9001
-- Date: 2017-03-22
+- Version: 0.1.2
+- Date: 2017-09-12
 - Author: Iago Mosqueira, EC JRC
-- Maintainer: Iago Mosqueira <iago.mosqueira AT jrc.ec.europa.eu>
+- Maintainer: Iago Mosqueira <iago.mosqueira AT ec.europa.eu>
 - Repository: <https://github.com/iagomosqueira/FLFishery/>
 - Bug reports: <https://github.com/iagomosqueira/FLFishery/issues>
 
 ## Overview
-FLCore contains the core classes and methods for FLR, a framework for fisheries modelling and management strategy simulation in R.
+FLFisheries contains classes that represent a fishery, a group of vessels operating with the same exploitation pattern in terms of gear, space and time.
 
 To install this package, start R and enter:
 
 	install.packages("FLFishery", repos="http://flr-project.org/R")
 
-or download from the [FLCore releases page](https://github.com/flr/FLCore/releases/latest)
+or download from the [FLFishery releases page](https://github.com/flr/FLFishery/releases/latest)
 
 ## Documentation
-- [Help pages](http://flr-project.org/FLCore)
-- Vignette
+- [Help pages](http://flr-project.org/FLFishery)
 
 ## Build Status
-[![Build Status](https://travis-ci.org/flr/FLCore.svg?branch=master)](https://travis-ci.org/flr/FLCore)
+[![Build Status](https://travis-ci.org/flr/FLFishery.svg?branch=master)](https://travis-ci.org/flr/FLFishery)
 
 ## Releases
-- [Latest release](https://github.com/flr/FLCore/releases/tag/v2.5.20130716)
-- [All release](https://github.com/flr/FLCore/releases/)
+- [All release](https://github.com/flr/FLFishery/releases/)
 
 ## License
-Copyright (c) 2004-2014 The FLR Team. Released under the [GPL v2](http://www.gnu.org/licenses/gpl-2.0.html).
+Copyright (c) 2015-2017 European Union. European Commission Joint Research Centre D.02. Released under the [EUPL 1.1](https://joinup.ec.europa.eu/community/eupl/home).
 
 ## Contact
 You are welcome to:
 
-- Submit suggestions and bug-reports at: <https://github.com/flr/FLCore/issues>
-- Send a pull request on: <https://github.com/flr/FLCore/>
-- Compose a friendly e-mail to: <flrteam AT flr-project.org>
+- Submit suggestions and bug-reports at: <https://github.com/flr/FLFishery/issues>
+- Send a pull request on: <https://github.com/flr/FLFishery/>
+- Compose a friendly e-mail to: <iago.mosqueira AT ec.europa.eu>

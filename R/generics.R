@@ -1,8 +1,8 @@
 # generics.R - DESC
 # FLFishery/R/generics.R
 
-# Copyright European Union, 2015 
-# Author: Iago Mosqueira (EC JRC) <iago.mosqueira@jrc.ec.europa.eu>
+# Copyright European Union, 2015-2017
+# Author: Iago Mosqueira (EC JRC) <iago.mosqueira@ec.europa.eu>
 #
 # Distributed under terms of the European Union Public Licence (EUPL) V.1.1.
 
@@ -21,8 +21,6 @@
 #' @rdname FLCatch
 #' @aliases FLCatch-method
 #'
-#' @genericMethods
-#' 
 #' @author The FLR Team
 #' @seealso \link{FLComp}
 #' @keywords classes
@@ -43,8 +41,6 @@ setGeneric("FLCatch", function(object, ...) standardGeneric("FLCatch"))
 #' @rdname FLCatches
 #' @aliases FLCatches-methods
 #'
-#' @genericMethods
-#' 
 #' @author The FLR Team
 #' @seealso \link{FLComp}
 #' @keywords classes
@@ -67,8 +63,6 @@ setGeneric("FLFishery", function(object, ...) standardGeneric("FLFishery"))
 #' @rdname FLFisheries
 #' @aliases FLFisheries-methods
 #'
-#' @genericMethods
-#' 
 #' @author The FLR Team
 #' @seealso \link{FLComp}
 #' @keywords classes
@@ -89,9 +83,6 @@ setGeneric("crewshare", function(object, ...) standardGeneric("crewshare"))
 #' @aliases crewshare<- crewshare<--method
 setGeneric("crewshare<-", function(object, ..., value) standardGeneric("crewshare<-"))
 
-setGeneric("fcost", function(object, ...) standardGeneric("fcost"))
-setGeneric("fcost<-", function(object, ..., value) standardGeneric("fcost<-"))
-
 #' @rdname FLFishery
 #' @aliases hperiod hperiod-method
 setGeneric("hperiod", function(object, ...) standardGeneric("hperiod"))
@@ -106,21 +97,7 @@ setGeneric("orevenue", function(object, ...) standardGeneric("orevenue"))
 #' @aliases orevenue<- orevenue<--method
 setGeneric("orevenue<-", function(object, ..., value) standardGeneric("orevenue<-"))
 
-setGeneric("price", function(object, ...) standardGeneric("price"))
-setGeneric("price<-", function(object, ..., value) standardGeneric("price<-"))
-
-#' @rdname FLFishery
-#' @aliases vcost vcost-method
-setGeneric("vcost", function(object, ...) standardGeneric("vcost"))
-#' @rdname FLFishery
-#' @aliases vcost<- vcost<--method
-setGeneric("vcost<-", function(object, ..., value) standardGeneric("vcost<-"))
-
 # METHODS
-
-#' @rdname FLCatch
-#' @aliases catch.sel catch.sel-method
-setGeneric("catch.sel", function(object, ...) standardGeneric("catch.sel"))
 
 #' @rdname FLCatch
 #' @param value Replacement value
@@ -131,14 +108,6 @@ setGeneric("catch.sel<-", function(object, ..., value) standardGeneric("catch.se
 #' @aliases discards.ratio discards.ratio-method
 setGeneric("discards.ratio", function(object, ...) standardGeneric("discards.ratio"))
 
-setGeneric("cost", function(object, ...) standardGeneric("cost"))
-
-setGeneric("ccost", function(object, ...) standardGeneric("ccost"))
-
-setGeneric("profit", function(object, ...) standardGeneric("profit"))
-
 #' @rdname FLCatch
 #' @aliases lrevenue lrevenue-method
 setGeneric("lrevenue", function(object, ...) standardGeneric("lrevenue"))
-
-setGeneric("revenue", function(object, ...) standardGeneric("revenue"))

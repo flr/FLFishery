@@ -17,10 +17,6 @@
 \alias{orevenue-method}
 \alias{orevenue<-}
 \alias{orevenue<--method}
-\alias{vcost}
-\alias{vcost-method}
-\alias{vcost<-}
-\alias{vcost<--method}
 \alias{FLFishery}
 \alias{FLFishery-methods}
 \alias{FLFishery-class}
@@ -65,10 +61,6 @@ hperiod(object, ...) <- value
 orevenue(object, ...)
 
 orevenue(object, ...) <- value
-
-vcost(object, ...)
-
-vcost(object, ...) <- value
 
 \S4method{FLFishery}{list}(object, ...)
 

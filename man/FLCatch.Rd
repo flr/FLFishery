@@ -5,8 +5,6 @@
 \name{FLCatch}
 \alias{FLCatch}
 \alias{FLCatch-method}
-\alias{catch.sel}
-\alias{catch.sel-method}
 \alias{catch.sel<-}
 \alias{catch.sel<--method}
 \alias{discards.ratio}
@@ -61,8 +59,6 @@
 \title{FLCatch constructor}
 \usage{
 FLCatch(object, ...)
-
-catch.sel(object, ...)
 
 catch.sel(object, ...) <- value
 

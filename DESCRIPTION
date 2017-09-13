@@ -1,9 +1,9 @@
 Package: FLFishery
 Title: Classes and Methods for Simpler Fleet/Fishery Modelling
-Version: 0.1.1.9001
-Date: 2017-03-22
+Version: 0.1.2
+Date: 2017-09-12
 Authors@R: c(
-  person("Iago", "Mosqueira", email = "iago.mosqueira@jrc.ec.europa.eu", role = c("cre", "aut")))
+  person("Iago", "Mosqueira", email = "iago.mosqueira@ec.europa.eu", role = c("cre", "aut")))
 Description: A set of classes and methods for modelling of fleet dynamics.
     Fisheries are homogeneus in selectivity and spatio-temporal distribution of
     activities, i.e. no metiers.
@@ -18,9 +18,7 @@ Suggests:
     knitr,
     testthat
 Additional_repositories: http://flr-project.org/R
-Maintainer: Iago Mosqueira <iago.mosqueira@jrc.ec.europa.eu>
-License: file LICENSE
-License_is_FOSS: yes
+License: EUPL
 LazyLoad: Yes
 LazyData: No
 Collate:

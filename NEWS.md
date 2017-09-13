@@ -1,4 +1,4 @@
-# CHANGES IN FLFishery
+# FLFishery 0.1.2
 
 ## NEW FEATURES
 
@@ -10,4 +10,3 @@
 
 ## DOCUMENTATION
 
-## DEPRECATED & DEFUNCT
