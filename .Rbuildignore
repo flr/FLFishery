@@ -1,7 +1,7 @@
 .travis.yml
 NEWS.md
 TODO.md
-gh-pages/
+docs/
 man-roxygen/
 Makefile
 .git/
