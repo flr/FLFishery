@@ -169,13 +169,3 @@ setMethod("discards.ratio", signature(object="FLCatch"),
 		return(discards.n(object) / catch.n(object))
 	}
 ) # }}}
-
-# harvest(FLFishery) {{{
-setMethod("harvest", signature(object="FLFishery"),
-	function(object) {
-
-	res <- lapply(object, function(x) catch.q(x) * catch.sel(x) %*% effort(object))
-
-	return(res)
-	}
-) # }}}

@@ -111,3 +111,5 @@ setGeneric("discards.ratio", function(object, ...) standardGeneric("discards.rat
 #' @rdname FLCatch
 #' @aliases lrevenue lrevenue-method
 setGeneric("lrevenue", function(object, ...) standardGeneric("lrevenue"))
+
+setGeneric("partialF", function(object, catches, ...) standardGeneric("partialF"))

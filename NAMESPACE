@@ -17,6 +17,8 @@ exportMethods(
   "FLCatches",
   "FLFisheries",
   "FLFishery",
+  "capacity",
+  "capacity<-",
   "catch",
   "catch",
   "catch.n",

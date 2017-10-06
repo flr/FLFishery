@@ -466,6 +466,8 @@ setClass("FLFisherycpp",
   }
 ) # }}}
 
+# FLFisheries {{{
+
 #' List class for FLFishery objects
 #'
 #' This is a containuer class for \code{FLFishery} objects.
@@ -488,23 +490,15 @@ setClass("FLFisherycpp",
 #' @author Finlay Scott, EC JRC.
 #' @seealso \link{FLCatch}, \link{FLFishery}
 #' @keywords classes
-# FLFisheries {{{
+
 setClass("FLFisheries", contains=c("FLlst"),
   # VALIDITY
   validity=function(object) {
 
     # all objects are FLFishery
-    if(any(!unlist(lapply(object, function(x) is(x, "FLFishery") | is(x, "FLFisherycpp")))))
+    if(any(!unlist(lapply(object, function(x) is(x, "FLFishery") |
+      is(x, "FLFisherycpp")))))
       return("Input objects must be of class 'FLFishery'")
-
-    # dmns <- lapply(object, dims)
-
-    # quant == 'age'
-    # qua <- unlist(lapply(dmns, '[', 'quant'))
-    # if(length(unique(qua)) > 1)
-    #   return("FLFishery objects must have quant='age'")
-
-    # iters 1 or N
 
     return(TRUE)
   }
