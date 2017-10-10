@@ -1,5 +1,5 @@
 # methods.R - DESC
-# FLFishery/R/m.R
+# FLFishery/R/methods.R
 
 # Copyright European Union, 2015 
 # Author: Iago Mosqueira (EC JRC) <iago.mosqueira@jrc.ec.europa.eu>
@@ -37,6 +37,17 @@ setMethod("[[<-", signature(x="FLFishery", i="character", j="missing", value="FL
     }
 		return(x)
 	}
+) # }}}
+
+# summary {{{
+setMethod("summary", signature(object="FLFishery"),
+  function(object) {
+
+    callNextMethod()
+
+    cat("crewshare     ")
+    summary(object@crewshare)
+  }
 ) # }}}
 
 # landings {{{
@@ -83,59 +94,50 @@ setMethod("catch.n", signature(object="FLCatch"),
   function(object) {
     return(landings.n(object) + discards.n(object))
   }
-)
-
-setMethod("catch.n", signature(object="FLFishery"),
-  function(object) {
-    return(Reduce("%+%", lapply(object@.Data, catch.n)))
-  }
 ) # }}}
 
 # catch.wt {{{
 setMethod("catch.wt", signature(object="FLCatch"),
   function(object) {
-    return((landings.wt(object) * landings.n(object) + discards.wt(object) * discards.n(object)) /
-           catch.n(object))
-  }
-)
-
-setMethod("catch.n", signature(object="FLFishery"),
-  function(object) {
-    return(Reduce("%+%", lapply(object@.Data, catch.n)))
+    return((landings.wt(object) * landings.n(object) + discards.wt(object) *
+      discards.n(object)) / catch.n(object))
   }
 ) # }}}
 
 # lrevenue {{{
 #' @rdname FLCatch
 #' @aliases lrevenue,FLCatch-method
-setMethod("lrevenue", signature("FLCatch"),
+setMethod("lrevenue", signature(object="FLCatch"),
   function(object) {
-    return(quantSums(price(object) * landings.n(object) * landings.wt(object)))
+    return(quantSums(price(object) * (landings.n(object) * landings.wt(object))))
   }
 )
-setMethod("lrevenue", signature("FLFishery"),
+#' @rdname FLFishery
+#' @aliases lrevenue,FLFishery-method
+setMethod("lrevenue", signature(object="FLFishery"),
   function(object) {
     return(Reduce("%+%", lapply(object@.Data, lrevenue)))
   }
 ) # }}}
 
 # revenue {{{
-setMethod("revenue", signature("FLFishery"),
+setMethod("revenue", signature(object="FLFishery"),
   function(object) {
     return(quantSums(replace(lrevenue(object), is.na(lrevenue(object)), 0)) +
-      quantSums(replace(orevenue(object), is.na(orevenue(object)), 0)))
+      quantSums(replace(orevenue(object), is.na(orevenue(object)), 0)) %*%
+        capacity(object))
   }
 ) # }}}
 
 # cost {{{
-setMethod("cost", signature("FLFishery"),
+setMethod("cost", signature(object="FLFishery"),
   function(object) {
     return(quantSums(vcost(object)) + quantSums(fcost(object)) + quantSums(ccost(object)))
   }
 ) # }}}
 
 # profit {{{
-setMethod("profit", signature("FLFishery"),
+setMethod("profit", signature(object="FLFishery"),
   function(object) {
     return(quantSums(revenue(object)) - quantSums(cost(object)))
   }

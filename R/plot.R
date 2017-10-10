@@ -7,10 +7,11 @@
 # Distributed under the terms of the European Union Public Licence (EUPL) V.1.1.
 
 # FLCatch {{{
+
 #' @rdname FLCatch
-#' @param y whatever
-#' @param x whatever
+#' @param x FLCatch
 #' @aliases plot,FLCatch,missing-method
+
 setMethod("plot", signature(x="FLCatch", y="missing"),
 	function(x, ...) {
         # Stupidness to appease check

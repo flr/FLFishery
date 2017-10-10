@@ -94,6 +94,51 @@ summary(flf[[1]])
 
 The `FLCatch` and `FLFishery` classes both contain slots for storing basic economic information.
 
+# Constructing an example FLFishery
+
+
+```{r flfishery}
+# catch, from ple4
+ca <- as(ple4, 'FLCatch')[, ac(2000:2005)]
+
+# price, as wt * 150, in EUR/t, as landings.n in 1000
+price(ca) <- (landings.wt(ca) * 150) * 1000
+units(price(ca)) <- 'EUR / t'
+
+# capacity, runif 19-28 boats
+cap <- FLQuant(floor(runif(5, 19, 28)), dimnames=list(year=2000:2005),
+  units="boat")
+
+# effort, same number of days per year
+ef <- FLQuant(c(225, 212), dimnames=list(quant=c("day", "night"), year=2000:2005),
+  units="d / boat")
+
+# hperiod, start 1st Jan, end 31st Dec
+hp <- FLQuant(c(0,1), dimnames=list(quant=c("start", "end"), year=2000:2005),
+  units="")
+
+# vcost
+vc <- FLQuant(c(1000, 10), dimnames=list(quant=c("fuel", "ice"), year=2000:2005),
+  units="EUR / d")
+
+# fcost
+fc <- FLQuant(c(10000, 5000), dimnames=list(quant=c("license", "dock"),
+  year=2000:2005), units="EUR / boat")
+
+# orevenue
+or <- FLQuant(200, dimnames=list(quant=c("tourism"), year=2000:2005),
+  units="EUR / boat")
+
+# crewshare
+cs <- predictModel(model=~fixed + share * lrevenue,
+  params=FLPar(fixed=300, share=0.05, units=c("EUR", "")))
+
+# FLFishery
+fis <- FLFishery(PLE=ca, SOL=ca, effort=ef, capacity=cap, hperiod=hp, vcost=vc,
+  fcost=fc, orevenue=or, crewshare=cs)
+```
+
+
 # More information
 
 * You can submit bug reports, questions or suggestions on `FLFishery` at the `FLFishery` issue page ^[<https://github.com/iagomosqueira/FLFishery/issues>], or on the *FLR* mailing list.

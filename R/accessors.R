@@ -206,25 +206,6 @@ setReplaceMethod("hperiod", signature(object="FLFishery", value="numeric"),
   }
 )
 
-# orevenue
-setMethod("orevenue", signature(object="FLFishery"),
-  function(object) {
-    return(slot(object, "orevenue"))
-  }
-)
-setReplaceMethod("orevenue", signature(object="FLFishery", value="FLQuant"),
-  function(object, value) {
-    slot(object, "orevenue") <- value
-    return(object)
-  }
-)
-setReplaceMethod("orevenue", signature(object="FLFishery", value="numeric"),
-  function(object, value) {
-    slot(object, "orevenue")[] <- value
-    return(object)
-  }
-)
-
 # Computation
 
 # effort
@@ -277,6 +258,27 @@ setReplaceMethod("fcost", signature(object="FLFishery", value="FLQuant"),
   return(object)
   }
 )
+
+# orevenue
+setMethod("orevenue", signature(object="FLFishery"),
+  function(object) {
+    return(slot(object, "orevenue") * capacity(object))
+  }
+)
+setReplaceMethod("orevenue", signature(object="FLFishery", value="FLQuant"),
+  function(object, value) {
+    slot(object, "orevenue") <- value
+    return(object)
+  }
+)
+setReplaceMethod("orevenue", signature(object="FLFishery", value="numeric"),
+  function(object, value) {
+    slot(object, "orevenue")[] <- value
+    return(object)
+  }
+)
+
+
 
 # crewshare
 setMethod("crewshare", signature(object="FLFishery"),
@@ -434,10 +436,85 @@ setReplaceMethod("crewshare", signature(object="FLFisherycpp", value="numeric"),
 # }}}
 
 # FLFisheries {{{
+
 #' @rdname FLFisheries
-#' @aliases landings.n,FLFisheries-method
-setMethod('landings.n', signature(object='FLFisheries'),
+#' @aliases landings,FLFisheries-method
+setMethod('landings', signature(object='FLFisheries'),
   function(object) {
-    lapply(object, landings.n)
+    lapply(object, landings)
   }
-) # }}}
+) 
+
+#' @rdname FLFisheries
+#' @aliases discards,FLFisheries-method
+setMethod('discards', signature(object='FLFisheries'),
+  function(object) {
+    lapply(object, discards)
+  }
+)
+
+#' @rdname FLFisheries
+#' @aliases catch,FLFisheries-method
+setMethod('catch', signature(object='FLFisheries'),
+  function(object) {
+    lapply(object, catch)
+  }
+)
+
+#' @rdname FLFisheries
+#' @aliases lrevenue,FLFisheries-method
+setMethod('lrevenue', signature(object='FLFisheries'),
+  function(object) {
+    lapply(object, lrevenue)
+  }
+)
+
+#' @rdname FLFisheries
+#' @aliases revenue,FLFisheries-method
+setMethod('revenue', signature(object='FLFisheries'),
+  function(object) {
+    lapply(object, revenue)
+  }
+)
+
+#' @rdname FLFisheries
+#' @aliases cost,FLFisheries-method
+setMethod('cost', signature(object='FLFisheries'),
+  function(object) {
+    lapply(object, cost)
+  }
+)
+
+#' @rdname FLFisheries
+#' @aliases ccost,FLFisheries-method
+setMethod('ccost', signature(object='FLFisheries'),
+  function(object) {
+    lapply(object, ccost)
+  }
+)
+
+#' @rdname FLFisheries
+#' @aliases vcost,FLFisheries-method
+setMethod('vcost', signature(object='FLFisheries'),
+  function(object) {
+    lapply(object, vcost)
+  }
+)
+
+#' @rdname FLFisheries
+#' @aliases fcost,FLFisheries-method
+setMethod('fcost', signature(object='FLFisheries'),
+  function(object) {
+    lapply(object, fcost)
+  }
+)
+
+#' @rdname FLFisheries
+#' @aliases profit,FLFisheries-method
+setMethod('profit', signature(object='FLFisheries'),
+  function(object) {
+    lapply(object, profit)
+  }
+)
+
+# }}}

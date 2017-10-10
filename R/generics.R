@@ -6,6 +6,8 @@
 #
 # Distributed under terms of the European Union Public Licence (EUPL) V.1.1.
 
+# FLCatch() {{{
+
 #' FLCatch constructor
 #'
 #' Make an FLCatch object.
@@ -24,7 +26,9 @@
 #' @author The FLR Team
 #' @seealso \link{FLComp}
 #' @keywords classes
-setGeneric("FLCatch", function(object, ...) standardGeneric("FLCatch"))
+setGeneric("FLCatch", function(object, ...) standardGeneric("FLCatch")) # }}}
+
+# FLCatches() {{{
 
 #' FLCatches constructor
 #'
@@ -44,9 +48,15 @@ setGeneric("FLCatch", function(object, ...) standardGeneric("FLCatch"))
 #' @author The FLR Team
 #' @seealso \link{FLComp}
 #' @keywords classes
-setGeneric("FLCatches", function(object, ...) standardGeneric("FLCatches"))
+setGeneric("FLCatches", function(object, ...) standardGeneric("FLCatches")) # }}}
 
-setGeneric("FLFishery", function(object, ...) standardGeneric("FLFishery"))
+# FLFishery() {{{
+
+#' @rdname FLFishery
+#' @aliases FLFishery FLFishery-method
+setGeneric("FLFishery", function(object, ...) standardGeneric("FLFishery")) # }}}
+
+# FLFisheries {{{
 
 #' FLFisheries constructor
 #'
@@ -66,16 +76,25 @@ setGeneric("FLFishery", function(object, ...) standardGeneric("FLFishery"))
 #' @author The FLR Team
 #' @seealso \link{FLComp}
 #' @keywords classes
-setGeneric("FLFisheries", function(object, ...) standardGeneric("FLFisheries"))
+setGeneric("FLFisheries", function(object, ...) standardGeneric("FLFisheries")) # }}}
 
-# ACCESSORS
+# ACCESSORS {{{
 
+#' @rdname FLFishery
+#' @aliases capacity capacity-method
 setGeneric("capacity", function(object, ...) standardGeneric("capacity"))
+
+#' @rdname FLFishery
+#' @param value Replacement value
+#' @param ... Other things
+#' @param object An object
+#' @aliases capacity<- capacity<--method
 setGeneric("capacity<-", function(object, ..., value) standardGeneric("capacity<-"))
 
 #' @rdname FLFishery
 #' @aliases crewshare crewshare-method
 setGeneric("crewshare", function(object, ...) standardGeneric("crewshare"))
+
 #' @rdname FLFishery
 #' @param value Replacement value
 #' @param ... Other things
@@ -86,6 +105,7 @@ setGeneric("crewshare<-", function(object, ..., value) standardGeneric("crewshar
 #' @rdname FLFishery
 #' @aliases hperiod hperiod-method
 setGeneric("hperiod", function(object, ...) standardGeneric("hperiod"))
+
 #' @rdname FLFishery
 #' @aliases hperiod<- hperiod<--method
 setGeneric("hperiod<-", function(object, ..., value) standardGeneric("hperiod<-"))
@@ -93,11 +113,13 @@ setGeneric("hperiod<-", function(object, ..., value) standardGeneric("hperiod<-"
 #' @rdname FLFishery
 #' @aliases orevenue orevenue-method
 setGeneric("orevenue", function(object, ...) standardGeneric("orevenue"))
+
 #' @rdname FLFishery
 #' @aliases orevenue<- orevenue<--method
 setGeneric("orevenue<-", function(object, ..., value) standardGeneric("orevenue<-"))
+# }}}
 
-# METHODS
+# METHODS {{{
 
 #' @rdname FLCatch
 #' @param value Replacement value
@@ -112,4 +134,7 @@ setGeneric("discards.ratio", function(object, ...) standardGeneric("discards.rat
 #' @aliases lrevenue lrevenue-method
 setGeneric("lrevenue", function(object, ...) standardGeneric("lrevenue"))
 
-setGeneric("partialF", function(object, catches, ...) standardGeneric("partialF"))
+#' @rdname harvest
+#' @aliases harvests harvests-method
+setGeneric("harvests", function(object, catches, ...) standardGeneric("harvests"))
+# }}}

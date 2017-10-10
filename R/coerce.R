@@ -6,23 +6,26 @@
 #
 # Distributed under terms of the European Union Public Licence (EUPL) V.1.1.
 
-
 # FLStock  -> FLCatch {{{
 
 setAs('FLStock', 'FLCatch',
 	function(from) {
-        sel <- sweep(harvest(from), 2:6, apply(harvest(from), 2:6, max), "/")
-		out <- FLCatch(name=name(from), desc=desc(from), landings.n=landings.n(from), landings.wt=landings.wt(from),
-			discards.n=discards.n(from), discards.wt=discards.wt(from), catch.sel= sel, catch.q=FLPar(alpha=1, beta=0))
-        # Empty desc and name slots are a frequent issue, i.e. character(0)
-        # So check if empty and if fill with something
-        if (identical(character(0), name(out))){
-            name(out) <- ""
-        }
-        if (identical(character(0), desc(out))){
-            desc(out) <- ""
-        }
-        return(out)
+    sel <- sweep(harvest(from), 2:6, apply(harvest(from), 2:6, max), "/")
+    units(sel) <- ""
+		out <- FLCatch(name=name(from), desc=desc(from),
+      landings.n=landings.n(from), landings.wt=landings.wt(from),
+			discards.n=discards.n(from), discards.wt=discards.wt(from),
+      catch.sel= sel, catch.q=FLPar(alpha=1, beta=0))
+    
+    # Empty desc and name slots are a frequent issue, i.e. character(0)
+    # So check if empty and if fill with something
+    if (identical(character(0), name(out))){
+      name(out) <- ""
+    }
+    if (identical(character(0), desc(out))){
+      desc(out) <- ""
+    }
+    return(out)
 	}
 )
 # }}}
