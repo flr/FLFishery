@@ -83,6 +83,14 @@ setMethod("catch", signature(object="FLCatch"),
   }
 )
 
+setMethod("catches", signature(object="FLFishery"),
+  function(object) {
+    res <- lapply(object@.Data, catch)
+    names(res) <- names(object)
+    return(res)
+  }
+)
+
 setMethod("catch", signature(object="FLFishery"),
   function(object) {
     return(Reduce("%+%", lapply(object@.Data, catch)))
