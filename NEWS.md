@@ -6,6 +6,8 @@
 
 ## USER-VISIBLE CHANGES
 
+- coerce(FLStock) to FLFishery calculates effort as the mean across the minfbasr:maxfbar range of the ratio between F and catch.q
+
 ## BUG FIXES
 
 ## UTILITIES
