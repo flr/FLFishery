@@ -37,7 +37,8 @@ setAs('FLStock', 'FLFishery',
 
     res <- FLFishery(as(from, 'FLCatch'))
     
-    names(res) <- desc(res) <- name(from)
+    names(res) <- name(from)
+    desc(res) <- desc(from)
 
     # FBAR ages
     fages <- range(from)[c('minfbar', 'maxfbar')]
