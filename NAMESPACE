@@ -1,9 +1,7 @@
 import("methods")
 import("FLCore")
+importFrom(ggplot2,aes, geom_line, geom_bar)
 import("ggplotFL")
-importFrom(ggplot2,aes)
-importFrom(ggplot2,geom_line)
-importFrom(ggplot2,geom_bar)
 exportClasses(
   "FLCatch",
   "FLCatches",
