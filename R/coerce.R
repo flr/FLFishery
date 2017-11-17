@@ -39,7 +39,16 @@ setAs('FLStock', 'FLFishery',
     
     names(res) <- desc(res) <- name(from)
 
-    effort(res)[] <- c((harvest(from) / (catch.q(res[[1]])['alpha',] * catch.sel(res[[1]])))[1,])
+    # FBAR ages
+    fages <- range(from)[c('minfbar', 'maxfbar')]
+
+    # MEAN harvesdt / catch.q across fbar ages
+    eff <- quantMeans((harvest(from) / (catch.q(res[[1]])['alpha',] *
+      catch.sel(res[[1]])))[seq(fages[1], fages[2]),])
+
+    # RELATIVE effort
+    effort(res)[] <- c(eff %/% eff[,1])
+
     capacity(res)[] <- 1
 
     return(res)
