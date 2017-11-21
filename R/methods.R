@@ -179,3 +179,15 @@ setMethod("discards.ratio", signature(object="FLCatch"),
 		return(discards.n(object) / catch.n(object))
 	}
 ) # }}}
+
+# propagate {{{
+setMethod("propagate", signature(object="FLFishery"),
+  function(object, iter, fill.iter=TRUE) {
+    
+    res <- callNextMethod()
+    res@.Data <- lapply(res@.Data, propagate, iter=iter)
+
+    return(res)
+  }
+)
+# }}}
