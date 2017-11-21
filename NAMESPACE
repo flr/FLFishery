@@ -58,6 +58,7 @@ exportMethods(
   "price",
   "price<-",
   "profit",
+  "propagate",
   "show",
   "summary",
   "vcost",
