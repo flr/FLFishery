@@ -6,13 +6,15 @@
 #
 # Distributed under terms of the European Union Public Licence (EUPL) V.1.1.
 
-# FLStock  -> FLCatch {{{
+# FLStock -> FLCatch {{{
 
 setAs('FLStock', 'FLCatch',
 	function(from) {
+    
     sel <- sweep(harvest(from), 2:6, apply(harvest(from), 2:6, max), "/")
     units(sel) <- ""
-		out <- FLCatch(name=name(from), desc=desc(from),
+		
+    out <- FLCatch(name=name(from), desc=desc(from),
       landings.n=landings.n(from), landings.wt=landings.wt(from),
 			discards.n=discards.n(from), discards.wt=discards.wt(from),
       catch.sel= sel, catch.q=FLPar(alpha=1, beta=0))
@@ -30,7 +32,7 @@ setAs('FLStock', 'FLCatch',
 )
 # }}}
 
-# FLStock  -> FLFishery {{{
+# FLStock -> FLFishery {{{
 
 setAs('FLStock', 'FLFishery',
   function(from) {
@@ -39,7 +41,9 @@ setAs('FLStock', 'FLFishery',
     
     names(res) <- desc(res) <- name(from)
 
-    effort(res)[] <- c((harvest(from) / (catch.q(res[[1]])['alpha',] * catch.sel(res[[1]])))[1,])
+    effort(res)[] <- c((harvest(from) / (catch.q(res[[1]])['alpha',] *
+      catch.sel(res[[1]])))[1,])
+
     capacity(res)[] <- 1
 
     return(res)
