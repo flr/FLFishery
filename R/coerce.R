@@ -12,7 +12,7 @@ setAs('FLStock', 'FLCatch',
 	function(from) {
     
     sel <- sweep(harvest(from), 2:6, apply(harvest(from), 2:6, max), "/")
-  #  sel[is.na(sel)] <- 0
+    sel[is.na(sel)] <- 0
     units(sel) <- ""
 		
     out <- FLCatch(name=name(from), desc=desc(from),
