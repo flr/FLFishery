@@ -12,6 +12,7 @@ setAs('FLStock', 'FLCatch',
 	function(from) {
     
     sel <- sweep(harvest(from), 2:6, apply(harvest(from), 2:6, max), "/")
+  #  sel[is.na(sel)] <- 0
     units(sel) <- ""
 		
     out <- FLCatch(name=name(from), desc=desc(from),
@@ -40,9 +41,9 @@ setAs('FLStock', 'FLFishery',
     res <- FLFishery(as(from, 'FLCatch'))
     
     names(res) <- desc(res) <- name(from)
-
-    effort(res)[] <- c((harvest(from) / (catch.q(res[[1]])['alpha',] *
+    effort(res)[] <- c((harvest(from) %/% (catch.q(res[[1]])['alpha',] %*%
       catch.sel(res[[1]])))[1,])
+    effort(res)[is.na(effort(res))] <- 0
 
     capacity(res)[] <- 1
 
