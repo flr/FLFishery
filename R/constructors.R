@@ -179,10 +179,11 @@ setMethod("FLFishery", signature(object="missing"),
   }
 ) # }}}
 
+# FLFisheries() {{{
+
 #' @rdname FLFisheries
 #' @param desc Description
 #' @aliases FLFisheries,list-method
-# FLFisheries() {{{
 setMethod('FLFisheries', signature(object='list'),
   function(object, desc=character(1)) {
 

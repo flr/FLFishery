@@ -38,14 +38,15 @@ setAs('FLStock', 'FLCatch',
 setAs('FLStock', 'FLFishery',
   function(from) {
 
-    res <- FLFishery(as(from, 'FLCatch'))
+    res <- FLFishery(as(from, 'FLCatch'), effort=unitSums(fbar(from)))
 
     capacity(res)[] <- 1
 
     names(res) <- desc(res) <- name(from)
-    res@effort[] <- c((harvest(from) %/% (catch.q(res[[1]])['alpha',] %*%
-      catch.sel(res[[1]])))[1,])
     
+    # CALCULATE pseudo-effort from F
+    res@effort[] <- c(unitSums(harvest(from) %/% (catch.q(res[[1]])['alpha',] %*%
+      catch.sel(res[[1]])))[1,])
     effort(res)[is.na(effort(res))] <- 0
 
     return(res)

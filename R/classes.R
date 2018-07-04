@@ -335,6 +335,8 @@ setClass("FLFishery",
     if(!identical(dimnames(object@hperiod)[['quant']], c("start", "end")))
       return("dimnames[['quant']] of @hperiod must be c('start', 'end')")
 
+    # effort must have no units
+
     # dims[2:5] of flqs match dims of flcs
 
     # iters 1 or N FLCs vs FLQs
