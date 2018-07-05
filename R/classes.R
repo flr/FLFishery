@@ -336,6 +336,8 @@ setClass("FLFishery",
       return("dimnames[['quant']] of @hperiod must be c('start', 'end')")
 
     # effort must have no units
+    if(dim(object@effort)[3] > 1)
+      stop("effort slot must have only one 'unit'")
 
     # dims[2:5] of flqs match dims of flcs
 
