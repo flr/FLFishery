@@ -97,9 +97,7 @@ lrevenue(object, ...)
 
 \item{value}{Replacement value}
 
-\item{x}{whatever}
-
-\item{y}{whatever}
+\item{x}{FLCatch}
 }
 \value{
 An FLCatch object

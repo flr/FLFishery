@@ -8,8 +8,8 @@
 <title>The FLFishery package for modelling fishing fleets • FLFishery</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="The FLFishery package for modelling fishing fleets">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><meta property="og:title" content="The FLFishery package for modelling fishing fleets">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -29,7 +29,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">FLFishery</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.3</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.4</span>
       </span>
     </div>
 
@@ -66,7 +66,7 @@
       <h1>The FLFishery package for modelling fishing fleets</h1>
                         <h4 class="author">Iago Mosqueira, Finlay Scott - European Commission Joint Research Center</h4>
             
-            <h4 class="date">May, 2018</h4>
+            <h4 class="date">July, 2018</h4>
       
       
       <div class="hidden name"><code>FLFishery.Rmd</code></div>
@@ -154,7 +154,7 @@ flc &lt;-<span class="st"> </span><span class="kw">as</span>(ple4, <span class="
 ## landings.wt   : [ 10 52 1 1 1 1 ], units =  kg 
 ## discards.n    : [ 10 52 1 1 1 1 ], units =  10^3 
 ## discards.wt   : [ 10 52 1 1 1 1 ], units =  kg 
-## catch.sel     : [ 10 52 1 1 1 1 ], units =   
+## catch.sel     : [ 10 52 1 1 1 1 ], units =  f 
 ## price         : [ 10 52 1 1 1 1 ], units =  10^3</code></pre>
 <p>The <em>catch.sel</em> slot takes the selectivity pattern from the <em>harvest</em> slot of the <code>FLStock</code>.</p>
 <p>A similar method can be used to make an <code>FLFishery</code> from an <code>FLStock</code>.</p>
@@ -179,7 +179,7 @@ flf &lt;-<span class="st"> </span><span class="kw">as</span>(ple4, <span class="
 ## landings.wt   : [ 10 52 1 1 1 1 ], units =  kg 
 ## discards.n    : [ 10 52 1 1 1 1 ], units =  10^3 
 ## discards.wt   : [ 10 52 1 1 1 1 ], units =  kg 
-## catch.sel     : [ 10 52 1 1 1 1 ], units =   
+## catch.sel     : [ 10 52 1 1 1 1 ], units =  f 
 ## price         : [ 10 52 1 1 1 1 ], units =  10^3</code></pre>
 </div>
 <div id="economics" class="section level1">
@@ -191,46 +191,43 @@ flf &lt;-<span class="st"> </span><span class="kw">as</span>(ple4, <span class="
 <h1 class="hasAnchor">
 <a href="#constructing-an-example-flfishery" class="anchor"></a>Constructing an example FLFishery</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># catch, from ple4</span>
-ca &lt;-<span class="st"> </span><span class="kw">as</span>(ple4, <span class="st">"FLCatch"</span>)[, <span class="kw">ac</span>(<span class="dv">2000</span>:<span class="dv">2005</span>)]
+ca &lt;-<span class="st"> </span><span class="kw">as</span>(ple4, <span class="st">'FLCatch'</span>)[, <span class="kw">ac</span>(<span class="dv">2000</span>:<span class="dv">2005</span>)]
 
-<span class="co"># price, as wt * 150, in EUR/t, as landings.n in</span>
-<span class="co"># 1000</span>
+<span class="co"># price, as wt * 150, in EUR/t, as landings.n in 1000</span>
 <span class="kw">price</span>(ca) &lt;-<span class="st"> </span>(<span class="kw">landings.wt</span>(ca) *<span class="st"> </span><span class="dv">150</span>) *<span class="st"> </span><span class="dv">1000</span>
-<span class="kw">units</span>(<span class="kw">price</span>(ca)) &lt;-<span class="st"> "EUR / t"</span>
+<span class="kw">units</span>(<span class="kw">price</span>(ca)) &lt;-<span class="st"> 'EUR / t'</span>
 
 <span class="co"># capacity, runif 19-28 boats</span>
-cap &lt;-<span class="st"> </span><span class="kw">FLQuant</span>(<span class="kw">floor</span>(<span class="kw">runif</span>(<span class="dv">5</span>, <span class="dv">19</span>, <span class="dv">28</span>)), <span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="dt">year =</span> <span class="dv">2000</span>:<span class="dv">2005</span>), 
-    <span class="dt">units =</span> <span class="st">"boat"</span>)
+cap &lt;-<span class="st"> </span><span class="kw">FLQuant</span>(<span class="kw">floor</span>(<span class="kw">runif</span>(<span class="dv">5</span>, <span class="dv">19</span>, <span class="dv">28</span>)), <span class="dt">dimnames=</span><span class="kw">list</span>(<span class="dt">year=</span><span class="dv">2000</span>:<span class="dv">2005</span>),
+  <span class="dt">units=</span><span class="st">"boat"</span>)
 
 <span class="co"># effort, same number of days per year</span>
-ef &lt;-<span class="st"> </span><span class="kw">FLQuant</span>(<span class="kw">c</span>(<span class="dv">225</span>, <span class="dv">212</span>), <span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="dt">quant =</span> <span class="kw">c</span>(<span class="st">"day"</span>, 
-    <span class="st">"night"</span>), <span class="dt">year =</span> <span class="dv">2000</span>:<span class="dv">2005</span>), <span class="dt">units =</span> <span class="st">"d / boat"</span>)
+ef &lt;-<span class="st"> </span><span class="kw">FLQuant</span>(<span class="kw">c</span>(<span class="dv">225</span>, <span class="dv">212</span>), <span class="dt">dimnames=</span><span class="kw">list</span>(<span class="dt">quant=</span><span class="kw">c</span>(<span class="st">"day"</span>, <span class="st">"night"</span>), <span class="dt">year=</span><span class="dv">2000</span>:<span class="dv">2005</span>),
+  <span class="dt">units=</span><span class="st">"d / boat"</span>)
 
 <span class="co"># hperiod, start 1st Jan, end 31st Dec</span>
-hp &lt;-<span class="st"> </span><span class="kw">FLQuant</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="dt">quant =</span> <span class="kw">c</span>(<span class="st">"start"</span>, 
-    <span class="st">"end"</span>), <span class="dt">year =</span> <span class="dv">2000</span>:<span class="dv">2005</span>), <span class="dt">units =</span> <span class="st">""</span>)
+hp &lt;-<span class="st"> </span><span class="kw">FLQuant</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">dimnames=</span><span class="kw">list</span>(<span class="dt">quant=</span><span class="kw">c</span>(<span class="st">"start"</span>, <span class="st">"end"</span>), <span class="dt">year=</span><span class="dv">2000</span>:<span class="dv">2005</span>),
+  <span class="dt">units=</span><span class="st">""</span>)
 
 <span class="co"># vcost</span>
-vc &lt;-<span class="st"> </span><span class="kw">FLQuant</span>(<span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">10</span>), <span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="dt">quant =</span> <span class="kw">c</span>(<span class="st">"fuel"</span>, 
-    <span class="st">"ice"</span>), <span class="dt">year =</span> <span class="dv">2000</span>:<span class="dv">2005</span>), <span class="dt">units =</span> <span class="st">"EUR / d"</span>)
+vc &lt;-<span class="st"> </span><span class="kw">FLQuant</span>(<span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">10</span>), <span class="dt">dimnames=</span><span class="kw">list</span>(<span class="dt">quant=</span><span class="kw">c</span>(<span class="st">"fuel"</span>, <span class="st">"ice"</span>), <span class="dt">year=</span><span class="dv">2000</span>:<span class="dv">2005</span>),
+  <span class="dt">units=</span><span class="st">"EUR / d"</span>)
 
 <span class="co"># fcost</span>
-fc &lt;-<span class="st"> </span><span class="kw">FLQuant</span>(<span class="kw">c</span>(<span class="dv">10000</span>, <span class="dv">5000</span>), <span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="dt">quant =</span> <span class="kw">c</span>(<span class="st">"license"</span>, 
-    <span class="st">"dock"</span>), <span class="dt">year =</span> <span class="dv">2000</span>:<span class="dv">2005</span>), <span class="dt">units =</span> <span class="st">"EUR / boat"</span>)
+fc &lt;-<span class="st"> </span><span class="kw">FLQuant</span>(<span class="kw">c</span>(<span class="dv">10000</span>, <span class="dv">5000</span>), <span class="dt">dimnames=</span><span class="kw">list</span>(<span class="dt">quant=</span><span class="kw">c</span>(<span class="st">"license"</span>, <span class="st">"dock"</span>),
+  <span class="dt">year=</span><span class="dv">2000</span>:<span class="dv">2005</span>), <span class="dt">units=</span><span class="st">"EUR / boat"</span>)
 
 <span class="co"># orevenue</span>
-or &lt;-<span class="st"> </span><span class="kw">FLQuant</span>(<span class="dv">200</span>, <span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="dt">quant =</span> <span class="kw">c</span>(<span class="st">"tourism"</span>), 
-    <span class="dt">year =</span> <span class="dv">2000</span>:<span class="dv">2005</span>), <span class="dt">units =</span> <span class="st">"EUR / boat"</span>)
+or &lt;-<span class="st"> </span><span class="kw">FLQuant</span>(<span class="dv">200</span>, <span class="dt">dimnames=</span><span class="kw">list</span>(<span class="dt">quant=</span><span class="kw">c</span>(<span class="st">"tourism"</span>), <span class="dt">year=</span><span class="dv">2000</span>:<span class="dv">2005</span>),
+  <span class="dt">units=</span><span class="st">"EUR / boat"</span>)
 
 <span class="co"># crewshare</span>
-cs &lt;-<span class="st"> </span><span class="kw">predictModel</span>(<span class="dt">model =</span> ~fixed +<span class="st"> </span>share *<span class="st"> </span>lrevenue, 
-    <span class="dt">params =</span> <span class="kw">FLPar</span>(<span class="dt">fixed =</span> <span class="dv">300</span>, <span class="dt">share =</span> <span class="fl">0.05</span>, <span class="dt">units =</span> <span class="kw">c</span>(<span class="st">"EUR"</span>, 
-        <span class="st">""</span>)))
+cs &lt;-<span class="st"> </span><span class="kw">predictModel</span>(<span class="dt">model=</span>~fixed +<span class="st"> </span>share *<span class="st"> </span>lrevenue,
+  <span class="dt">params=</span><span class="kw">FLPar</span>(<span class="dt">fixed=</span><span class="dv">300</span>, <span class="dt">share=</span><span class="fl">0.05</span>, <span class="dt">units=</span><span class="kw">c</span>(<span class="st">"EUR"</span>, <span class="st">""</span>)))
 
 <span class="co"># FLFishery</span>
-fis &lt;-<span class="st"> </span><span class="kw">FLFishery</span>(<span class="dt">PLE =</span> ca, <span class="dt">SOL =</span> ca, <span class="dt">effort =</span> ef, <span class="dt">capacity =</span> cap, 
-    <span class="dt">hperiod =</span> hp, <span class="dt">vcost =</span> vc, <span class="dt">fcost =</span> fc, <span class="dt">orevenue =</span> or, 
-    <span class="dt">crewshare =</span> cs)</code></pre></div>
+fis &lt;-<span class="st"> </span><span class="kw">FLFishery</span>(<span class="dt">PLE=</span>ca, <span class="dt">SOL=</span>ca, <span class="dt">effort=</span>ef, <span class="dt">capacity=</span>cap, <span class="dt">hperiod=</span>hp, <span class="dt">vcost=</span>vc,
+  <span class="dt">fcost=</span>fc, <span class="dt">orevenue=</span>or, <span class="dt">crewshare=</span>cs)</code></pre></div>
 </div>
 <div id="more-information" class="section level1">
 <h1 class="hasAnchor">
@@ -242,27 +239,26 @@ fis &lt;-<span class="st"> </span><span class="kw">FLFishery</span>(<span class=
 <li>For more information on the FLR Project for Quantitative Fisheries Science in R, visit the FLR webpage <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</li>
 <li>The latest version of <code>FLFishery</code> can always be installed using the <code>devtools</code> package, by calling</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"iagomosqueira/FLFishery"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">library</span>(devtools)
+    <span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">'iagomosqueira/FLFishery'</span>)</code></pre></div>
 <div id="software-versions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#software-versions" class="anchor"></a>Software Versions</h2>
 <ul>
-<li>R version 3.4.4 (2018-03-15)</li>
-<li>FLFishery: 0.1.3</li>
-<li>FLCore: 2.6.7.9001</li>
+<li>R version 3.5.1 (2018-07-02)</li>
+<li>FLFishery: 0.1.2</li>
+<li>FLCore: 2.6.8.9005</li>
 <li>ggplotFL: 2.6.3</li>
 <li>
-<strong>Compiled</strong>: Mon May 14 15:19:22 2018</li>
+<strong>Compiled</strong>: Fri Jul 13 14:43:10 2018</li>
 <li>
-<strong>Git Hash</strong>: ff6fddf</li>
+<strong>Git Hash</strong>: f0e2c76</li>
 </ul>
 </div>
 <div id="knitr-options" class="section level2">
 <h2 class="hasAnchor">
 <a href="#knitr-options" class="anchor"></a><code>knitr</code> options</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">opts_chunk$<span class="kw">set</span>(<span class="dt">dev =</span> <span class="st">"png"</span>, <span class="dt">fig.width =</span> <span class="fl">4.5</span>, <span class="dt">fig.height =</span> <span class="fl">4.5</span>, 
-    <span class="dt">tidy =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">opts_chunk$<span class="kw">set</span>(<span class="dt">dev=</span><span class="st">'png'</span>, <span class="dt">fig.width=</span><span class="fl">4.5</span>, <span class="dt">fig.height=</span><span class="fl">4.5</span>, <span class="dt">tidy=</span><span class="ot">TRUE</span>)</code></pre></div>
 </div>
 </div>
 <div class="footnotes">

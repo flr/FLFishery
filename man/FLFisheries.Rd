@@ -8,14 +8,41 @@
 \alias{FLFisheries}
 \alias{FLFisheries-class}
 \alias{FLFisheries-methods}
-\alias{landings.n,FLFisheries-method}
+\alias{landings,FLFisheries-method}
+\alias{discards,FLFisheries-method}
+\alias{catch,FLFisheries-method}
+\alias{lrevenue,FLFisheries-method}
+\alias{revenue,FLFisheries-method}
+\alias{cost,FLFisheries-method}
+\alias{ccost,FLFisheries-method}
+\alias{vcost,FLFisheries-method}
+\alias{fcost,FLFisheries-method}
+\alias{profit,FLFisheries-method}
 \alias{FLFisheries,list-method}
 \alias{FLFisheries,missing-method}
 \title{FLFisheries constructor}
 \usage{
 FLFisheries(object, ...)
 
-\S4method{landings.n}{FLFisheries}(object)
+\S4method{landings}{FLFisheries}(object)
+
+\S4method{discards}{FLFisheries}(object)
+
+\S4method{catch}{FLFisheries}(object)
+
+\S4method{lrevenue}{FLFisheries}(object)
+
+\S4method{revenue}{FLFisheries}(object)
+
+\S4method{cost}{FLFisheries}(object)
+
+\S4method{ccost}{FLFisheries}(object)
+
+\S4method{vcost}{FLFisheries}(object)
+
+\S4method{fcost}{FLFisheries}(object)
+
+\S4method{profit}{FLFisheries}(object)
 
 \S4method{FLFisheries}{list}(object, desc = character(1))
 
