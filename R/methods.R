@@ -191,3 +191,17 @@ setMethod("propagate", signature(object="FLFishery"),
   }
 )
 # }}}
+
+# iter {{{
+setMethod("iter", signature(obj="FLFishery"),
+	  function(obj, iter) {
+
+    # SUBSET iter in FLQ slots
+    res <- callNextMethod()
+
+    # SUBSET FLCatches
+    res[seq(length(obj))] <- lapply(res@.Data, "iter", iter=iter)
+
+    return(res)
+	  }
+) # }}}
