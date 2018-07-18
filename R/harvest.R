@@ -6,10 +6,38 @@
 #
 # Distributed under the terms of the European Union Public Licence (EUPL) V.1.1.
 
+
+#' Methods to calculate fishing mortalities
+#'
+#' Fishing mortalities and harvest rates can be calculated for a combination of
+#' FLBiol and FLFishery/FLFisheries using the harvest() method.
+#'
+#' The calculated fishing mortalities, or havest rates, are returned, in the
+#' case of *harvest*, disaggregated by fishery, as an *FLQuants* list. For a
+#' single *FLFishery* object, a single *FLQuant* is obtained.
+#'
+#' @param object Object containing population abundances, of class *FLBiol*.
+#' @param catch Object containing catches in number of the population represented by object, class *FLFishery*.
+#' @param catches Object containing catches in number of the population represented by object, class *FLFisheries*.
+#' @param fcb A vector indicating the correspondance, by position of name, between *object* and the *FLCatch* elements inside *catches*, and of the same length.
+#' @param units Should output be in terms of fishing mortaloty ('f') or harvest rate ('hr').
+#'
+#' @return An object of class *FLQuant* or *FLQuants*.
+#'
+#' @name harvest
+#' @rdname harvest
+#'
+#' @author The FLR Team
+#' @seealso [FLCore::harvest()]
+#' @keywords methods
+#' @md
+NULL
+
 # harvests(FLBiol, FLFisheries) {{{
+#' @rdname harvest
 setMethod("harvests", signature(object="FLBiol", catches="FLFisheries"),
-  function(object, catches, fcb=rep(1, length(catches)), units=c("f", "hr"), ...) {
-  
+  function(object, catches, fcb=rep(1, length(catches)), units=c("f", "hr")) {
+ 
     res <- vector("list", length=length(catches))
 
     if(units[1] == "f") {
@@ -29,6 +57,7 @@ setMethod("harvests", signature(object="FLBiol", catches="FLFisheries"),
 ) # }}}
 
 # harvest(FLBiol, FLFishery) {{{
+#' @rdname harvest
 setMethod("harvest", signature(object="FLBiol", catch="FLFishery"),
   function(object, catch, fcb=1) {
   
@@ -41,14 +70,4 @@ setMethod("harvest", signature(object="FLBiol", catch="FLFishery"),
     units(res) <- "f"
     return(res)
   }
-) # }}}
-
-# harvest(FLBiol, FLFisheries) {{{
-setMethod("harvest", signature(object="FLBiol", catch="FLFisheries"),
-	function(object, catch, ...) {
-
-    res <- Reduce("+",  partialF(object, catches, ...))
-    units(res) <- "f"
-	  return(res)
-	}
 ) # }}}

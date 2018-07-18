@@ -54,6 +54,7 @@ setGeneric("FLCatches", function(object, ...) standardGeneric("FLCatches")) # }}
 
 #' @rdname FLFishery
 #' @aliases FLFishery FLFishery-method
+#' @param object An object
 setGeneric("FLFishery", function(object, ...) standardGeneric("FLFishery")) # }}}
 
 # FLFisheries {{{
@@ -87,7 +88,6 @@ setGeneric("capacity", function(object, ...) standardGeneric("capacity"))
 #' @rdname FLFishery
 #' @param value Replacement value
 #' @param ... Other things
-#' @param object An object
 #' @aliases capacity<- capacity<--method
 setGeneric("capacity<-", function(object, ..., value) standardGeneric("capacity<-"))
 
@@ -96,9 +96,6 @@ setGeneric("capacity<-", function(object, ..., value) standardGeneric("capacity<
 setGeneric("crewshare", function(object, ...) standardGeneric("crewshare"))
 
 #' @rdname FLFishery
-#' @param value Replacement value
-#' @param ... Other things
-#' @param object An object
 #' @aliases crewshare<- crewshare<--method
 setGeneric("crewshare<-", function(object, ..., value) standardGeneric("crewshare<-"))
 
@@ -136,5 +133,6 @@ setGeneric("lrevenue", function(object, ...) standardGeneric("lrevenue"))
 
 #' @rdname harvest
 #' @aliases harvests harvests-method
+#' @param ... Other things
 setGeneric("harvests", function(object, catches, ...) standardGeneric("harvests"))
 # }}}

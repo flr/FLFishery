@@ -169,17 +169,20 @@ setReplaceMethod("catch.q", signature(object="FLCatch", value="numeric"),
 # Direct accesors
 
 # capacity
+#' @rdname FLFishery
 setMethod("capacity", signature(object="FLFishery"),
   function(object) {
     return(slot(object, "capacity"))
   }
 )
+#' @rdname FLFishery
 setReplaceMethod("capacity", signature(object="FLFishery", value="FLQuant"),
   function(object, value) {
     slot(object, "capacity") <- value
     return(object)
   }
 )
+#' @rdname FLFishery
 setReplaceMethod("capacity", signature(object="FLFishery", value="numeric"),
   function(object, value) {
     slot(object, "capacity")[] <- value
@@ -188,17 +191,20 @@ setReplaceMethod("capacity", signature(object="FLFishery", value="numeric"),
 )
 
 # hperiod
+#' @rdname FLFishery
 setMethod("hperiod", signature(object="FLFishery"),
   function(object) {
     return(slot(object, "hperiod"))
   }
 )
+#' @rdname FLFishery
 setReplaceMethod("hperiod", signature(object="FLFishery", value="FLQuant"),
   function(object, value) {
     slot(object, "hperiod") <- value
     return(object)
   }
 )
+#' @rdname FLFishery
 setReplaceMethod("hperiod", signature(object="FLFishery", value="numeric"),
   function(object, value) {
     slot(object, "hperiod")[] <- value
@@ -209,6 +215,8 @@ setReplaceMethod("hperiod", signature(object="FLFishery", value="numeric"),
 # Computation
 
 # effort
+#' @rdname FLFishery
+#' @param compute Carry out formnula calculation (TRUE) or return full slot (FALSE).
 setMethod("effort", signature(object="FLFishery"),
   function(object, compute=TRUE) {
     if(compute) {
@@ -218,6 +226,7 @@ setMethod("effort", signature(object="FLFishery"),
     }
   }
 )
+#' @rdname FLFishery
 setReplaceMethod("effort", signature(object="FLFishery", value="FLQuant"),
   function(object, value) {
     slot(object, "effort") <- value
@@ -226,6 +235,7 @@ setReplaceMethod("effort", signature(object="FLFishery", value="FLQuant"),
 )
 
 # vcost
+#' @rdname FLFishery
 setMethod("vcost", signature(object="FLFishery"),
   function(object, compute=TRUE) {
     if(compute) {
@@ -235,6 +245,7 @@ setMethod("vcost", signature(object="FLFishery"),
     }
   }
 )
+#' @rdname FLFishery
 setReplaceMethod("vcost", signature(object="FLFishery", value="FLQuant"),
   function(object, value) {
     slot(object, "vcost") <- value
@@ -243,6 +254,7 @@ setReplaceMethod("vcost", signature(object="FLFishery", value="FLQuant"),
 )
 
 # fcost
+#' @rdname FLFishery
 setMethod("fcost", signature(object="FLFishery"),
   function(object, compute=TRUE) {
     if(compute) {
@@ -252,6 +264,7 @@ setMethod("fcost", signature(object="FLFishery"),
     }
   }
 )
+#' @rdname FLFishery
 setReplaceMethod("fcost", signature(object="FLFishery", value="FLQuant"),
   function(object, value) {
     slot(object, "fcost") <- value
@@ -260,17 +273,20 @@ setReplaceMethod("fcost", signature(object="FLFishery", value="FLQuant"),
 )
 
 # orevenue
+#' @rdname FLFishery
 setMethod("orevenue", signature(object="FLFishery"),
   function(object) {
     return(slot(object, "orevenue") * capacity(object))
   }
 )
+#' @rdname FLFishery
 setReplaceMethod("orevenue", signature(object="FLFishery", value="FLQuant"),
   function(object, value) {
     slot(object, "orevenue") <- value
     return(object)
   }
 )
+#' @rdname FLFishery
 setReplaceMethod("orevenue", signature(object="FLFishery", value="numeric"),
   function(object, value) {
     slot(object, "orevenue")[] <- value
@@ -302,17 +318,22 @@ setReplaceMethod("crewshare", signature(object="FLFishery", value="predictModel"
 # Direct accesors
 
 # capacity
+#' @rdname FLFisherycpp
+#' @param object Object to extract or operate on
 setMethod("capacity", signature(object="FLFisherycpp"),
   function(object) {
     return(slot(object, "capacity"))
   }
 )
+#' @rdname FLFisherycpp
+#' @param value Replacement value
 setReplaceMethod("capacity", signature(object="FLFisherycpp", value="FLQuant"),
   function(object, value) {
     slot(object, "capacity") <- value
     return(object)
   }
 )
+#' @rdname FLFisherycpp
 setReplaceMethod("capacity", signature(object="FLFisherycpp", value="numeric"),
   function(object, value) {
     slot(object, "capacity")[] <- value
@@ -321,17 +342,20 @@ setReplaceMethod("capacity", signature(object="FLFisherycpp", value="numeric"),
 )
 
 # hperiod
+#' @rdname FLFisherycpp
 setMethod("hperiod", signature(object="FLFisherycpp"),
   function(object) {
     return(slot(object, "hperiod"))
   }
 )
+#' @rdname FLFisherycpp
 setReplaceMethod("hperiod", signature(object="FLFisherycpp", value="FLQuant"),
   function(object, value) {
     slot(object, "hperiod") <- value
     return(object)
   }
 )
+#' @rdname FLFisherycpp
 setReplaceMethod("hperiod", signature(object="FLFisherycpp", value="numeric"),
   function(object, value) {
     slot(object, "hperiod")[] <- value
@@ -340,17 +364,20 @@ setReplaceMethod("hperiod", signature(object="FLFisherycpp", value="numeric"),
 )
 
 # orevenue
+#' @rdname FLFisherycpp
 setMethod("orevenue", signature(object="FLFisherycpp"),
   function(object) {
     return(slot(object, "orevenue"))
   }
 )
+#' @rdname FLFisherycpp
 setReplaceMethod("orevenue", signature(object="FLFisherycpp", value="FLQuant"),
   function(object, value) {
     slot(object, "orevenue") <- value
     return(object)
   }
 )
+#' @rdname FLFisherycpp
 setReplaceMethod("orevenue", signature(object="FLFisherycpp", value="numeric"),
   function(object, value) {
     slot(object, "orevenue")[] <- value
@@ -359,17 +386,20 @@ setReplaceMethod("orevenue", signature(object="FLFisherycpp", value="numeric"),
 )
 
 # effort
+#' @rdname FLFisherycpp
 setMethod("effort", signature(object="FLFisherycpp"),
   function(object) {
     return(slot(object, "effort"))
   }
 )
+#' @rdname FLFisherycpp
 setReplaceMethod("effort", signature(object="FLFisherycpp", value="FLQuant"),
   function(object, value) {
     slot(object, "effort") <- value
     return(object)
   }
 )
+#' @rdname FLFisherycpp
 setReplaceMethod("effort", signature(object="FLFisherycpp", value="numeric"),
   function(object, value) {
     slot(object, "effort")[] <- value
@@ -378,17 +408,20 @@ setReplaceMethod("effort", signature(object="FLFisherycpp", value="numeric"),
 )
 
 # vcost
+#' @rdname FLFisherycpp
 setMethod("vcost", signature(object="FLFisherycpp"),
   function(object) {
     return(slot(object, "vcost"))
   }
 )
+#' @rdname FLFisherycpp
 setReplaceMethod("vcost", signature(object="FLFisherycpp", value="FLQuant"),
   function(object, value) {
     slot(object, "vcost") <- value
     return(object)
   }
 )
+#' @rdname FLFisherycpp
 setReplaceMethod("vcost", signature(object="FLFisherycpp", value="numeric"),
   function(object, value) {
     slot(object, "vcost")[] <- value
@@ -397,17 +430,20 @@ setReplaceMethod("vcost", signature(object="FLFisherycpp", value="numeric"),
 )
 
 # fcost
+#' @rdname FLFisherycpp
 setMethod("fcost", signature(object="FLFisherycpp"),
   function(object) {
     return(slot(object, "fcost"))
   }
 )
+#' @rdname FLFisherycpp
 setReplaceMethod("fcost", signature(object="FLFisherycpp", value="FLQuant"),
   function(object, value) {
     slot(object, "fcost") <- value
     return(object)
   }
 )
+#' @rdname FLFisherycpp
 setReplaceMethod("fcost", signature(object="FLFisherycpp", value="numeric"),
   function(object, value) {
     slot(object, "fcost")[] <- value
@@ -416,17 +452,20 @@ setReplaceMethod("fcost", signature(object="FLFisherycpp", value="numeric"),
 )
 
 # crewshare
+#' @rdname FLFisherycpp
 setMethod("crewshare", signature(object="FLFisherycpp"),
   function(object) {
     return(slot(object, "crewshare"))
   }
 )
+#' @rdname FLFisherycpp
 setReplaceMethod("crewshare", signature(object="FLFisherycpp", value="FLQuant"),
   function(object, value) {
     slot(object, "crewshare") <- value
     return(object)
   }
 )
+#' @rdname FLFisherycpp
 setReplaceMethod("crewshare", signature(object="FLFisherycpp", value="numeric"),
   function(object, value) {
     slot(object, "crewshare")[] <- value

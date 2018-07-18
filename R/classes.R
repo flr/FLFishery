@@ -1,3 +1,4 @@
+
 # classes.R - The FLFishery classes
 # FLFishery/R/classes.R
 
@@ -241,7 +242,7 @@ setClass("FLCatches",
 #'
 #' @section Slots:
 #'
-#' \code{FLFishery} objects inherit from \code{FLCatches} woth a number of slots
+#' \code{FLFishery} objects inherit from \code{FLCatches} with a number of slots
 #' added.
 #'     \describe{
 #'     \item{.Data}{The list of \code{FLCatch} object with catch data per stock,

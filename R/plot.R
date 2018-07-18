@@ -10,7 +10,7 @@
 
 #' @rdname FLCatch
 #' @param x FLCatch
-#' @aliases plot,FLCatch,missing-method
+#' @param y missing
 
 setMethod("plot", signature(x="FLCatch", y="missing"),
 	function(x, ...) {
