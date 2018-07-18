@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>FLFisheries constructor — FLFisheries • FLFishery</title>
+<title>Methods to calculate fishing mortalities — harvests • FLFishery</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,10 +30,10 @@
 
 
 
-<meta property="og:title" content="FLFisheries constructor — FLFisheries" />
+<meta property="og:title" content="Methods to calculate fishing mortalities — harvests" />
 
-<meta property="og:description" content="Make an FLFisheries object.
-This is a containuer class for FLFishery objects." />
+<meta property="og:description" content="Fishing mortalities and harvest rates can be calculated for a combination of
+FLBiol and FLFishery/FLFisheries using the harvest() method." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,98 +99,69 @@ This is a containuer class for FLFishery objects." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>FLFisheries constructor</h1>
+    <h1>Methods to calculate fishing mortalities</h1>
     
-    <div class="hidden name"><code>FLFisheries.Rd</code></div>
+    <div class="hidden name"><code>harvest.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Make an FLFisheries object.</p>
-<p>This is a containuer class for <code>FLFishery</code> objects.</p>
+    <p>Fishing mortalities and harvest rates can be calculated for a combination of
+FLBiol and FLFishery/FLFisheries using the harvest() method.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>FLFisheries</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>harvests</span>(<span class='no'>object</span>, <span class='no'>catches</span>, <span class='no'>...</span>)
 
-<span class='co'># S4 method for FLFisheries</span>
-<span class='fu'>landings</span>(<span class='no'>object</span>)
+<span class='co'># S4 method for FLBiol,FLFisheries</span>
+<span class='fu'>harvests</span>(<span class='no'>object</span>, <span class='no'>catches</span>, <span class='kw'>fcb</span> <span class='kw'>=</span> <span class='fu'>rep</span>(<span class='fl'>1</span>,
+  <span class='fu'>length</span>(<span class='no'>catches</span>)), <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"f"</span>, <span class='st'>"hr"</span>))
 
-<span class='co'># S4 method for FLFisheries</span>
-<span class='fu'>discards</span>(<span class='no'>object</span>)
-
-<span class='co'># S4 method for FLFisheries</span>
-<span class='fu'>catch</span>(<span class='no'>object</span>)
-
-<span class='co'># S4 method for FLFisheries</span>
-<span class='fu'><a href='FLCatch.html'>lrevenue</a></span>(<span class='no'>object</span>)
-
-<span class='co'># S4 method for FLFisheries</span>
-<span class='fu'>revenue</span>(<span class='no'>object</span>)
-
-<span class='co'># S4 method for FLFisheries</span>
-<span class='fu'>cost</span>(<span class='no'>object</span>)
-
-<span class='co'># S4 method for FLFisheries</span>
-<span class='fu'>ccost</span>(<span class='no'>object</span>)
-
-<span class='co'># S4 method for FLFisheries</span>
-<span class='fu'>vcost</span>(<span class='no'>object</span>)
-
-<span class='co'># S4 method for FLFisheries</span>
-<span class='fu'>fcost</span>(<span class='no'>object</span>)
-
-<span class='co'># S4 method for FLFisheries</span>
-<span class='fu'>profit</span>(<span class='no'>object</span>)
-
-<span class='co'># S4 method for list</span>
-<span class='fu'>FLFisheries</span>(<span class='no'>object</span>, <span class='kw'>desc</span> <span class='kw'>=</span> <span class='fu'>character</span>(<span class='fl'>1</span>))
-
-<span class='co'># S4 method for missing</span>
-<span class='fu'>FLFisheries</span>(<span class='no'>object</span>, <span class='no'>...</span>)</pre>
+<span class='co'># S4 method for FLBiol,FLFishery</span>
+<span class='fu'>harvest</span>(<span class='no'>object</span>, <span class='no'>catch</span>, <span class='kw'>fcb</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>Either a list of FLFishery objects or missing</p></td>
+      <td><p>Object containing population abundances, of class <em>FLBiol</em>.</p></td>
+    </tr>
+    <tr>
+      <th>catches</th>
+      <td><p>Object containing catches in number of the population represented by object, class <em>FLFisheries</em>.</p></td>
     </tr>
     <tr>
       <th>...</th>
       <td><p>Other things</p></td>
     </tr>
     <tr>
-      <th>desc</th>
-      <td><p>Description</p></td>
+      <th>fcb</th>
+      <td><p>A vector indicating the correspondance, by position of name, between <em>object</em> and the <em>FLCatch</em> elements inside <em>catches</em>, and of the same length.</p></td>
+    </tr>
+    <tr>
+      <th>units</th>
+      <td><p>Should output be in terms of fishing mortaloty ('f') or harvest rate ('hr').</p></td>
+    </tr>
+    <tr>
+      <th>catch</th>
+      <td><p>Object containing catches in number of the population represented by object, class <em>FLFishery</em>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An FLFisheries object</p>
+    <p>An object of class <em>FLQuant</em> or <em>FLQuants</em>.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Make an FLFisheries object.</p>
-    
-    <h2 class="hasAnchor" id="accessors"><a class="anchor" href="#accessors"></a>Accessors</h2>
-
-    
-    <p>Elements in the classes can be extracted and replaced using the list subset
-operators,'[', '[&lt;-', '[[' and '[[&lt;-'.</p>
-<p>The values passed for replacement need to be of the class FLFishery.</p>
-    
-    <h2 class="hasAnchor" id="constructor"><a class="anchor" href="#constructor"></a>Constructor</h2>
-
-    
-    <p>A construction method exists for this class that can take named arguments for
-any of its elements.</p>
+    <p>The calculated fishing mortalities, or havest rates, are returned, in the
+case of <em>harvest</em>, disaggregated by fishery, as an <em>FLQuants</em> list. For a
+single <em>FLFishery</em> object, a single <em>FLQuant</em> is obtained.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>FLComp</p>
-<p>FLCatch, FLFishery</p></div>
+    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/FLCore/topics/accessors'>FLCore::harvest()</a></code></p></div>
     
 
   </div>
@@ -203,18 +174,12 @@ any of its elements.</p>
 
       <li><a href="#details">Details</a></li>
 
-      <li><a href="#accessors">Accessors</a></li>
-
-      <li><a href="#constructor">Constructor</a></li>
-
       <li><a href="#see-also">See also</a></li>
           </ul>
 
     <h2>Author</h2>
     
 The FLR Team
-
-Finlay Scott, EC JRC.
 
   </div>
 </div>

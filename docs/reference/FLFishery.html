@@ -65,7 +65,7 @@ common gear configuration during each time step and area (no metiers)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">FLFishery</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.5</span>
       </span>
     </div>
 
@@ -117,35 +117,122 @@ common gear configuration during each time step and area (no <em>metiers</em>).<
     
     </div>
 
-    <pre class="usage"><span class='fu'>FLFishery</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+    <pre class="usage">FLFishery(object, ...)
 
-<span class='fu'>capacity</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+capacity(object, ...)
 
-<span class='fu'>capacity</span>(<span class='no'>object</span>, <span class='no'>...</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+capacity(object, ...) <- value
 
-<span class='fu'>crewshare</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+crewshare(object, ...)
 
-<span class='fu'>crewshare</span>(<span class='no'>object</span>, <span class='no'>...</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+crewshare(object, ...) <- value
 
-<span class='fu'>hperiod</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+hperiod(object, ...)
 
-<span class='fu'>hperiod</span>(<span class='no'>object</span>, <span class='no'>...</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+hperiod(object, ...) <- value
 
-<span class='fu'>orevenue</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+orevenue(object, ...)
 
-<span class='fu'>orevenue</span>(<span class='no'>object</span>, <span class='no'>...</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+orevenue(object, ...) <- value
 
-<span class='co'># S4 method for list</span>
-<span class='fu'>FLFishery</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+# S4 method for FLFishery
+capacity(object)
 
-<span class='co'># S4 method for FLCatch</span>
-<span class='fu'>FLFishery</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+# S4 method for FLFishery,FLQuant
+capacity(object) <- value
 
-<span class='co'># S4 method for missing</span>
-<span class='fu'>FLFishery</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+# S4 method for FLFishery,numeric
+capacity(object) <- value
 
-<span class='co'># S4 method for FLFishery</span>
-<span class='fu'><a href='FLCatch.html'>lrevenue</a></span>(<span class='no'>object</span>)</pre>
+# S4 method for FLFishery
+hperiod(object)
+
+# S4 method for FLFishery,FLQuant
+hperiod(object) <- value
+
+# S4 method for FLFishery,numeric
+hperiod(object) <- value
+
+# S4 method for FLFishery,ANY
+effort(object, compute = TRUE)
+
+# S4 method for FLFishery,FLQuant
+effort(object) <- value
+
+# S4 method for FLFishery
+vcost(object, compute = TRUE)
+
+# S4 method for FLFishery,FLQuant
+vcost(object) <- value
+
+# S4 method for FLFishery
+fcost(object, compute = TRUE)
+
+# S4 method for FLFishery,FLQuant
+fcost(object) <- value
+
+# S4 method for FLFishery
+orevenue(object)
+
+# S4 method for FLFishery,FLQuant
+orevenue(object) <- value
+
+# S4 method for FLFishery,numeric
+orevenue(object) <- value
+
+# S4 method for list
+FLFishery(object, ...)
+
+# S4 method for FLCatch
+FLFishery(object, ...)
+
+# S4 method for missing
+FLFishery(object, ...)
+
+# S4 method for FLFishery,ANY,missing,ANY
+[(x, i)
+
+# S4 method for FLFishery,numeric,missing,FLCatch
+[[(x, i) <- value
+
+# S4 method for FLFishery,character,missing,FLCatch
+[[(x, i) <- value
+
+# S4 method for FLFishery
+summary(object)
+
+# S4 method for FLFishery
+landings(object)
+
+# S4 method for FLFishery
+discards(object)
+
+# S4 method for FLFishery
+catches(object)
+
+# S4 method for FLFishery
+catch(object)
+
+# S4 method for FLFishery
+lrevenue(object)
+
+# S4 method for FLFishery
+revenue(object)
+
+# S4 method for FLFishery
+cost(object)
+
+# S4 method for FLFishery
+profit(object)
+
+# S4 method for FLFishery
+ccost(object)
+
+# S4 method for FLFishery
+propagate(object, iter, fill.iter = TRUE)
+
+# S4 method for FLFishery
+iter(obj, iter)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,22 +250,35 @@ common gear configuration during each time step and area (no <em>metiers</em>).<
       <td><p>Replacement value</p></td>
     </tr>
     <tr>
-      <th>value</th>
-      <td><p>Replacement value</p></td>
+      <th>compute</th>
+      <td><p>Carry out formnula calculation (TRUE) or return full slot (FALSE).</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Other things</p></td>
+      <th>x</th>
+      <td><p>Object to be subset</p></td>
     </tr>
     <tr>
-      <th>object</th>
-      <td><p>An object</p></td>
+      <th>i</th>
+      <td><p>Element to be extracted, by name (character) or position (numeric).</p></td>
+    </tr>
+    <tr>
+      <th>iter</th>
+      <td><p>Position (numeric) or name (character) of the iter(s) to be extracted (iter), or number of iters to be created (propagate).</p></td>
+    </tr>
+    <tr>
+      <th>fill.iter</th>
+      <td><p>Should the object content be copied across the new iters, logical.</p></td>
+    </tr>
+    <tr>
+      <th>obj</th>
+      <td><p>Object on which to apply method</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>What do you say what I can ever do for you
+    <p>Fisheries are defined here as a group of vessels catching from a number of stocks</p>
+<p>What do you say what I can ever do for you
 What are we gonna do to pass the time
 What do you care when you find that life's unfair
 Equality is just a state of mind
@@ -188,7 +288,7 @@ You know where to draw the line</p>
     <h2 class="hasAnchor" id="slots"><a class="anchor" href="#slots"></a>Slots</h2>
 
     
-    <p><code>FLFishery</code> objects inherit from <code>FLCatches</code> woth a number of slots
+    <p><code>FLFishery</code> objects inherit from <code>FLCatches</code> with a number of slots
 added.</p><dl class='dl-horizontal'>
     <dt>.Data</dt><dd><p>The list of <code>FLCatch</code> object with catch data per stock,
       (<code>FLCatches</code>).</p></dd>

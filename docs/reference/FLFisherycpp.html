@@ -62,7 +62,7 @@ The class is used for passing to C++ FLR objects." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">FLFishery</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.5</span>
       </span>
     </div>
 
@@ -111,7 +111,82 @@ The class is used for passing to C++ FLR objects.</p>
     
     </div>
 
-        
+    <pre class="usage"><span class='co'># S4 method for FLFisherycpp</span>
+<span class='fu'><a href='FLFishery.html'>capacity</a></span>(<span class='no'>object</span>)
+
+<span class='co'># S4 method for FLFisherycpp,FLQuant</span>
+<span class='fu'><a href='FLFishery.html'>capacity</a></span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+
+<span class='co'># S4 method for FLFisherycpp,numeric</span>
+<span class='fu'><a href='FLFishery.html'>capacity</a></span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+
+<span class='co'># S4 method for FLFisherycpp</span>
+<span class='fu'><a href='FLFishery.html'>hperiod</a></span>(<span class='no'>object</span>)
+
+<span class='co'># S4 method for FLFisherycpp,FLQuant</span>
+<span class='fu'><a href='FLFishery.html'>hperiod</a></span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+
+<span class='co'># S4 method for FLFisherycpp,numeric</span>
+<span class='fu'><a href='FLFishery.html'>hperiod</a></span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+
+<span class='co'># S4 method for FLFisherycpp</span>
+<span class='fu'><a href='FLFishery.html'>orevenue</a></span>(<span class='no'>object</span>)
+
+<span class='co'># S4 method for FLFisherycpp,FLQuant</span>
+<span class='fu'><a href='FLFishery.html'>orevenue</a></span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+
+<span class='co'># S4 method for FLFisherycpp,numeric</span>
+<span class='fu'><a href='FLFishery.html'>orevenue</a></span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+
+<span class='co'># S4 method for FLFisherycpp,ANY</span>
+<span class='fu'>effort</span>(<span class='no'>object</span>)
+
+<span class='co'># S4 method for FLFisherycpp,FLQuant</span>
+<span class='fu'>effort</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+
+<span class='co'># S4 method for FLFisherycpp,numeric</span>
+<span class='fu'>effort</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+
+<span class='co'># S4 method for FLFisherycpp</span>
+<span class='fu'>vcost</span>(<span class='no'>object</span>)
+
+<span class='co'># S4 method for FLFisherycpp,FLQuant</span>
+<span class='fu'>vcost</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+
+<span class='co'># S4 method for FLFisherycpp,numeric</span>
+<span class='fu'>vcost</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+
+<span class='co'># S4 method for FLFisherycpp</span>
+<span class='fu'>fcost</span>(<span class='no'>object</span>)
+
+<span class='co'># S4 method for FLFisherycpp,FLQuant</span>
+<span class='fu'>fcost</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+
+<span class='co'># S4 method for FLFisherycpp,numeric</span>
+<span class='fu'>fcost</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+
+<span class='co'># S4 method for FLFisherycpp</span>
+<span class='fu'><a href='FLFishery.html'>crewshare</a></span>(<span class='no'>object</span>)
+
+<span class='co'># S4 method for FLFisherycpp,FLQuant</span>
+<span class='fu'><a href='FLFishery.html'>crewshare</a></span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+
+<span class='co'># S4 method for FLFisherycpp,numeric</span>
+<span class='fu'><a href='FLFishery.html'>crewshare</a></span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span></pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>object</th>
+      <td><p>Object to extract or operate on</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>Replacement value</p></td>
+    </tr>
+    </table>
+    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>What have you done what's in your mind what do you need
@@ -991,6 +1066,7 @@ for sizing but not stored in any slot.</p>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#details">Details</a></li>
 
