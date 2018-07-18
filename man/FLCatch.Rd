@@ -54,7 +54,15 @@
 \alias{catch.q<-,FLCatch,numeric-method}
 \alias{FLCatch,FLQuant-method}
 \alias{FLCatch,missing-method}
+\alias{landings,FLCatch-method}
+\alias{discards,FLCatch-method}
+\alias{catch,FLCatch-method}
+\alias{catch.n,FLCatch-method}
+\alias{catch.wt,FLCatch-method}
 \alias{lrevenue,FLCatch-method}
+\alias{landings.sel,FLCatch-method}
+\alias{discards.sel,FLCatch-method}
+\alias{discards.ratio,FLCatch-method}
 \alias{plot,FLCatch,missing-method}
 \title{FLCatch constructor}
 \usage{
@@ -86,7 +94,23 @@ lrevenue(object, ...)
 
 \S4method{FLCatch}{missing}(object, ...)
 
+\S4method{landings}{FLCatch}(object)
+
+\S4method{discards}{FLCatch}(object)
+
+\S4method{catch}{FLCatch}(object)
+
+\S4method{catch.n}{FLCatch}(object)
+
+\S4method{catch.wt}{FLCatch}(object)
+
 \S4method{lrevenue}{FLCatch}(object)
+
+\S4method{landings.sel}{FLCatch}(object)
+
+\S4method{discards.sel}{FLCatch}(object)
+
+\S4method{discards.ratio}{FLCatch}(object)
 
 \S4method{plot}{FLCatch,missing}(x, y, ...)
 }
@@ -98,6 +122,8 @@ lrevenue(object, ...)
 \item{value}{Replacement value}
 
 \item{x}{FLCatch}
+
+\item{y}{missing}
 }
 \value{
 An FLCatch object
