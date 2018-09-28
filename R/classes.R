@@ -119,6 +119,7 @@ setClass("FLCatch",
     discards.n = "FLQuant",
     discards.wt = "FLQuant",
     catch.sel = "FLQuant",
+    # TODO price as predictModel
     price = "FLQuant",
     catch.q = "FLPar"),
   prototype(

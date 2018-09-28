@@ -123,8 +123,9 @@ setMethod("catch.n", signature(object="FLCatch"),
 #' @rdname FLCatch
 setMethod("catch.wt", signature(object="FLCatch"),
   function(object) {
-    return((landings.wt(object) * landings.n(object) + discards.wt(object) *
-      discards.n(object)) / catch.n(object))
+    return(((landings.wt(object) * (landings.n(object) + 1e-16)) +
+      (discards.wt(object) * (discards.n(object) + 1e-16))) / 
+        (landings.n(object) + discards.n(object) + 1e-16))
   }
 ) # }}}
 
@@ -232,3 +233,18 @@ setMethod("iter", signature(obj="FLFishery"),
     return(res)
 	  }
 ) # }}}
+
+# npv {{{
+npv <- function(object, drate, refYear=dims(object)$minyear) {
+
+  # net revenue
+  reven <- window(profit(object), start=as.numeric(refYear))
+
+  t <- dim(reven)[2]
+
+  res <- yearSums(reven * exp(-drate * t))
+  dimnames(res)$year <- dims(object)$maxyear
+
+  return(res)
+}
+# }}}
