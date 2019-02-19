@@ -3,6 +3,7 @@
  BUG FIXES
 
 - Coerced FLFishery from FLStock now has correct hperiod.
+- Improved coertion FLStock to FLFishery, effort series now calculated as harvest/catch.sel
 
  FLFishery 0.1.3
 
