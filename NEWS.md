@@ -1,5 +1,9 @@
 # FLFishery 0.1.6
 
+## NEW FEATURES
+
+- New .travis.yml file deploys OSX package
+
 ## BUG FIXES
 
 - Coerced FLFishery from FLStock now has correct hperiod.

@@ -1,29 +1,48 @@
-# Sample .travis.yml for R projects.
-#
-# See README.md for instructions, or for more configuration options,
-# see the wiki:
-# https://github.com/craigcitro/r-travis/wiki
+warnings_are_errors: false
+
+language: r
 
 os:
   - linux
   - osx
 
-language: c
+r:
+  - release
 
-before_install:
-  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-  - chmod 755 ./travis-tool.sh
-  - ./travis-tool.sh bootstrap
+branches:
+  only:
+  - master
+    
+sudo: false
 
-install:
-  - ./travis-tool.sh install_deps
-
-script: ./travis-tool.sh run_tests
-
-after_failure:
-  - ./travis-tool.sh dump_logs
+cache: packages
 
 notifications:
   email:
     on_success: change
     on_failure: change
+
+before_deploy:
+  # Get PKGVER
+  - 'export PKGVER=$(sed -n "s/Version: *\([^ ]*\)/\1/p" DESCRIPTION)'
+  # CHECK version type by counting dots (flaky)
+  - 'export RELEASE=$(grep -o \\. <<< $PKGVER | wc -w)'
+  - "echo $RELEASE"
+  # Build binary and remove the source archive
+  - "R CMD INSTALL --build FLFishery_$PKGVER.tar.gz"
+  - "rm FLFishery_$PKGVER.tar.gz"
+  # Look for packages
+  - "export RELEASE_PKG_FILE=$(ls FLFishery*gz)"
+  - "echo $RELEASE_PKG_FILE"
+
+deploy:
+  provider: releases
+  api_key:
+    secure: nmRvtZ59JOaCW4Z18+OByHZtBxfHVnzF4sc86NPne0iOZ/dwP4uIS1j6Yk9rLXTu6y/E+jZSZ2Vq8w8vMYKqhfVHxHKuifus5joBv7+FdnjhC9JzZwPArU/HpgH+sZzX74Vi6DRpu/n2KfbTmmQljFj4772DadMRWHd8MHiXKZw=
+  file: $RELEASE_PKG_FILE
+  skip_cleanup: true
+  draft: true
+  on:
+    repo: flr/FLFishery
+    # condition: "$RELEASE=2"
+    # condition: $RELEASE =~ ^[0-9]+\.[0-9]+\.[0-9]+
