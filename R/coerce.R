@@ -48,11 +48,11 @@ setAs('FLStock', 'FLFishery',
     # EFFORT
     fages <- do.call(seq,as.list(unname(range(from)[c("minfbar","maxfbar")])))
 
-    effort(res) <- quantMeans((harvest(from) %/% catch.sel(from))[ac(fages),])
+    effort(res) <- unitSums(quantMeans((harvest(from) %/% catch.sel(from))[ac(fages),]))
     
     # hperiod
-    spw <- m.spwn(from)[1,]
-    fpr <- harvest.spwn(from)[1,]
+    spw <- unitMeans(m.spwn(from)[1,])
+    fpr <- unitMeans(harvest.spwn(from)[1,])
 
     # IF fpr > spw, hperiod = 0 -- spw + (spw * (1 - fpr))
     hperiod(res)['start',][fpr > spw] <- 0
