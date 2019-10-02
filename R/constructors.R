@@ -97,7 +97,8 @@ setMethod("FLFishery", signature(object="list"),
     cas <- new("FLCatches", object)
 
     # adjust years in cas if needed
-    dmns <- lapply(cas, function(x) unlist(dims(x)[c('year', 'minyear', 'maxyear')]))
+    dmns <- lapply(cas, function(x)
+      unlist(dims(x)[c('year', 'minyear', 'maxyear')]))
     dmns <- matrix(unlist(dmns), ncol=3, byrow=T, dimnames=list(names(dmns),
       c('year', 'minyear', 'maxyear')))
 
@@ -119,16 +120,18 @@ setMethod("FLFishery", signature(object="list"),
       # ... select first one
       flq <- args[[names(idq)[idq][1]]]
       flq[] <- NA
+      units(flq) <- ""
     } else {
-      flq <- FLQuant(dimnames=c(list(quant='all'), dimnames(landings.n(cas[[1]]))[-1]))
+      flq <- FLQuant(dimnames=c(list(quant='all'), dimnames(landings.n(cas[[1]]))[-1]), units="")
     }
 
     # hperiod
-    hper <- FLQuant(c(0,1), dimnames=c(list(quant=c("start", "end")), dimnames(flq)[-1]))
+    hper <- FLQuant(c(0,1), dimnames=c(list(quant=c("start", "end")),
+      dimnames(flq)[-1]), units="")
 
     # create new object
-    res <- new("FLFishery", cas, capacity=flq, effort=flq, hperiod=hper, vcost=flq,
-          fcost=flq, orevenue=flq)
+    res <- new("FLFishery", cas, capacity=FLQuant(1, dimnames=dimnames(flq)),
+      effort=flq, hperiod=hper, vcost=flq, fcost=flq, orevenue=flq)
 
     # Fill desc with something, anything
     res@desc <- ""

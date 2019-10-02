@@ -320,16 +320,16 @@ setClass("FLFishery",
     orevenue="FLQuant",
     crewshare="predictModel"),
   prototype(
-    capacity=FLQuant(1, dimnames=list(quant=c("all"))),
-    effort=FLQuant(NA, dimnames=list(quant=c("all"))),
-    hperiod=FLQuant(c(0, 1), dimnames=list(quant=c("start", "end"))),
+    capacity=FLQuant(1, dimnames=list(quant=c("all")), units="boat"),
+    effort=FLQuant(NA, dimnames=list(quant=c("all")), units="d"),
+    hperiod=FLQuant(c(0, 1), dimnames=list(quant=c("start", "end")), units=""),
     # vcost = effort * landings * Z
-    vcost=FLQuant(NA, dimnames=list(quant=c("all"))),
+    vcost=FLQuant(NA, dimnames=list(quant=c("all")), units="EUR/d"),
     # fcost = capacity * X
-    fcost=FLQuant(NA, dimnames=list(quant=c("all"))),
-    orevenue=FLQuant(NA, dimnames=list(quant=c("all"))),
+    fcost=FLQuant(NA, dimnames=list(quant=c("all")), units="EUR/boat"),
+    orevenue=FLQuant(NA, dimnames=list(quant=c("all")), units="EUR/boat"),
     crewshare=predictModel(model=~fixed * crew + share * lrevenue,
-      params=FLPar(fixed=0, crew=1, share=0.0))),
+      params=FLPar(fixed=0, crew=1, share=0.0, units=c("EUR", "", "")))),
   # VALIDITY
   validity=function(object) {
 

@@ -60,8 +60,12 @@ setMethod("harvests", signature(object="FLBiol", catches="FLFisheries"),
 #' @rdname harvest
 setMethod("harvest", signature(object="FLBiol", catch="FLFishery"),
   function(object, catch, fcb=1) {
+
+    return(harvest(n(object), catch.n(catch[[fcb]]), m(object)))
+
+    # TODO
   
-    # F = alpha * n * wt ^ (-1 * beta) * catch.sel
+    # F = alpha * effort * (n * wt) ^ (-1 * beta) * catch.sel
     res <- ((catch.q(catch[[fcb]])$alpha *
       quantSums(n(object) * wt(object)) ^
       (- 1 * catch.q(catch[[fcb]])$beta)) * effort(catch)) %*%
@@ -69,5 +73,26 @@ setMethod("harvest", signature(object="FLBiol", catch="FLFishery"),
     
     units(res) <- "f"
     return(res)
+  }
+) # }}}
+
+# harvest(FLBiol, FLFisheries) {{{
+#' @rdname harvest
+setMethod("harvest", signature(object="FLBiol", catch="FLFisheries"),
+  function(object, catch, fcb=1) {
+
+    return(harvest(n(object),
+      # GET catch.n of fcbs FLCatches across all fisheries
+      Reduce('+', mapply(function(x, y)
+        catch.n(x[[y]]), catch, fcb, SIMPLIFY = FALSE)), 
+      m(object)))
+  }
+) # }}}
+
+# harvest(FLBiol, FLCatch {{{
+#' @rdname harvest
+setMethod("harvest", signature(object="FLBiol", catch="FLCatch"),
+  function(object, catch) {
+    return(harvest(n(object), catch.n(catch), m(object)))
   }
 ) # }}}

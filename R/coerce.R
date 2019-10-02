@@ -46,9 +46,11 @@ setAs('FLStock', 'FLFishery',
     names(res) <- desc(res) <- name(from)
     
     # EFFORT
-    fages <- do.call(seq,as.list(unname(range(from)[c("minfbar","maxfbar")])))
+    fages <- do.call(seq,as.list(unname(range(from)[c("minfbar",
+      "maxfbar")])))
 
-    effort(res) <- unitSums(quantMeans((harvest(from) %/% catch.sel(from))[ac(fages),]))
+    effort(res) <- FLQuant(unitSums(quantMeans((harvest(from) %/%
+      catch.sel(from))[ac(fages),])), units="")
     
     # hperiod
     spw <- unitMeans(m.spwn(from)[1,])

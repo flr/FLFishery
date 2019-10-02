@@ -220,7 +220,7 @@ setReplaceMethod("hperiod", signature(object="FLFishery", value="numeric"),
 setMethod("effort", signature(object="FLFishery"),
   function(object, compute=TRUE) {
     if(compute) {
-      return(slot(object, "effort") %*% slot(object, "capacity"))
+      return(slot(object, "effort") * slot(object, "capacity"))
     } else {
       return(slot(object, "effort"))
     }
@@ -253,6 +253,13 @@ setReplaceMethod("vcost", signature(object="FLFishery", value="FLQuant"),
   }
 )
 
+setReplaceMethod("vcost", signature(object="FLFishery", value="numeric"),
+  function(object, value) {
+    slot(object, "vcost")[] <- value
+  return(object)
+  }
+)
+
 # fcost
 #' @rdname FLFishery
 setMethod("fcost", signature(object="FLFishery"),
@@ -268,6 +275,13 @@ setMethod("fcost", signature(object="FLFishery"),
 setReplaceMethod("fcost", signature(object="FLFishery", value="FLQuant"),
   function(object, value) {
     slot(object, "fcost") <- value
+  return(object)
+  }
+)
+
+setReplaceMethod("fcost", signature(object="FLFishery", value="numeric"),
+  function(object, value) {
+    slot(object, "fcost")[] <- value
   return(object)
   }
 )
