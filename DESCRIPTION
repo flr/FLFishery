@@ -1,6 +1,6 @@
 Package: FLFishery
 Title: Classes and Methods for Simpler Fleet/Fishery Modelling
-Version: 0.2.0
+Version: 0.3.0
 Date: 2019-10-02
 Authors@R: c(
   person("Iago", "Mosqueira", email = "iago.mosqueira@ec.europa.eu", role = c("cre", "aut")))
