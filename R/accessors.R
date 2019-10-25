@@ -216,11 +216,11 @@ setReplaceMethod("hperiod", signature(object="FLFishery", value="numeric"),
 
 # effort
 #' @rdname FLFishery
-#' @param compute Carry out formnula calculation (TRUE) or return full slot (FALSE).
+#' @param compute Carry out formula calculation (TRUE) or return full slot (FALSE).
 setMethod("effort", signature(object="FLFishery"),
   function(object, compute=TRUE) {
     if(compute) {
-      return(slot(object, "effort") * slot(object, "capacity"))
+      return(slot(object, "effort") %*% slot(object, "capacity"))
     } else {
       return(slot(object, "effort"))
     }

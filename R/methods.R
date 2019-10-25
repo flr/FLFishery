@@ -234,6 +234,28 @@ setMethod("iter", signature(obj="FLFishery"),
 	  }
 ) # }}}
 
+# iter<- {{{
+#' @rdname FLFishery
+#' @param object Object on which to assign value
+#' @param value Object to assign
+setMethod("iter<-", signature(object="FLFishery", value="FLFishery"),
+	  function(object, iter, value) {
+
+    browser()
+
+    for(i in c("capacity", "effort"))
+      slot(object, i)[,,,,,iter] <- slot(value, i)
+
+    # SUBSET iter in FLQ slots
+    res <- callNextMethod()
+
+    # SUBSET FLCatches
+    res[seq(length(obj))] <- lapply(res@.Data, "iter", iter=iter)
+
+    return(res)
+	  }
+) # }}}
+
 # npv {{{
 npv <- function(object, drate, refYear=dims(object)$minyear) {
 
