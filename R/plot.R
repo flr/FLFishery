@@ -1,8 +1,8 @@
 # plot.R - DESC
-# /plot.R
+# ggplotFL/R/plot.R
 
-# Copyright European Union, 2015
-# Author: Iago Mosqueira (EC JRC) <iago.mosqueira@jrc.ec.europa.eu>
+# Copyright European Union, 2015-2019
+# Author: Iago Mosqueira (WMR) <iago.mosqueira@wur.nl>
 #
 # Distributed under the terms of the European Union Public Licence (EUPL) V.1.1.
 
@@ -27,3 +27,31 @@ setMethod("plot", signature(x="FLCatch", y="missing"),
 		p + geom_bar(data=as.data.frame(discards(x)), aes(x=year, y=data), fill="red", colour="darkred", alpha=0.5, stat="identity")
 	})
 # }}}
+
+# FLFishery
+# effort, catch by spp, revenue, (profit)
+
+setMethod("plot", signature(x="FLFishery"),
+  function(x) {
+    
+  dataE <- as.data.frame(metrics(x, list(Effort=effort)))
+  
+  dataE <- cbind(as.data.frame(effort(x), date=TRUE, units=TRUE),
+    qname='eff', panel="Effort")
+  dataC <- cbind(as.data.frame(catches(x), date=TRUE, units=TRUE), panel="Catch")
+  names(dataE) <- names(dataC)
+  data <- rbind(dataE, dataC)
+
+  labels <- ggplotFL:::format_label_flqs(c(Effort=dataE$units[1], Catch=dataC$units[1]),
+    c(Effort="Effort", Catch="Catch"))
+
+  ggplot(data, aes(x=year, y=data, group=qname)) + geom_line() +
+    facet_grid(panel~., scales="free_y", labeller=labels) +
+    theme() +
+    ylim(c(0, NA)) + ylab("") + xlab("")
+  })
+
+# FLBiol, FLFishery
+# FLBiol, FLFisheries
+# FLBiols, FLFishery
+# FLBiols, FLFisheries

@@ -100,7 +100,7 @@ setMethod("catches", signature(object="FLFishery"),
   function(object) {
     res <- lapply(object@.Data, catch)
     names(res) <- names(object)
-    return(res)
+    return(FLQuants(res))
   }
 )
 
@@ -241,18 +241,15 @@ setMethod("iter", signature(obj="FLFishery"),
 setMethod("iter<-", signature(object="FLFishery", value="FLFishery"),
 	  function(object, iter, value) {
 
-    browser()
-
-    for(i in c("capacity", "effort"))
+    # FLQs
+    for(i in c("capacity", "effort", "hperiod", "vcost", "fcost", "orevenue"))
       slot(object, i)[,,,,,iter] <- slot(value, i)
 
-    # SUBSET iter in FLQ slots
-    res <- callNextMethod()
+    # pM
+    #iter(slot(object, "crewshare")@params, iter) <-
+    #  slot(value, "crewshare")@params
 
-    # SUBSET FLCatches
-    res[seq(length(obj))] <- lapply(res@.Data, "iter", iter=iter)
-
-    return(res)
+    return(object)
 	  }
 ) # }}}
 
@@ -270,3 +267,9 @@ npv <- function(object, drate, refYear=dims(object)$minyear) {
   return(res)
 }
 # }}}
+
+# verify
+
+# FLCatch
+
+# FLFishery

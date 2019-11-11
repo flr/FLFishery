@@ -6,13 +6,14 @@
 #
 # Distributed under the terms of the GPL 3.0
 
-# XX {{{
-# }}}
 
 library(FLasher)
 
 #
 data(mixed_fishery_example_om)
+
+names(flfs[[1]]) <- c("ple", "sol")
+names(flfs[[2]]) <- c("ple", "sol")
 
 years <- 2:20
 
@@ -24,8 +25,8 @@ plaice_bt_gn_catch_relative <- 1.2
 
 flasher_ctrl <- fwdControl(
     list(year=years, quant="catch",biol="sol", value=sole_catch_target),
-    list(year=years, quant="catch", relYear=2:20, fishery="bt", catch="pleBT",
-      relFishery="gn", relCatch="pleGN", value=plaice_bt_gn_catch_relative),
+    list(year=years, quant="catch", relYear=2:20, fishery="bt", catch="ple",
+      relFishery="gn", relCatch="ple", value=plaice_bt_gn_catch_relative),
   FCB=fcb)
 
 run <- fwd(object=biols, fishery=flfs, control=flasher_ctrl)
