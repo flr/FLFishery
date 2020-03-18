@@ -133,7 +133,7 @@ setClass("FLCatch",
     discards.wt = FLQuant(),
     catch.sel = FLQuant(),
     price = FLQuant(),
-    catch.q = FLPar(a=NA, b=0, e=1)),
+    catch.q = FLPar(alpha=1, beta=0)),
 
   # VALIDITY
   validity=function(object) {

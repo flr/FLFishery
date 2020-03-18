@@ -6,6 +6,8 @@
 #
 # Distributed under the terms of the European Union Public Licence (EUPL) V.1.1.
 
+globalVariables(c("data", "year", "qname"))
+
 # FLCatch {{{
 
 #' @rdname FLCatch
@@ -14,9 +16,9 @@
 
 setMethod("plot", signature(x="FLCatch", y="missing"),
 	function(x, ...) {
-        # Stupidness to appease check
-        year <- NULL
-        data <- NULL
+    # Stupidness to appease check
+    year <- NULL
+    data <- NULL
 
 		fqs <- FLQuants(Catch=catch(x), DiscardsRatio=discards.ratio(x), Price=price(x))
 

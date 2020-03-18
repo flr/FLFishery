@@ -88,25 +88,89 @@ setAs("FLFishery", "FLFisherycpp",
   }
 ) # }}}
 
-# asFLStock {{{
-asFLStock <- function(fbi, fca) {
-	
-	res <- FLStock(
-		# From FLBiol
-		stock.n = n(fbi), stock.wt=wt(fbi),
-		m=m(fbi), m.spwn=spwn(fbi), mat=fec(fbi),
+# FLBiol,FLFisheries -> FLStock {{{
+setMethod("as.FLStock", signature(object="FLBiol"),
+  function(object, fisheries, full=TRUE, catch=rep(1, length(fisheries)), ...) {
 
-		# From FLFishery
-		landings.n=landings.n(fca), landings.wt=landings.wt(fca),
-		discards.n=discards.n(fca), discards.wt=discards.wt(fca)
-	)
+  # PARSE FLFishery
+  if(is(fisheries, "FLFishery"))
+    fisheries <- FLFisheries(F=fisheries)
 
-	#
-	stock(res) <- computeStock(res)
-	
-	catch(res) <- computeCatch(res, 'all')
+  # CHECK: single FLCatch per FLFishery
+  m <- m(object)
+  mat <- mat(object)
+  spwn <- spwn(object)
 
-} 
+  # SUM all catches
+  ln <- Reduce("+", mapply(function(x, y) landings.n(x[[y]]), fisheries, catch,
+    SIMPLIFY=FALSE))
+  dn <- Reduce("+", mapply(function(x, y) discards.n(x[[y]]), fisheries, catch,
+    SIMPLIFY=FALSE))
+  cn <- Reduce("+", mapply(function(x, y) catch.n(x[[y]]), fisheries, catch,
+    SIMPLIFY=FALSE))
+
+  # WEIGHTED average of wts
+  lw <- Reduce("+", mapply(function(x, y)
+    landings.wt(x[[y]]) * landings.n(x[[y]]) / ln, fisheries, catch, SIMPLIFY=FALSE))
+  dw <- Reduce("+", mapply(function(x, y)
+    discards.wt(x[[y]]) * discards.n(x[[y]]) / dn, fisheries, catch, SIMPLIFY=FALSE))
+  cw <- Reduce("+", mapply(function(x, y)
+    catch.wt(x[[y]]) * catch.n(x[[y]]) / cn, fisheries, catch, SIMPLIFY=FALSE))
+
+  # SET harvest.spwn as catch-weighted mean of hperiod
+
+  hspwn <- lapply(fisheries,
+    function(x) (hperiod(x)['end',] - hperiod(x)['start',]) * spwn(object))
+
+  hspwn <- Reduce("+", mapply("*", mapply(function(x, y)
+    catch(x[[y]]), fisheries, catch, SIMPLIFY=FALSE), hspwn, SIMPLIFY = FALSE)) /
+    Reduce("+", mapply(function(x, y) catch(x[[y]]), fisheries, catch,
+      SIMPLIFY=FALSE))
+
+  hspwn <- expand(hspwn, age=dimnames(ln)$age)
+  mspwn <- expand(spwn(object), age=dimnames(ln)$age, fill=TRUE)
+  units(hspwn) <- units(mspwn) <- ""
+
+  # BUILD FLStock
+
+  stk <- FLStock(
+    name=name(object), desc=desc(biol),
+    # landings.n, landings.wt
+    landings.n=ln, landings.wt=lw,
+    # discards.n, discards.wt
+    discards.n=dn, discards.wt=dw,
+    # catch.n, catch.wt
+    catch.n=cn, catch.wt=cw,
+    # stock.wt
+    stock.wt=wt,
+    # m, mat
+    m=m, mat=mat,
+    # spwn
+    m.spwn=mspwn, harvest.spwn=hspwn
+    # harvest
+  )
+
+  # COMPUTE l, d, c
+  landings(stk) <- computeLandings(stk)
+  discards(stk) <- computeDiscards(stk)
+  catch(stk) <- computeCatch(stk)
+
+  # stock.n & harvest
+  if(full) {
+    stock.n(stk) <- n(object)
+    harvest(stk) <- harvest(object, fisheries)
+    units(harvest(stk)) <- "f"
+	  stock(stk) <- computeStock(stk)
+  }
+
+  # ADD extra slots in ...
+  args <- list(...)
+  if(length(args) > 0)
+    for(i in names(args))
+      stk <- do.call(paste0(i, "<-"), list(stk, value=args[[i]]))
+
+  return(stk)
+})
 
 
 # }}}

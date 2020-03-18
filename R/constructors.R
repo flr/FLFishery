@@ -27,7 +27,7 @@ setMethod("FLCatch", signature(object="FLQuant"),
       discards.wt=object,
       catch.sel=object,
       price=object,
-      catch.q=FLPar(q=NA),
+      catch.q=FLPar(alpha=1, beta=0),
       range=c(min=dmn$min, max=dmn$max,  plusgroup=dmn$max, minyear=dmn$minyear,
         maxyear=dmn$maxyear)
     )

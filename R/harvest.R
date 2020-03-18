@@ -96,3 +96,17 @@ setMethod("harvest", signature(object="FLBiol", catch="FLCatch"),
     return(harvest(n(object), catch.n(catch), m(object)))
   }
 ) # }}}
+
+# TODO fbar(FLBiol, FLFisheries)
+setMethod("fbar", signature(object="FLBiol"),
+  function(object, fisheries, range=c(minfbar, maxfbar),
+    minfbar=range[1], maxfbar=range[2]) {
+
+    if(!is.null(names(range)))
+     range <- range[pmatch(c("min", "max"), names(range))]
+
+    harvest <- harvest(object, fisheries)
+
+    return(quantMeans(harvest[seq(ac(range[1], range[2]))]))
+  }
+)

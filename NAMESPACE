@@ -1,6 +1,14 @@
 import("methods")
 import("FLCore")
-importFrom(ggplot2,aes, geom_line, geom_bar)
+importFrom(ggplot2,
+  aes,
+  facet_grid,
+  geom_line,
+  geom_bar,
+  theme,
+  xlab,
+  ylab,
+  ylim)
 import("ggplotFL")
 exportClasses(
   "FLCatch",
