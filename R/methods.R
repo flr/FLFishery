@@ -270,6 +270,48 @@ npv <- function(object, drate, refYear=dims(object)$minyear) {
 
 # verify
 
-# FLCatch
+# FLFishery catches slots {{{
 
-# FLFishery
+.returnFromCatches <- function(object, method, catch) {
+   
+  # IF catch missing,return FLQuants
+  if(missing(catch)) {
+      return(lapply(object, method))
+    } else {
+      if(length(catch) == 1)
+        return(do.call(method, list(object[[catch]])))
+      else
+        return(do.call(method, list(object[catch])))
+    }
+}
+
+setMethod("catch.n", signature(object="FLFishery"),
+  function(object, catch=catch) {
+    .returnFromCatches(object, "catch.n", catch=catch)
+  })
+
+setMethod("catch.wt", signature(object="FLFishery"),
+  function(object, catch=catch) {
+    .returnFromCatches(object, "catch.wt", catch=catch)
+  })
+
+setMethod("landings.n", signature(object="FLFishery"),
+  function(object, catch=catch) {
+    .returnFromCatches(object, "landings.n", catch=catch)
+  })
+
+setMethod("landings.wt", signature(object="FLFishery"),
+  function(object, catch=catch) {
+    .returnFromCatches(object, "landings.wt", catch=catch)
+  })
+
+setMethod("discards.n", signature(object="FLFishery"),
+  function(object, catch=catch) {
+    .returnFromCatches(object, "discards.n", catch=catch)
+  })
+
+setMethod("discards.wt", signature(object="FLFishery"),
+  function(object, catch=catch) {
+    .returnFromCatches(object, "discards.wt", catch=catch)
+  })
+# }}}
