@@ -53,8 +53,8 @@ fis <- FLFishery(PLE=ca, SOL=ca, effort=ef, capacity=cap, hperiod=hp, vcost=vc,
 
 # FLCatch methods
 
-landings(fis[['PLE']])
-discards(fis[['PLE']])
+landings.n(fis[['PLE']])
+discards.n(fis[['PLE']])
 catch.n(fis[['PLE']])
 catch.wt(fis[['PLE']])
 catch(fis[['PLE']])
@@ -87,6 +87,9 @@ revenue(fis)
 cost(fis)
 ccost(fis)
 profit(fis)
+
+
+
 
 # CREATOR
 
