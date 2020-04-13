@@ -100,6 +100,7 @@ setMethod("as.FLStock", signature(object="FLBiol"),
   m <- m(object)
   mat <- mat(object)
   spwn <- spwn(object)
+  wt <- wt(object)
 
   # SUM all catches
   ln <- Reduce("+", mapply(function(x, y) landings.n(x[[y]]), fisheries, catch,
@@ -134,7 +135,7 @@ setMethod("as.FLStock", signature(object="FLBiol"),
   # BUILD FLStock
 
   stk <- FLStock(
-    name=name(object), desc=desc(biol),
+    name=name(object), desc=desc(object),
     # landings.n, landings.wt
     landings.n=ln, landings.wt=lw,
     # discards.n, discards.wt

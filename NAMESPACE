@@ -19,6 +19,7 @@ exportClasses(
 exportMethods(
   "[",
   "[[<-",
+  "as.FLStock",
   "FLCatch",
   "FLCatches",
   "FLFisheries",
