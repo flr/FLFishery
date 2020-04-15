@@ -79,6 +79,7 @@ crewshare(fis)
 # FLFishery METHODS
 
 landings(fis)
+landings.n(fis)
 discards(fis)
 catch(fis)
 catches(fis)
