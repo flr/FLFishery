@@ -26,6 +26,7 @@ Collate:
     generics.R
     classes.R
     accessors.R
+    computation.R
     coerce.R
     constructors.R
     methods.R

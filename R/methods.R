@@ -107,17 +107,24 @@ setMethod("catches", signature(object="FLFishery"),
 #' @rdname FLFishery
 setMethod("catch", signature(object="FLFishery"),
   function(object) {
-    return(Reduce("%+%", lapply(object@.Data, catch)))
+    return(Reduce("%+%", lapply(object, "catch")))
   }
-) # }}}
+) 
 
-# catch.n {{{
-#' @rdname FLCatch
-setMethod("catch.n", signature(object="FLCatch"),
+setMethod("catch", signature(object="FLFisheries"),
   function(object) {
-    return(landings.n(object) + discards.n(object))
+    return(Reduce("%+%", lapply(object, "catch")))
   }
-) # }}}
+)
+
+setMethod("landings", signature(object="FLFishery"),
+  function(object, catch=names(object)) {
+    return(Reduce("%+%", lapply(object, "landings")[catch]))
+  }
+)
+
+
+# }}}
 
 # catch.wt {{{
 #' @rdname FLCatch
