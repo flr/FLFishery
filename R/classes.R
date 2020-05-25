@@ -207,7 +207,7 @@ setClass("FLCatches",
     # quant == 'age'
     qua <- unlist(lapply(dmns, "[", "quant"))
     if(length(unique(qua)) > 1)
-      return("FLCatch objects must have quant='age'")
+      return("FLCatch objects must all share the same quant")
 
     # dims [c(2,4,5)] must be the same - units can be different
     dmns <- lapply(object, function(x) dimnames(landings.n(x))[-c(1,3,6)])

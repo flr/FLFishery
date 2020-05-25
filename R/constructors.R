@@ -19,6 +19,7 @@ setMethod("FLCatch", signature(object="FLQuant"),
     object[] <- as.numeric(NA)
     dmns <- dimnames(object)
     dmn <- dims(object)
+    units(object) <- "NA"
 
     res <- new("FLCatch",
       landings.n=object,
