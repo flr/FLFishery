@@ -30,7 +30,7 @@ setMethod("plot", signature(x="FLCatch", y="missing"),
 	})
 # }}}
 
-# FLFishery
+# FLFishery {{{
 # effort, catch by spp, revenue, (profit)
 
 setMethod("plot", signature(x="FLFishery"),
@@ -51,9 +51,10 @@ setMethod("plot", signature(x="FLFishery"),
     facet_grid(panel~., scales="free_y", labeller=labels) +
     theme() +
     ylim(c(0, NA)) + ylab("") + xlab("")
-  })
+  }) # }}}
 
 # FLBiol, FLFishery
 # FLBiol, FLFisheries
+
 # FLBiols, FLFishery
 # FLBiols, FLFisheries
