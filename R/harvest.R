@@ -37,22 +37,17 @@ NULL
 #' @rdname harvest
 setMethod("harvests", signature(object="FLBiol", catches="FLFisheries"),
   function(object, catches, fcb=rep(1, length(catches)), units=c("f", "hr")) {
- 
-    res <- vector("list", length=length(catches))
-
-    if(units[1] == "f") {
-      for(fl in seq(length(catches)))
-        res[[fl]] <- harvest(object, catches[[fl]], fcb=fcb[fl])
-    } else if (units[1] == "hr") {
-      for(fl in seq(length(catches)))
-        res[[fl]] <- harvest(object, catches[[fl]], fcb=fcb[fl])
-    }
-
-      names(res) <- names(catches)
-      res <- FLQuants(res)
-      res <- lapply(res, "units<-", "f")
     
-    return(res)
+    # COMPUTE total catch at age
+    tca <- Reduce("+", catch.n(catches))
+    
+    # COMPUTE partial catch at age
+    pca <- catch.n(catches, pos=fcb)
+    
+    # COMPUTE proportion
+    pca <- lapply(pca, "/", tca)
+
+    return(lapply(pca, "*", e1=harvest(object, catches)))
   }
 ) # }}}
 
@@ -62,17 +57,6 @@ setMethod("harvest", signature(object="FLBiol", catch="FLFishery"),
   function(object, catch, fcb=1) {
 
     return(harvest(n(object), catch.n(catch[[fcb]]), m(object)))
-
-    # TODO
-  
-    # F = alpha * effort * (n * wt) ^ (-1 * beta) * catch.sel
-    res <- ((catch.q(catch[[fcb]])$alpha *
-      quantSums(n(object) * wt(object)) ^
-      (- 1 * catch.q(catch[[fcb]])$beta)) * effort(catch)) %*%
-      catch.sel(catch[[fcb]])
-    
-    units(res) <- "f"
-    return(res)
   }
 ) # }}}
 
@@ -97,10 +81,14 @@ setMethod("harvest", signature(object="FLBiol", catch="FLCatch"),
   }
 ) # }}}
 
-# TODO fbar(FLBiol, FLFisheries)
+# fbar(FLBiol, FLFisheries) {{{
+
 setMethod("fbar", signature(object="FLBiol"),
-  function(object, fisheries, range=c(minfbar, maxfbar),
+  function(object, fisheries, range=missing,
     minfbar=range[1], maxfbar=range[2]) {
+
+  if(missing(range) & (missing(maxfbar) | missing(minfbar)))
+    stop("Need ages for mean F, specify 'range' or 'minfbar' and 'maxfbar'")
 
     if(!is.null(names(range)))
      range <- range[pmatch(c("min", "max"), names(range))]
@@ -109,4 +97,4 @@ setMethod("fbar", signature(object="FLBiol"),
 
     return(quantMeans(harvest[seq(ac(range[1], range[2]))]))
   }
-)
+) # }}}
