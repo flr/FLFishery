@@ -1,14 +1,5 @@
 import("methods")
 import("FLCore")
-importFrom(ggplot2,
-  aes,
-  facet_grid,
-  geom_line,
-  geom_bar,
-  theme,
-  xlab,
-  ylab,
-  ylim)
 import("ggplotFL")
 exportClasses(
   "FLCatch",
@@ -49,6 +40,8 @@ exportMethods(
   "effort<-",
   "fcost",
   "fcost<-",
+  "harvest",
+  "harvests",
   "hperiod",
   "hperiod<-",
   "landings",
