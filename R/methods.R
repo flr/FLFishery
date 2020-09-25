@@ -196,50 +196,67 @@ npv <- function(object, drate, refYear=dims(object)$minyear) {
 }
 # }}}
 
-# verify
+# fwdWindow {{{
+setMethod("fwdWindow", signature(x="FLFishery", y="missing"),
+  function(x, end=dims(x)$maxyear, nsq=3) {
 
-# FLFishery catches slots {{{
+    # CALL window if not to extend
+    if(end <= dims(x)$maxyear)
+      return(window(x, end=end))
 
-.returnFromCatches <- function(object, method, catch) {
-   
-  # IF catch missing,return FLQuants
-  if(missing(catch)) {
-      return(lapply(object, method))
-    } else {
-      if(length(catch) == 1)
-        return(do.call(method, list(object[[catch]])))
-      else
-        return(do.call(method, list(object[catch])))
+    res <- window(x, end=end)
+
+    # YEARS for mean
+    myrs <- tail(dimnames(capacity(x))$year, nsq)
+    # NEW years
+    nyrs <- ac(seq(dims(x)$maxyear + 1, end))
+
+    # AVERAGES for nsq years
+    capacity(res)[, nyrs] <- yearMeans(capacity(res)[, myrs])
+    effort(res)[, nyrs] <- yearMeans(effort(res)[, myrs])
+    hperiod(res)[, nyrs] <- yearMeans(hperiod(res)[, myrs])
+    vcost(res)[, nyrs] <- yearMeans(vcost(res)[, myrs])
+    fcost(res)[, nyrs] <- yearMeans(fcost(res)[, myrs])
+    orevenue(res)[, nyrs] <- yearMeans(orevenue(res)[, myrs])
+
+    if(length(crewshare(res, FALSE)) > 0) {
+      stop("TODO")
     }
-}
 
-setMethod("catch.n", signature(object="FLFishery"),
-  function(object, catch=catch) {
-    .returnFromCatches(object, "catch.n", catch=catch)
-  })
+    # FLCatches
+    res[seq(length(res))] <- lapply(res, fwdWindow, end=end)
 
-setMethod("catch.wt", signature(object="FLFishery"),
-  function(object, catch=catch) {
-    .returnFromCatches(object, "catch.wt", catch=catch)
-  })
+    return(res)
+  }
+)
 
-setMethod("landings.n", signature(object="FLFishery"),
-  function(object, catch=catch) {
-    .returnFromCatches(object, "landings.n", catch=catch)
-  })
+setMethod("fwdWindow", signature(x="FLCatch", y="missing"),
+  function(x, end=dims(x)$maxyear, nsq=3) {
+  
+    # CALL window if not to extend
+    if(end <= dims(x)$maxyear)
+      return(window(x, end=end))
 
-setMethod("landings.wt", signature(object="FLFishery"),
-  function(object, catch=catch) {
-    .returnFromCatches(object, "landings.wt", catch=catch)
-  })
+    res <- window(x, end=end)
 
-setMethod("discards.n", signature(object="FLFishery"),
-  function(object, catch=catch) {
-    .returnFromCatches(object, "discards.n", catch=catch)
-  })
+    # YEARS for mean
+    myrs <- tail(dimnames(landings.n(x))$year, nsq)
+    # NEW years
+    nyrs <- ac(seq(dims(x)$maxyear + 1, end))
 
-setMethod("discards.wt", signature(object="FLFishery"),
-  function(object, catch=catch) {
-    .returnFromCatches(object, "discards.wt", catch=catch)
-  })
+    # AVERAGES for nsq years, only for landings/discards ratio
+    lans <- yearMeans(landings.n(x)[, myrs])
+    landings.n(res)[, nyrs] <-  lans %/% (quantSums(lans) + 1e-16)
+    dans <- yearMeans(discards.n(x)[, myrs])
+    discards.n(res)[, nyrs] <- dans %/% (quantSums(dans) + 1e-16)
+    
+    # AVERAGES for nsq years
+    landings.wt(res)[, nyrs] <- yearMeans(landings.wt(x)[, myrs])
+    discards.wt(res)[, nyrs] <- yearMeans(discards.wt(x)[, myrs])
+    catch.sel(res)[, nyrs] <- yearMeans(catch.sel(x)[, myrs])
+    price(res)[, nyrs] <- yearMeans(price(x)[, myrs])
+
+    return(res)
+  }
+)
 # }}}
