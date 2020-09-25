@@ -1,10 +1,10 @@
 # computation.R - DESC
 # /computation.R
 
-# Copyright Iago MOSQUEIRA (WMR), 2020
+# Copyright European Union, 2015 
 # Author: Iago MOSQUEIRA (WMR) <iago.mosqueira@wur.nl>
 #
-# Distributed under the terms of the EUPL-1.2
+# Distributed under terms of the European Union Public Licence (EUPL) V.1.2.
 
 # landings (FLC, FLF) {{{
 
@@ -121,7 +121,18 @@ setMethod("catch.n", signature(object="FLFisheries"),
 #' @rdname FLCatch
 setMethod("catch.wt", signature(object="FLCatch"),
   function(object) {
-    return(landings.n(object) + discards.n(object))
+
+  # DEAL with NAs
+  landings.wt(object)[is.na(landings.n(object))] <- 0
+  landings.n(object)[is.na(landings.n(object))] <- 1
+
+  discards.wt(object)[is.na(discards.n(object))] <- 0
+  discards.n(object)[is.na(discards.n(object))] <- 1
+
+  # WEIGHTED average (+ 1e-16)
+  return(((landings.wt(object) * (landings.n(object) + 1e-16)) +
+    (discards.wt(object) * (discards.n(object) + 1e-16))) /
+      (landings.n(object) + discards.n(object) + 1e-16))
   }
 )
 
@@ -144,5 +155,3 @@ setMethod("catch.wt", signature(object="FLFisheries"),
       mapply("catch.wt", object, pos, SIMPLIFY=FALSE)
   }
 ) # }}}
-
-
