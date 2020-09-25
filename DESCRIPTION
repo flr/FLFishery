@@ -1,7 +1,7 @@
 Package: FLFishery
 Title: Classes and Methods for Simpler Fleet/Fishery Modelling
-Version: 0.3.4
-Date: 2020-06-15
+Version: 0.3.4.9007
+Date: 2020-08-25
 Authors@R: c(
   person("Iago", "Mosqueira", email = "iago.mosqueira@wur.nl", role = c("cre", "aut")))
 Description: A set of classes and methods for modelling of fleet dynamics.
@@ -31,5 +31,6 @@ Collate:
     getPlural.R
     plot.R
     harvest.R
+    oem.R
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1

@@ -119,7 +119,6 @@ setMethod("as.FLStock", signature(object="FLBiol"),
     catch.wt(x[[y]]) * catch.n(x[[y]]) / cn, fisheries, catch, SIMPLIFY=FALSE))
 
   # SET harvest.spwn as catch-weighted mean of hperiod
-
   hspwn <- lapply(fisheries,
     function(x) (hperiod(x)['end',] - hperiod(x)['start',]) * spwn(object))
 

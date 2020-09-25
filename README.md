@@ -1,7 +1,7 @@
 # FLFishery
 
-- Version: 0.3.4
-- Date: 2020-06-15
+- Version: 0.3.4.9007
+- Date: 2020-08-25
 - Author: Iago Mosqueira, EC JRC
 - Maintainer: Iago Mosqueira <iago.mosqueira AT ec.europa.eu>
 - Repository: <https://github.com/iagomosqueira/FLFishery/>
