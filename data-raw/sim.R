@@ -34,6 +34,6 @@ run <- fwd(object=biols, fishery=flfs, control=flasher_ctrl)
 ple <- run$biols[['ple']]
 sol <- run$biols[['sol']]
 
-fisheries <- run$fisheries
+nsfleet <- run$fisheries
 
-save(fisheries, ple, sol, file="../data/fisheries.RData", compress="xz")
+save(nsfleet, ple, sol, file="../data/nsfishery.RData", compress="xz")
