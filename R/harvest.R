@@ -84,17 +84,14 @@ setMethod("harvest", signature(object="FLBiol", catch="FLCatch"),
 # fbar(FLBiol, FLFisheries) {{{
 
 setMethod("fbar", signature(object="FLBiol"),
-  function(object, fisheries, range=missing,
+  function(object, fisheries, range=unlist(dims(bio)[c("min", "max")]),
     minfbar=range[1], maxfbar=range[2]) {
-
-  if(missing(range) & (missing(maxfbar) | missing(minfbar)))
-    stop("Need ages for mean F, specify 'range' or 'minfbar' and 'maxfbar'")
 
     if(!is.null(names(range)))
      range <- range[pmatch(c("min", "max"), names(range))]
 
     harvest <- harvest(object, fisheries)
 
-    return(quantMeans(harvest[seq(ac(range[1], range[2]))]))
+    return(quantMeans(harvest[ac(seq(minfbar, maxfbar))]))
   }
 ) # }}}
