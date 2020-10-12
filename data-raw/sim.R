@@ -9,7 +9,9 @@
 
 library(FLasher)
 
-#
+
+# 2 FLFishery w/ 2 FLCatch each
+
 data(mixed_fishery_example_om)
 
 names(flfs[[1]]) <- c("ple", "sol")
