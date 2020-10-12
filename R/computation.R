@@ -99,20 +99,27 @@ setMethod("catch.n", signature(object="FLCatch"),
 #' @rdname FLFishery
 setMethod("catch.n", signature(object="FLFishery"),
   function(object, pos=names(object)) {
-    if(length(pos) == 1)
-      lapply(object, "catch.n")[[pos]]
-    else
-      lapply(object, "catch.n")[pos]
+    return(lapply(object, "catch.n")[pos])
   }
 )
 
 #' @rdname FLFisheries
 setMethod("catch.n", signature(object="FLFisheries"),
   function(object, pos=lapply(object, names)) {
-    if(length(pos) == 1)
+
+    if(length(pos) == 1) {
       FLQuants(mapply("catch.n", object, pos, SIMPLIFY=FALSE))
-    else
-      mapply("catch.n", object, pos, SIMPLIFY=FALSE)
+    } else {
+
+      can <- lapply(object, catch.n)
+      
+      cans <- Reduce(c, can)
+
+      res <- lapply(setNames(nm=unique(names(cans))),
+        function(x) Reduce("%++%", cans[x]))
+
+      return(res)
+    }
   }
 ) # }}}
 
