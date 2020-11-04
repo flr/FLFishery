@@ -1,10 +1,11 @@
-# computation.R - DESC
-# /computation.R
+# metrics.R - DESC
+# FLFishery/R/metrics.R
 
 # Copyright European Union, 2015 
 # Author: Iago MOSQUEIRA (WMR) <iago.mosqueira@wur.nl>
 #
 # Distributed under terms of the European Union Public Licence (EUPL) V.1.2.
+
 
 # landings (FLC, FLF) {{{
 
@@ -18,26 +19,70 @@ setMethod("landings", signature(object="FLCatch"),
 #' @rdname FLFishery
 setMethod("landings", signature(object="FLFishery"),
   function(object, catch=seq(object)) {
-    return(Reduce("%+%", lapply(object, "landings")[catch]))
+    return(lapply(object, "landings")[catch])
   }
-) # }}}
+)
+
+#' @rdname FLFisheries
+setMethod("landings", signature(object="FLFisheries"),
+  function(object) {
+   
+    # EXTRACT landings by FLCatch 
+    las <- lapply(object, "landings")
+
+    # CONVERT to flat list
+    las <- Reduce("c", las)
+
+    # GET names of FLCatch(es)
+    cns <- unique(names(las))
+
+    # ADD by catch name
+    return(lapply(setNames(nm=cns), function(x)
+      Reduce("+", las[names(las) == x])))
+  }
+)
+
+# }}}
 
 # discards (FLC, FLF) {{{
+
 #' @rdname FLCatch
 setMethod("discards", signature(object="FLCatch"),
   function(object) {
-    return(quantSums(discards.n(object) * discards.wt(object)))
+    return(quantSums(discards.wt(object) * discards.n(object)))
   }
 )
 
 #' @rdname FLFishery
 setMethod("discards", signature(object="FLFishery"),
-  function(object, catch=names(object)) {
-    return(Reduce("%+%", lapply(object, "discards")[catch]))
+  function(object, catch=seq(object)) {
+    return(lapply(object, "discards")[catch])
   }
-) # }}}
+)
+
+#' @rdname FLFisheries
+setMethod("discards", signature(object="FLFisheries"),
+  function(object) {
+   
+    # EXTRACT discards by FLCatch 
+    dis <- lapply(object, "discards")
+
+    # CONVERT to flat list
+    dis <- Reduce("c", dis)
+
+    # GET names of FLCatch(es)
+    cns <- unique(names(dis))
+
+    # ADD by catch name
+    return(lapply(setNames(nm=cns), function(x)
+      Reduce("+", dis[names(dis) == x])))
+  }
+)
+
+# }}}
 
 # catch (FLC, FLF, FLFs) {{{
+
 #' @rdname FLCatch
 setMethod("catch", signature(object="FLCatch"),
   function(object) {
@@ -46,25 +91,16 @@ setMethod("catch", signature(object="FLCatch"),
 )
 
 #' @rdname FLFishery
-setMethod("catches", signature(object="FLFishery"),
-  function(object) {
-    res <- lapply(object@.Data, catch)
-    names(res) <- names(object)
-    return(FLQuants(res))
+setMethod("catch", signature(object="FLFishery"),
+  function(object, catch=seq(object)) {
+    return(lapply(object, "catch")[catch])
   }
 )
-
-#' @rdname FLFishery
-setMethod("catch", signature(object="FLFishery"),
-  function(object) {
-    return(Reduce("%+%", lapply(object, "catch")))
-  }
-) 
 
 #' @rdname FLFisheries
 setMethod("catch", signature(object="FLFisheries"),
   function(object) {
-    return(Reduce("%+%", lapply(object, "catch")))
+    return(mapply("+", landings(object), discards(object), SIMPLIFY=FALSE))
   }
 ) # }}}
 
@@ -112,7 +148,6 @@ setMethod("catch.n", signature(object="FLFisheries"),
     } else {
 
       can <- lapply(object, catch.n)
-      
       cans <- Reduce(c, can)
 
       res <- lapply(setNames(nm=unique(names(cans))),

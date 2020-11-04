@@ -156,11 +156,12 @@ setMethod("as.FLStock", signature(object="FLBiol"),
   catch(stk) <- computeCatch(stk)
 
   # stock.n & harvest
+  stock.n(stk) <- n(object)
+	stock(stk) <- computeStock(stk)
+  
   if(full) {
-    stock.n(stk) <- n(object)
     harvest(stk) <- harvest(object, fisheries)
     units(harvest(stk)) <- "f"
-	  stock(stk) <- computeStock(stk)
   }
 
   # ADD extra slots in ...
