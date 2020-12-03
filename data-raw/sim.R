@@ -20,7 +20,7 @@ names(flfs[[2]]) <- c("ple", "sol")
 years <- 2:20
 
 fcb <- matrix(c(1,1,1,1,2,2,2,1,1,2,2,2), byrow=TRUE, ncol=3,
-  dimnames=list(1:4,c("F","C","B")))
+  dimnames=list(1:4, c("F","C","B")))
 
 sole_catch_target <- 8000
 plaice_bt_gn_catch_relative <- 1.2
