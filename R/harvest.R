@@ -84,7 +84,7 @@ setMethod("harvest", signature(object="FLBiol", catch="FLCatch"),
 # fbar(FLBiol, FLFisheries) {{{
 
 setMethod("fbar", signature(object="FLBiol"),
-  function(object, fisheries, range=unlist(dims(bio)[c("min", "max")]),
+  function(object, fisheries, range=unlist(dims(object)[c("min", "max")]),
     minfbar=range[1], maxfbar=range[2]) {
 
     if(!is.null(names(range)))

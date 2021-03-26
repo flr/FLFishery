@@ -34,7 +34,7 @@ setMethod("survey",   signature(object="FLBiol"),
       exp(-(harvest(object) * timing - m(object) * timing))
  
     # APPLY survey selectivity
-    survey <- stock.n %*% sel
+    survey <- stock.n %*% sel.pattern(index)
 
     # SET units as stock.n
     units(survey) <- units(stock.n)
