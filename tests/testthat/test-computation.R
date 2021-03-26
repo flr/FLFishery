@@ -40,14 +40,20 @@ test_that("landings(FLFs/FLF) returns FLQs/list, landings(FLC) an FLQ", {
 
 # TEST discards (FLC / FLF / FLFs){{{
 
-test_that("discards(FLFs/FLF) returns FLQs, discards(FLC) an FLQ", {
+test_that("discards(FLFs/FLF) returns FLQs/list, discards(FLC) an FLQ", {
   
   # FLFs
+  # fishery, sum
+  
   # output is an FLQuants 
   expect_s4_class(discards(nsfleet), "FLQuants")
 
   # dimnames match input FLQuant
-  expect_equal(unique(unlist(lapply(nsfleet, names))), names(discards(nsfleet)))
+  expect_equal(names(nsfleet), names(discards(nsfleet)))
+
+  # fishery, !sum
+  # catch, sum
+  # catch, !sum
 
   # FLF
   expect_s4_class(discards(nsfleet[[1]]), "FLQuants")
@@ -60,14 +66,20 @@ test_that("discards(FLFs/FLF) returns FLQs, discards(FLC) an FLQ", {
 
 # TEST catch (FLC / FLF / FLFs){{{
 
-test_that("catch(FLFs/FLF) returns FLQs, catch(FLC) an FLQ", {
+test_that("catch(FLFs/FLF) returns FLQs/list, catch(FLC) an FLQ", {
   
   # FLFs
+  # fishery, sum
+  
   # output is an FLQuants 
   expect_s4_class(catch(nsfleet), "FLQuants")
 
   # dimnames match input FLQuant
-  expect_equal(unique(unlist(lapply(nsfleet, names))), names(catch(nsfleet)))
+  expect_equal(names(nsfleet), names(catch(nsfleet)))
+
+  # fishery, !sum
+  # catch, sum
+  # catch, !sum
 
   # FLF
   expect_s4_class(catch(nsfleet[[1]]), "FLQuants")
