@@ -13,7 +13,7 @@ vignette: >
 
 ```{r, setup, echo=FALSE, results='hide', message=FALSE}
 library(knitr)
-opts_chunk$set(dev='png', fig.width=5, fig.height=4.5, tidy=TRUE)
+opts_chunk$set(dev='png', fig.width=5, fig.height=4.5, tidy=FALSE)
 options(width=50)
 ```
 
