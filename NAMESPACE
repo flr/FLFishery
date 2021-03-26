@@ -1,6 +1,17 @@
 import("methods")
 import("FLCore")
 import("ggplotFL")
+importFrom("ggplot2",
+  "aes",
+  "facet_grid",
+  "geom_bar",
+  "geom_line",
+  "theme",
+  "xlab",
+  "ylab",
+  "ylim")
+importFrom("stats",
+  "setNames")
 exportClasses(
   "FLCatch",
   "FLCatches",

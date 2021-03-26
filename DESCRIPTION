@@ -5,16 +5,18 @@ Date: 2021-03-22
 Authors@R: c(
   person("Iago", "Mosqueira", email = "iago.mosqueira@wur.nl", role = c("cre", "aut")))
 Description: A set of classes and methods for modelling of fleet dynamics.
-    Fisheries are groups of vessels sharing an effort time series, with static or
-    changing spatio-temporal patterns in selectivity.
+  Fisheries are groups of vessels sharing an effort time series, with static or
+  changing spatio-temporal patterns in selectivity.
 Depends:
-    R(>= 4.0),
-    methods,
-    FLCore(>= 2.6.16),
-    ggplotFL
+  R(>= 4.0),
+  methods,
+  FLCore(>= 2.6.16),
+  ggplotFL
+Imports:
+  ggplot2
 Suggests:
-    knitr,
-    testthat
+  knitr,
+  testthat
 Additional_repositories: http://flr-project.org/R
 License: EUPL
 LazyLoad: Yes
@@ -33,4 +35,4 @@ Collate:
   harvest.R
   oem.R
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.1

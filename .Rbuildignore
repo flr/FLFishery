@@ -3,6 +3,7 @@ NEWS.md
 TODO.md
 docs/
 man-roxygen/
+data-raw/
 Makefile
 .git/
 vignettes/*_cache
