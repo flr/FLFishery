@@ -26,24 +26,6 @@
 \alias{capacity,FLFisherycpp-method}
 \alias{capacity<-,FLFisherycpp,FLQuant-method}
 \alias{capacity<-,FLFisherycpp,numeric-method}
-\alias{hperiod,FLFisherycpp-method}
-\alias{hperiod<-,FLFisherycpp,FLQuant-method}
-\alias{hperiod<-,FLFisherycpp,numeric-method}
-\alias{orevenue,FLFisherycpp-method}
-\alias{orevenue<-,FLFisherycpp,FLQuant-method}
-\alias{orevenue<-,FLFisherycpp,numeric-method}
-\alias{effort,FLFisherycpp,ANY-method}
-\alias{effort<-,FLFisherycpp,FLQuant-method}
-\alias{effort<-,FLFisherycpp,numeric-method}
-\alias{vcost,FLFisherycpp-method}
-\alias{vcost<-,FLFisherycpp,FLQuant-method}
-\alias{vcost<-,FLFisherycpp,numeric-method}
-\alias{fcost,FLFisherycpp-method}
-\alias{fcost<-,FLFisherycpp,FLQuant-method}
-\alias{fcost<-,FLFisherycpp,numeric-method}
-\alias{crewshare,FLFisherycpp-method}
-\alias{crewshare<-,FLFisherycpp,FLQuant-method}
-\alias{crewshare<-,FLFisherycpp,numeric-method}
 \title{An internal class for homogeneous fishing fleets}
 \usage{
 \S4method{capacity}{FLFisherycpp}(object)

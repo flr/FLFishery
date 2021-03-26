@@ -4,9 +4,7 @@
 \name{FLCatches}
 \alias{FLCatches}
 \alias{FLCatches-methods}
-\alias{FLCatches}
 \alias{FLCatches-class}
-\alias{FLCatches-methods}
 \alias{FLCatches,list-method}
 \alias{FLCatches,missing-method}
 \title{FLCatches constructor}
