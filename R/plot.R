@@ -36,6 +36,7 @@ setMethod("plot", signature(x="FLCatch", y="missing"),
 setMethod("plot", signature(x="FLFishery"),
   function(x) {
     
+  # GET effort data
   dataE <- as.data.frame(metrics(x, list(Effort=effort)))
   
   dataE <- cbind(as.data.frame(effort(x), date=TRUE, units=TRUE),
