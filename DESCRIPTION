@@ -16,7 +16,8 @@ Imports:
   ggplot2
 Suggests:
   knitr,
-  testthat
+  testthat,
+  rmarkdown
 Additional_repositories: http://flr-project.org/R
 License: EUPL
 LazyLoad: Yes
