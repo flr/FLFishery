@@ -153,8 +153,8 @@ setMethod("catch.n", signature(object="FLFisheries"),
 
 # landings.wt (FLC, FLF, FLFs) {{{
 
-#' @rdname FLlandings
-setMethod("landings.wt", signature(object="FLlandings"),
+#' @rdname FLCatch
+setMethod("landings.wt", signature(object="FLCatch"),
   function(object) {
 
   landings.wt(object) <- propagate(landings.wt(object),

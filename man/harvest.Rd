@@ -8,6 +8,7 @@
 \alias{harvest,FLBiol,FLFishery-method}
 \alias{harvest,FLBiol,FLFisheries-method}
 \alias{harvest,FLBiol,FLCatch-method}
+\alias{fbar,FLBiol-method}
 \title{Methods to calculate fishing mortalities}
 \usage{
 harvests(object, catches, ...)
@@ -19,6 +20,14 @@ harvests(object, catches, ...)
 \S4method{harvest}{FLBiol,FLFisheries}(object, catch, fcb = 1)
 
 \S4method{harvest}{FLBiol,FLCatch}(object, catch)
+
+\S4method{fbar}{FLBiol}(
+  object,
+  fisheries,
+  range = unlist(dims(object)[c("min", "max")]),
+  minfbar = range[1],
+  maxfbar = range[2]
+)
 }
 \arguments{
 \item{object}{Object containing population abundances, of class \emph{FLBiol}.}
@@ -44,6 +53,15 @@ FLBiol and FLFishery/FLFisheries using the harvest() method.
 The calculated fishing mortalities, or havest rates, are returned, in the
 case of \emph{harvest}, disaggregated by fishery, as an \emph{FLQuants} list. For a
 single \emph{FLFishery} object, a single \emph{FLQuant} is obtained.
+}
+\examples{
+data(nsfishery)
+harvests(ple, nsfleet)
+harvest(ple, nsfleet[["bt"]], fcb="ple")
+harvest(ple, nsfleet)
+harvest(ple, nsfleet[["bt"]][["ple"]])
+fbar(ple, fisheries=nsfleet, minfbar=3, maxfbar=6)
+fbar(ple, fisheries=nsfleet[["bt"]], minfbar=3, maxfbar=6)
 }
 \seealso{
 \code{\link[FLCore:accessors]{FLCore::harvest()}}

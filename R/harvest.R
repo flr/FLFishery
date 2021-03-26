@@ -31,10 +31,16 @@
 #' @seealso [FLCore::harvest()]
 #' @keywords methods
 #' @md
+#' @examples
+#' data(nsfishery)
 NULL
 
 # harvests(FLBiol, FLFisheries) {{{
+
 #' @rdname harvest
+#' @examples
+#' harvests(ple, nsfleet)
+
 setMethod("harvests", signature(object="FLBiol", catches="FLFisheries"),
   function(object, catches, fcb=rep(1, length(catches)), units=c("f", "hr")) {
     
@@ -52,7 +58,11 @@ setMethod("harvests", signature(object="FLBiol", catches="FLFisheries"),
 ) # }}}
 
 # harvest(FLBiol, FLFishery) {{{
+
 #' @rdname harvest
+#' @examples
+#' harvest(ple, nsfleet[["bt"]], fcb="ple")
+
 setMethod("harvest", signature(object="FLBiol", catch="FLFishery"),
   function(object, catch, fcb=1) {
 
@@ -61,20 +71,26 @@ setMethod("harvest", signature(object="FLBiol", catch="FLFishery"),
 ) # }}}
 
 # harvest(FLBiol, FLFisheries) {{{
+
 #' @rdname harvest
+#' @examples
+#' harvest(ple, nsfleet)
+
 setMethod("harvest", signature(object="FLBiol", catch="FLFisheries"),
   function(object, catch, fcb=1) {
-
     return(harvest(n(object),
       # GET catch.n of fcbs FLCatches across all fisheries
-      Reduce('+', mapply(function(x, y)
-        catch.n(x[[y]]), catch, fcb, SIMPLIFY = FALSE)), 
+      Reduce('+', Map(function(x, y) catch.n(x[[y]]), catch, fcb)), 
       m(object)))
   }
 ) # }}}
 
 # harvest(FLBiol, FLCatch {{{
+
 #' @rdname harvest
+#' @examples
+#' harvest(ple, nsfleet[["bt"]][["ple"]])
+
 setMethod("harvest", signature(object="FLBiol", catch="FLCatch"),
   function(object, catch) {
     return(harvest(n(object), catch.n(catch), m(object)))
@@ -82,6 +98,11 @@ setMethod("harvest", signature(object="FLBiol", catch="FLCatch"),
 ) # }}}
 
 # fbar(FLBiol, FLFisheries) {{{
+
+#' @rdname harvest
+#' @examples
+#' fbar(ple, fisheries=nsfleet, minfbar=3, maxfbar=6)
+#' fbar(ple, fisheries=nsfleet[["bt"]], minfbar=3, maxfbar=6)
 
 setMethod("fbar", signature(object="FLBiol"),
   function(object, fisheries, range=unlist(dims(object)[c("min", "max")]),
