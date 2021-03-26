@@ -14,14 +14,20 @@ data(nsfishery)
 
 # TEST landings (FLC / FLF / FLFs){{{
 
-test_that("landings(FLFs/FLF) returns FLQs, landings(FLC) an FLQ", {
+test_that("landings(FLFs/FLF) returns FLQs/list, landings(FLC) an FLQ", {
   
   # FLFs
+  # fishery, sum
+  
   # output is an FLQuants 
   expect_s4_class(landings(nsfleet), "FLQuants")
 
   # dimnames match input FLQuant
-  expect_equal(unique(unlist(lapply(nsfleet, names))), names(landings(nsfleet)))
+  expect_equal(names(nsfleet), names(landings(nsfleet)))
+
+  # fishery, !sum
+  # catch, sum
+  # catch, !sum
 
   # FLF
   expect_s4_class(landings(nsfleet[[1]]), "FLQuants")
