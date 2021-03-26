@@ -55,7 +55,34 @@ setMethod("summary", signature(object="FLFishery"),
     cat("crewshare     ")
     summary(object@crewshare)
   }
-) # }}}
+)
+
+setMethod('summary', signature(object='FLFisheries'),
+  function(object)
+  {
+	  cat("An object of class \"", class(object), "\"\n\n", sep="")
+		cat("Elements:", names(object), "\n")
+    cat("\n")
+    for(i in seq(1, length(object)))
+    {
+		  qnames <- getSlotNamesClass(object[[i]], 'FLArray')
+      qdims <- dims(object[[i]])
+
+      cat("Name:", name(object[[i]]), "\n")
+  		cat("\tDescription:", desc(object[[i]]), "\n")
+	  	cat("\tRange:\t", paste(sub('plusgroup', 'pgroup', names(range(object[[i]]))),
+        collapse="\t"), "\n")
+  		cat("\t", range(object[[i]]), "\n", sep="\t")
+	  	cat("\tQuant:", qdims$quant, "\n")
+	  	cat("\tdim:", unlist(qdims[c(qdims$quant, 'year', 'unit', 'season', 'area')]
+          , use.names=FALSE), "\n")
+
+      cat("\tcatches:", names(object[[i]]), "\n")
+   }
+  }
+)
+
+# }}}
 
 # lrevenue {{{
 #' @rdname FLCatch
