@@ -153,29 +153,6 @@ setMethod("catch.n", signature(object="FLFisheries"),
 
 # landings.wt (FLC, FLF, FLFs) {{{
 
-#' @rdname FLCatch
-setMethod("landings.wt", signature(object="FLCatch"),
-  function(object) {
-
-  landings.wt(object) <- propagate(landings.wt(object),
-    dim(landings.n(object))[6])
-  discards.wt(object) <- propagate(discards.wt(object),
-    dim(discards.n(object))[6])
-
-  # DEAL with NAs
-  landings.wt(object)[is.na(landings.n(object))] <- 0
-  landings.n(object)[is.na(landings.n(object))] <- 1
-
-  discards.wt(object)[is.na(discards.n(object))] <- 0
-  discards.n(object)[is.na(discards.n(object))] <- 1
-
-  # WEIGHTED average (+ 1e-16)
-  return(((landings.wt(object) * (landings.n(object) + 1e-16)) +
-    (discards.wt(object) * (discards.n(object) + 1e-16))) /
-      (landings.n(object) + discards.n(object) + 1e-16))
-  }
-)
-
 #' @rdname FLFishery
 setMethod("landings.wt", signature(object="FLFishery"),
   function(object, pos=names(object)) {
@@ -197,29 +174,6 @@ setMethod("landings.wt", signature(object="FLFisheries"),
 ) # }}}
 
 # catch.wt (FLC, FLF, FLFs) {{{
-
-#' @rdname FLCatch
-setMethod("catch.wt", signature(object="FLCatch"),
-  function(object) {
-
-  landings.wt(object) <- propagate(landings.wt(object),
-    dim(landings.n(object))[6])
-  discards.wt(object) <- propagate(discards.wt(object),
-    dim(discards.n(object))[6])
-
-  # DEAL with NAs
-  landings.wt(object)[is.na(landings.n(object))] <- 0
-  landings.n(object)[is.na(landings.n(object))] <- 1
-
-  discards.wt(object)[is.na(discards.n(object))] <- 0
-  discards.n(object)[is.na(discards.n(object))] <- 1
-
-  # WEIGHTED average (+ 1e-16)
-  return(((landings.wt(object) * (landings.n(object) + 1e-16)) +
-    (discards.wt(object) * (discards.n(object) + 1e-16))) /
-      (landings.n(object) + discards.n(object) + 1e-16))
-  }
-)
 
 #' @rdname FLFishery
 setMethod("catch.wt", signature(object="FLFishery"),
