@@ -52,16 +52,16 @@ setAs('FLStock', 'FLFishery',
     effort(res) <- FLQuant(unitSums(quantMeans((harvest(from) %/%
       catch.sel(from))[ac(fages),])), units="")
     
-    # hperiod
+    # hperiod, only age 1
     spw <- unitMeans(m.spwn(from)[1,])
     fpr <- unitMeans(harvest.spwn(from)[1,])
 
     # IF fpr > spw, hperiod = 0 -- spw + (spw * (1 - fpr))
     hperiod(res)['start',][fpr > spw] <- 0
-    hperiod(res)['end',][fpr > spw]  <- (spw + spw * (1 - fpr))[fpr > spw]
+    hperiod(res)['end',][fpr > spw]  <- (spw / fpr)[fpr > spw]
 
     # IF fpr < spw, hperiod = spw - (spr * fpr) -- 1
-    hperiod(res)['start',][fpr < spw]  <- (spw - spw * fpr)[fpr < spw]
+    hperiod(res)['start',][fpr < spw]  <- ((fpr * (1 - spw)) / (1 - fpr))[fpr < spw]
     hperiod(res)['end',][fpr < spw] <- 1
 
     return(res)
