@@ -23,6 +23,7 @@ setMethod("landings", signature(object="FLFishery"),
 ) 
 
 #' @rdname FLFisheries
+#' @param by Dimension to aggregate by, "fishery" or "catch".
 setMethod("landings", signature(object="FLFisheries"),
   function(object, by=c("fishery", "catch"), sum=TRUE) {
     .parseMetrics(object, metric="landings", by=by[1], sum=sum)
