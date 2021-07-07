@@ -35,5 +35,6 @@ Collate:
   plot.R
   harvest.R
   oem.R
+  data.R
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
