@@ -1,3 +1,10 @@
+
+# FLFishery 0.3.6
+
+## BUG FIXES
+
+- Fix to effort in coercion of FLStock to FLFishery
+
 # FLFishery 0.3.5
 
 ## NEW FEATURES
