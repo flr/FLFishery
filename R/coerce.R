@@ -49,6 +49,8 @@ setAs('FLStock', 'FLFishery',
     effort(res) <- (unitSums(catch(from)) / unitSums(vb(from))) /
       catch.q(res[[1]])$alpha
 
+    effort(res)[is.na(effort(res))] <- effort(res)[!is.na(effort(res))][,1]
+
     # hperiod, only age 1
     spw <- unitMeans(m.spwn(from)[1,])
     fpr <- unitMeans(harvest.spwn(from)[1,])
