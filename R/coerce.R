@@ -38,7 +38,7 @@ setAs('FLStock', 'FLCatch',
 setAs('FLStock', 'FLFishery',
   function(from) {
     
-    res <- FLFishery(as(from, 'FLCatch'), effort=unitSums(fbar(from)))
+    res <- FLFishery(as(from, 'FLCatch'), effort=unitSums(fbar(from)) %=% 0)
 
     # CAPACITY
     capacity(res)[] <- 1
@@ -46,12 +46,9 @@ setAs('FLStock', 'FLFishery',
     names(res) <- desc(res) <- name(from)
     
     # EFFORT
-    fages <- do.call(seq,as.list(unname(range(from)[c("minfbar",
-      "maxfbar")])))
+    effort(res) <- (unitSums(catch(from)) / unitSums(vb(from))) /
+      catch.q(res[[1]])$alpha
 
-    effort(res) <- FLQuant(unitSums(quantMeans((harvest(from) %/%
-      catch.sel(from))[ac(fages),])), units="")
-    
     # hperiod, only age 1
     spw <- unitMeans(m.spwn(from)[1,])
     fpr <- unitMeans(harvest.spwn(from)[1,])
