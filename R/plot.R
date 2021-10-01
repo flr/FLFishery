@@ -16,11 +16,8 @@ globalVariables(c("data", "year", "qname", "fishery"))
 
 setMethod("plot", signature(x="FLCatch", y="missing"),
 	function(x, ...) {
-    # Stupidness to appease check
-    year <- NULL
-    data <- NULL
-
-		fqs <- FLQuants(Catch=catch(x), DiscardsRatio=discards.ratio(x), Price=price(x))
+ 
+		fqs <- FLQuants(Catch=catch(x), DiscardsRatio=discards.ratio(x))
 
 		p <- plot(fqs)
 
@@ -37,11 +34,10 @@ setMethod("plot", signature(x="FLFishery"),
   function(x) {
     
   # GET effort data
-  dataE <- as.data.frame(metrics(x, list(Effort=effort)))
-  
   dataE <- cbind(as.data.frame(effort(x), date=TRUE, units=TRUE),
     qname='eff', panel="Effort")
-  dataC <- cbind(as.data.frame(catches(x), date=TRUE, units=TRUE), panel="Catch")
+  dataC <- cbind(as.data.frame(lapply(catch(x), unitSums), date=TRUE,
+    units=TRUE), panel="Catch")
   names(dataE) <- names(dataC)
   data <- rbind(dataE, dataC)
 
@@ -91,6 +87,25 @@ setMethod("plot", signature(x="FLFisheries"),
 
 # FLBiol, FLFishery
 # FLBiol, FLFisheries
+
+setMethod("plot", signature(x="FLBiol", y="FLFishery"),
+  function(x, y) {
+
+    # COMPUTE metrics
+
+    b <- tb(x)
+    sb <- ssb(x, catch.n=Reduce("+", catch.n(y)))
+
+    c <- catch(y)
+    ef <- effort(y)
+    dimnames(ef) <- list(age='all')
+
+    plot(FLQuants(b, sb))
+    
+    # plot(FLQuants(c, ef))
+
+  }
+)
 
 # FLBiols, FLFishery
 # FLBiols, FLFisheries

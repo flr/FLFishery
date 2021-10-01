@@ -80,8 +80,7 @@ setMethod("harvest", signature(object="FLBiol", catch="FLFisheries"),
   function(object, catch, fcb=1) {
     return(harvest(n(object),
       # GET catch.n of fcbs FLCatches across all fisheries
-      Reduce('+', Map(function(x, y) catch.n(x[[y]]), catch, fcb)), 
-      m(object)))
+      Reduce('+', Map(function(x, y) catch.n(x[[y]]), catch, fcb)), m(object)))
   }
 ) # }}}
 

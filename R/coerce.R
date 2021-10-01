@@ -48,6 +48,9 @@ setAs('FLStock', 'FLFishery',
     # EFFORT
     effort(res) <- (unitSums(catch(from)) / unitSums(vb(from))) /
       catch.q(res[[1]])$alpha
+    
+    # AVOID long strings in units(effort) if stock has not proper uoms.
+    units(effort(res)) <- ""
 
     effort(res)[is.na(effort(res))] <- effort(res)[!is.na(effort(res))][,1]
 
