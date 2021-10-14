@@ -75,7 +75,7 @@ numbers, with the corresponding mean weights at age." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">FLFishery</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
       </span>
     </div>
 
@@ -83,12 +83,9 @@ numbers, with the corresponding mean weights at age." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
-</li>
-<li>
-  <a href="../articles/FLFishery.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -124,73 +121,73 @@ numbers, with the corresponding mean weights at age." />
 numbers, with the corresponding mean weights at age.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>FLCatch</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>FLCatch</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>catch.sel</span>(<span class='no'>object</span>, <span class='no'>...</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+<span class='fu'>catch.sel</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span>
 
-<span class='fu'>discards.ratio</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+<span class='fu'>discards.ratio</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>lrevenue</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+<span class='fu'>lrevenue</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S4 method for FLCatch</span>
-<span class='fu'>landings.n</span>(<span class='no'>object</span>)
+<span class='fu'>landings.n</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
 
 <span class='co'># S4 method for FLCatch,numeric</span>
-<span class='fu'>landings.n</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+<span class='fu'>landings.n</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span>
 
 <span class='co'># S4 method for FLCatch,numeric</span>
-<span class='fu'>landings.wt</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+<span class='fu'>landings.wt</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span>
 
 <span class='co'># S4 method for FLCatch,numeric</span>
-<span class='fu'>discards.n</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+<span class='fu'>discards.n</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span>
 
 <span class='co'># S4 method for FLCatch,numeric</span>
-<span class='fu'>discards.wt</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+<span class='fu'>discards.wt</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span>
 
 <span class='co'># S4 method for FLCatch,numeric</span>
-<span class='fu'>catch.sel</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+<span class='fu'>catch.sel</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span>
 
 <span class='co'># S4 method for FLCatch,numeric</span>
-<span class='fu'>price</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+<span class='fu'>price</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span>
 
 <span class='co'># S4 method for FLCatch,numeric</span>
-<span class='fu'>catch.q</span>(<span class='no'>object</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+<span class='fu'>catch.q</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>value</span>
+
+<span class='co'># S4 method for FLCatch</span>
+<span class='fu'>landings</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+
+<span class='co'># S4 method for FLCatch</span>
+<span class='fu'>discards</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+
+<span class='co'># S4 method for FLCatch</span>
+<span class='fu'>catch</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+
+<span class='co'># S4 method for FLCatch</span>
+<span class='fu'>catch.n</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+
+<span class='co'># S4 method for FLCatch</span>
+<span class='fu'>catch.wt</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
 
 <span class='co'># S4 method for FLQuant</span>
-<span class='fu'>FLCatch</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+<span class='fu'>FLCatch</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S4 method for missing</span>
-<span class='fu'>FLCatch</span>(<span class='no'>object</span>, <span class='no'>...</span>)
+<span class='fu'>FLCatch</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S4 method for FLCatch</span>
-<span class='fu'>landings</span>(<span class='no'>object</span>)
+<span class='fu'>lrevenue</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
 
 <span class='co'># S4 method for FLCatch</span>
-<span class='fu'>discards</span>(<span class='no'>object</span>)
+<span class='fu'>landings.sel</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
 
 <span class='co'># S4 method for FLCatch</span>
-<span class='fu'>catch</span>(<span class='no'>object</span>)
+<span class='fu'>discards.sel</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
 
 <span class='co'># S4 method for FLCatch</span>
-<span class='fu'>catch.n</span>(<span class='no'>object</span>)
-
-<span class='co'># S4 method for FLCatch</span>
-<span class='fu'>catch.wt</span>(<span class='no'>object</span>)
-
-<span class='co'># S4 method for FLCatch</span>
-<span class='fu'>lrevenue</span>(<span class='no'>object</span>)
-
-<span class='co'># S4 method for FLCatch</span>
-<span class='fu'>landings.sel</span>(<span class='no'>object</span>)
-
-<span class='co'># S4 method for FLCatch</span>
-<span class='fu'>discards.sel</span>(<span class='no'>object</span>)
-
-<span class='co'># S4 method for FLCatch</span>
-<span class='fu'>discards.ratio</span>(<span class='no'>object</span>)
+<span class='fu'>discards.ratio</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
 
 <span class='co'># S4 method for FLCatch,missing</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>y</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -229,7 +226,7 @@ a single stock or species caught by that fleet.</p>
 
     
 
-<p></p><dl'>
+<p></p><dl>
     <dt>catch.q</dt><dd><p>Parameters of the catchability function, (<code>FLPar</code>).</p></dd>
     <dt>catch.sel</dt><dd><p>Selectivity at age as proportions over fully-selected
       ages, (<code>FLQuant</code>).</p></dd>
@@ -249,7 +246,7 @@ a single stock or species caught by that fleet.</p>
     
 
 
-<p></p><dl'>
+<p></p><dl>
     <dt>Length of dimensions 2:5</dt><dd><p>All <code>FLQuant</code> slots must share
       dimensions 2 to 5.</p></dd>
     <dt><code>iter</code> dim of length 1 or N</dt><dd><p>The 6th dimension in all
@@ -285,7 +282,7 @@ for sizing but not stored in any slot.</p>
     
 
 <p>Methods exist for various calculations based on values stored in the class:</p>
-<dl'>
+<dl>
  <dt>landings</dt><dd><p>Total landings as sum on 'age' of <code>landings.n</code>
    times <code>landings.wt</code>.</p></dd>
  <dt>discards</dt><dd><p>Total discards as sum on 'age' of <code>discards.n</code>
@@ -308,21 +305,26 @@ for sizing but not stored in any slot.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>FLComp</p>
-<p>FLCatches, FLFishery</p></div>
+<p><a href='FLCatches.html'>FLCatches</a>, <a href='FLFishery.html'>FLFishery</a></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>The FLR Team</p>
+<p>Iago Mosqueira, EC JRC.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>ple4</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>ple4</span><span class='op'>)</span>
 
 <span class='co'># EXTRACT data from FLCore ple4, fake prices</span>
-<span class='no'>fca</span> <span class='kw'>&lt;-</span> <span class='fu'>FLCatch</span>(<span class='kw'>name</span><span class='kw'>=</span><span class='st'>'PLE'</span>, <span class='kw'>desc</span><span class='kw'>=</span><span class='st'>'All NS PLE catches'</span>,
-  <span class='kw'>landings.n</span><span class='kw'>=</span><span class='fu'>landings.n</span>(<span class='no'>ple4</span>), <span class='kw'>landings.wt</span><span class='kw'>=</span><span class='fu'>landings.wt</span>(<span class='no'>ple4</span>),
-  <span class='kw'>discards.n</span><span class='kw'>=</span><span class='fu'>discards.n</span>(<span class='no'>ple4</span>), <span class='kw'>discards.wt</span><span class='kw'>=</span><span class='fu'>discards.wt</span>(<span class='no'>ple4</span>),
-  <span class='kw'>price</span><span class='kw'>=</span><span class='fu'>landings.wt</span>(<span class='no'>ple4</span>) * <span class='fl'>23</span>, <span class='kw'>catch.q</span><span class='kw'>=</span><span class='fu'>FLPar</span>(<span class='kw'>q</span><span class='kw'>=</span><span class='fl'>1</span>),
-  <span class='kw'>catch.sel</span><span class='kw'>=</span><span class='fu'>catch.sel</span>(<span class='no'>ple4</span>))
+<span class='va'>fca</span> <span class='op'>&lt;-</span> <span class='fu'>FLCatch</span><span class='op'>(</span>name<span class='op'>=</span><span class='st'>'PLE'</span>, desc<span class='op'>=</span><span class='st'>'All NS PLE catches'</span>,
+  landings.n<span class='op'>=</span><span class='fu'>landings.n</span><span class='op'>(</span><span class='va'>ple4</span><span class='op'>)</span>, landings.wt<span class='op'>=</span><span class='fu'>landings.wt</span><span class='op'>(</span><span class='va'>ple4</span><span class='op'>)</span>,
+  discards.n<span class='op'>=</span><span class='fu'>discards.n</span><span class='op'>(</span><span class='va'>ple4</span><span class='op'>)</span>, discards.wt<span class='op'>=</span><span class='fu'>discards.wt</span><span class='op'>(</span><span class='va'>ple4</span><span class='op'>)</span>,
+  price<span class='op'>=</span><span class='fu'>landings.wt</span><span class='op'>(</span><span class='va'>ple4</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>23</span>, catch.q<span class='op'>=</span><span class='fu'>FLPar</span><span class='op'>(</span>q<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>,
+  catch.sel<span class='op'>=</span><span class='fu'>catch.sel</span><span class='op'>(</span><span class='va'>ple4</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># Calculations</span>
-<span class='fu'>landings</span>(<span class='no'>fca</span>)</div><div class='output co'>#&gt; An object of class "FLQuant"
+<span class='fu'>landings</span><span class='op'>(</span><span class='va'>fca</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; An object of class "FLQuant"
 #&gt; , , unit = unique, season = all, area = unique
 #&gt; 
 #&gt;      year
@@ -348,7 +350,8 @@ for sizing but not stored in any slot.</p>
 #&gt;   all  84750
 #&gt; 
 #&gt; units:  t </div><div class='input'>
-<span class='fu'>catch.n</span>(<span class='no'>fca</span>)</div><div class='output co'>#&gt; An object of class "FLQuant"
+<span class='fu'>catch.n</span><span class='op'>(</span><span class='va'>fca</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; An object of class "FLQuant"
 #&gt; , , unit = unique, season = all, area = unique
 #&gt; 
 #&gt;     year
@@ -484,7 +487,8 @@ for sizing but not stored in any slot.</p>
 #&gt;   9     2567.24
 #&gt;   10    8882.65
 #&gt; 
-#&gt; units:  1000 </div><div class='input'><span class='fu'>catch.wt</span>(<span class='no'>fca</span>)</div><div class='output co'>#&gt; An object of class "FLQuant"
+#&gt; units:  1000 </div><div class='input'><span class='fu'>catch.wt</span><span class='op'>(</span><span class='va'>fca</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; An object of class "FLQuant"
 #&gt; , , unit = unique, season = all, area = unique
 #&gt; 
 #&gt;     year
@@ -601,7 +605,7 @@ for sizing but not stored in any slot.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

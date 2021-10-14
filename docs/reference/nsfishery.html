@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>FLCatches constructor — FLCatches • FLFishery</title>
+<title>Simulated fisheries data for fisheries exploiting North sea plaice and sole. — nsfishery • FLFishery</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,9 @@
 
 
 
-<meta property="og:title" content="FLCatches constructor — FLCatches" />
-<meta property="og:description" content="Make an FLCatches object.
-This is class is used inside FLFishery to store the catches of
-all species caught by that fleet. It is not meant to be used directly." />
+<meta property="og:title" content="Simulated fisheries data for fisheries exploiting North sea plaice and sole. — nsfishery" />
+<meta property="og:description" content="An example data for two fisheries (*bt* and *gn*) exploiting two stocks,
+*ple* and *sol*, represented by two objects of class *FLBiol*." />
 
 
 
@@ -108,90 +107,28 @@ all species caught by that fleet. It is not meant to be used directly." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>FLCatches constructor</h1>
+    <h1>Simulated fisheries data for fisheries exploiting North sea plaice and sole.</h1>
     
-    <div class="hidden name"><code>FLCatches.Rd</code></div>
+    <div class="hidden name"><code>nsfishery.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Make an FLCatches object.</p>
-<p>This is class is used inside <code>FLFishery</code> to store the catches of
-all species caught by that fleet. It is not meant to be used directly.</p>
+    <p>An example data for two fisheries (*bt* and *gn*) exploiting two stocks,
+*ple* and *sol*, represented by two objects of class *FLBiol*.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>FLCatches</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span>
+    <pre class="usage"><span class='va'>nsfleet</span>
 
-<span class='co'># S4 method for list</span>
-<span class='fu'>FLCatches</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+<span class='va'>ple</span>
 
-<span class='co'># S4 method for missing</span>
-<span class='fu'>FLCatches</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>...</span><span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>object</th>
-      <td><p>Either a list of FLCatch objects or missing</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Other things</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>An FLCatches object</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Make an FLCatches object.</p>
-    <h2 class="hasAnchor" id="validity"><a class="anchor" href="#validity"></a>Validity</h2>
-
-    
+<span class='va'>sol</span></pre>
 
 
-<p></p><dl>
-    <dt>Length of dimensions 2:5</dt><dd><p>All elements must be of class <code>FLCatch</code></p></dd>
-    <dt>Length of dimensions 2, 4 and 5</dt><dd><p>All <code>FLQuant</code> slots must share
-      dimensions 2, 4 and 5 (year, season and area).</p></dd>
-    <dt>quant must 'age'</dt><dd><p>The 1st dimension in elements must be 'age'.</p></dd>
-  
-</dl>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-<p>You can inspect the class validity function by using
-   <code>getValidity(getClassDef('FLCatches'))</code></p>
-    <h2 class="hasAnchor" id="accessors"><a class="anchor" href="#accessors"></a>Accessors</h2>
-
-    
-
-<p>Elements in the classes can be extracted and replaced using the list subset
-operators,'[', '[&lt;-', '[[' and '[[&lt;-'.</p>
-<p>The values passed for replacement need to be of the class FLCatch.</p>
-    <h2 class="hasAnchor" id="constructor"><a class="anchor" href="#constructor"></a>Constructor</h2>
-
-    
-
-<p>A construction method exists for this class that can take named arguments for
-any of its elements.</p>
-    <h2 class="hasAnchor" id="methods"><a class="anchor" href="#methods"></a>Methods</h2>
-
-    
-
-<p>Methods exist for various operations with elements stored in the class:</p>
-<dl>
- <dt>plot</dt><dd><p>Standard plot for the FLCatches class.</p></dd>
-
-</dl>
-
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>FLComp</p>
-<p><a href='FLCatch.html'>FLCatch</a>, <a href='FLFishery.html'>FLFishery</a></p></div>
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
-
-    <p>The FLR Team</p>
-<p>Iago Mosqueira, EC JRC.</p>
+    <p>The objects of classes FLFisheries (nsfleet) and FLBiol (sol, ple).</p>
+<p>An object of class <code>FLBiol</code> of length 1.</p>
+<p>An object of class <code>FLBiol</code> of length 1.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

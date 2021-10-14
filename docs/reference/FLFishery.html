@@ -76,7 +76,7 @@ common gear configuration during each time step and area (no metiers)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">FLFishery</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.6</span>
       </span>
     </div>
 
@@ -84,12 +84,9 @@ common gear configuration during each time step and area (no metiers)." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
-</li>
-<li>
-  <a href="../articles/FLFishery.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -180,6 +177,9 @@ fcost(object, compute = TRUE)
 # S4 method for FLFishery,FLQuant
 fcost(object) &lt;- value
 
+# S4 method for FLFishery,numeric
+fcost(object) &lt;- value
+
 # S4 method for FLFishery
 orevenue(object)
 
@@ -188,6 +188,33 @@ orevenue(object) &lt;- value
 
 # S4 method for FLFishery,numeric
 orevenue(object) &lt;- value
+
+# S4 method for FLFishery
+crewshare(object, compute = TRUE)
+
+# S4 method for FLFishery,predictModel
+crewshare(object) &lt;- value
+
+# S4 method for FLFishery
+landings(object, catch = seq(object))
+
+# S4 method for FLFishery
+discards(object, catch = seq(object))
+
+# S4 method for FLFishery
+catch(object, catch = seq(object))
+
+# S4 method for FLFishery
+catch.n(object, pos = names(object))
+
+# S4 method for FLFishery
+landings.wt(object, pos = names(object))
+
+# S4 method for FLFishery
+catch.wt(object, pos = names(object))
+
+# S4 method for FLFishery
+catch.wt(object, pos = names(object))
 
 # S4 method for list
 FLFishery(object, ...)
@@ -211,18 +238,6 @@ FLFishery(object, ...)
 summary(object)
 
 # S4 method for FLFishery
-landings(object)
-
-# S4 method for FLFishery
-discards(object)
-
-# S4 method for FLFishery
-catches(object)
-
-# S4 method for FLFishery
-catch(object)
-
-# S4 method for FLFishery
 lrevenue(object)
 
 # S4 method for FLFishery
@@ -241,14 +256,17 @@ ccost(object)
 propagate(object, iter, fill.iter = TRUE)
 
 # S4 method for FLFishery
-iter(obj, iter)</pre>
+iter(obj, iter)
+
+# S4 method for FLFishery,FLFishery
+iter(object, iter) &lt;- value</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>object</th>
-      <td><p>An object</p></td>
+      <td><p>Object on which to assign value</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -256,11 +274,11 @@ iter(obj, iter)</pre>
     </tr>
     <tr>
       <th>value</th>
-      <td><p>Replacement value</p></td>
+      <td><p>Object to assign</p></td>
     </tr>
     <tr>
       <th>compute</th>
-      <td><p>Carry out formnula calculation (TRUE) or return full slot (FALSE).</p></td>
+      <td><p>Carry out formula calculation (TRUE) or return full slot (FALSE).</p></td>
     </tr>
     <tr>
       <th>x</th>
@@ -299,7 +317,7 @@ You know where to draw the line</p>
 
 
 <p><code>FLFishery</code> objects inherit from <code>FLCatches</code> with a number of slots
-added.</p><dl'>
+added.</p><dl>
     <dt>.Data</dt><dd><p>The list of <code>FLCatch</code> object with catch data per stock,
       (<code>FLCatches</code>).</p></dd>
     <dt>name</dt><dd><p>Name of the object, e.g. species or stock code, (<code>character</code>).</p></dd>
@@ -348,7 +366,7 @@ for sizing but not stored in any slot.</p>
     
 
 <p>Methods exist for various calculations based on values stored in the class:</p>
-<dl'>
+<dl>
   <dt>ccost</dt><dd><p>Calculate the total crew costs by evaluating the formula in
     <code>crewshare</code>.</p></dd>
   <dt>cost</dt><dd><p>Total costs, calculated.</p></dd>
@@ -366,15 +384,21 @@ for sizing but not stored in any slot.</p>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>See <code><a href='../articles/FLFishery.html'>vignette("FLFishery", package = "FLFishery")</a></code> for an
+    <div class='dont-index'><p>See <code>vignette("FLFishery", package = "FLFishery")</code> for an
 overview of the package.</p>
-<p>FLCatches</p></div>
+<p><a href='FLCatches.html'>FLCatches</a></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Iago Mosqueira (EC JRC) <a href='mailto:iago.mosqueira@ec.europa.eu'>iago.mosqueira@ec.europa.eu</a></p>
+<p>Maintainer: Iago Mosqueira (EC JRC) <a href='mailto:iago.mosqueira@ec.europa.eu'>iago.mosqueira@ec.europa.eu</a></p>
+<p>Iago Mosqueira, EC JRC.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'>FLFishery</span>()
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='fu'>FLFishery</span><span class='op'>(</span><span class='op'>)</span>
 
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>ple4</span>)
-<span class='fu'>FLFishery</span>(<span class='kw'>PLE</span><span class='kw'>=</span><span class='fu'>as</span>(<span class='no'>ple4</span>, <span class='st'>'FLCatch'</span>))</div><div class='output co'>#&gt; An object of class "FLFishery"
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>ple4</span><span class='op'>)</span>
+<span class='fu'>FLFishery</span><span class='op'>(</span>PLE<span class='op'>=</span><span class='fu'>as</span><span class='op'>(</span><span class='va'>ple4</span>, <span class='st'>'FLCatch'</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; An object of class "FLFishery"
 #&gt; 
 #&gt; Name:  
 #&gt; Description:  
@@ -411,7 +435,7 @@ overview of the package.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
