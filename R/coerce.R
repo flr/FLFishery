@@ -46,9 +46,8 @@ setAs('FLStock', 'FLFishery',
     names(res) <- desc(res) <- name(from)
     
     # EFFORT
-    effort(res) <- (unitSums(catch(from)) / unitSums(vb(from))) /
-      catch.q(res[[1]])$alpha
-    
+    effort(res) <- (harvest(from) / catch.sel(from))[1,]
+
     # AVOID long strings in units(effort) if stock has not proper uoms.
     units(effort(res)) <- ""
 
