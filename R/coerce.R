@@ -45,8 +45,8 @@ setAs('FLStock', 'FLFishery',
 
     names(res) <- desc(res) <- name(from)
     
-    # EFFORT
-    effort(res) <- (harvest(from) / catch.sel(from))[1,]
+    # EFFORT, uses mean to avoid NAs from F=0
+    effort(res) <- quantMeans((harvest(from) / catch.sel(from)))
 
     # AVOID long strings in units(effort) if stock has not proper uoms.
     units(effort(res)) <- ""
@@ -173,6 +173,5 @@ setMethod("as.FLStock", signature(object="FLBiol"),
 
   return(stk)
 })
-
 
 # }}}
