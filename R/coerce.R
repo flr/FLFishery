@@ -46,12 +46,12 @@ setAs('FLStock', 'FLFishery',
     names(res) <- desc(res) <- name(from)
     
     # EFFORT, uses mean to avoid NAs from F=0
-    effort(res) <- quantMeans((harvest(from) / catch.sel(from)))
+    effort(res) <- quantMeans(unitMeans((harvest(from) / catch.sel(from))))
 
     # AVOID long strings in units(effort) if stock has not proper uoms.
     units(effort(res)) <- ""
 
-    effort(res)[is.na(effort(res))] <- effort(res)[!is.na(effort(res))][,1]
+    effort(res)[is.na(effort(res))] <- 1e-12
 
     # hperiod, only age 1
     spw <- unitMeans(m.spwn(from)[1,])
