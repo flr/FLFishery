@@ -287,3 +287,29 @@ setMethod("fwdWindow", signature(x="FLCatch", y="missing"),
   }
 )
 # }}}
+
+# combine {{{
+
+setMethod("combine", signature(x="FLFishery", y="FLFishery"),
+  function(x, y, ..., check=FALSE) {
+
+    args <- c(list(x, y), list(...))
+
+    # FLF
+    capacity(x) <- do.call(combine, lapply(args, capacity))
+    effort(x) <- do.call(combine, lapply(args, effort))
+    hperiod(x) <- do.call(combine, lapply(args, hperiod))
+    vcost(x) <- do.call(combine, lapply(args, vcost))
+    fcost(x) <- do.call(combine, lapply(args, fcost))
+    orevenue(x) <- do.call(combine, lapply(args, orevenue))
+ 
+    # x@crewshare@params <- do.call(combine, lapply(args, function(i)
+    #   i@crewshare@params))
+
+    # FLCs
+    x@.Data <- do.call(Map, c(f=combine, lapply(args, slot, ".Data")))
+
+    return(x)
+  }
+)
+# }}}
