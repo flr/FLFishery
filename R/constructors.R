@@ -123,7 +123,8 @@ setMethod("FLFishery", signature(object="list"),
       flq[] <- NA
       units(flq) <- ""
     } else {
-      flq <- FLQuant(dimnames=c(list(quant='all'), dimnames(landings.n(cas[[1]]))[-1]), units="")
+      flq <- FLQuant(dimnames=c(list(quant='all'),
+        dimnames(landings.n(cas[[1]]))[-1]), units="")
     }
 
     # hperiod

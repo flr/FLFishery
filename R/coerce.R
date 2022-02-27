@@ -45,7 +45,7 @@ setAs('FLStock', 'FLFishery',
 
     names(res) <- desc(res) <- name(from)
     
-    # EFFORT, uses mean to avoid NAs from F=0
+    # EFFORT = F / sel, uses mean to avoid NAs from F=0
     effort(res) <- quantMeans(unitMeans((harvest(from) / catch.sel(from))))
     effort(res)[is.na(effort(res))] <- 1e-12
 
@@ -122,12 +122,15 @@ setMethod("as.FLStock", signature(object="FLBiol"),
   hspwn <- lapply(fisheries,
     function(x) (hperiod(x)['end',] - hperiod(x)['start',]) %*% spwn(object))
 
-  hspwn <- Reduce("+", mapply("*", mapply(function(x, y)
-    catch(x[[y]]), fisheries, catch, SIMPLIFY=FALSE), hspwn, SIMPLIFY = FALSE)) /
-    Reduce("+", mapply(function(x, y) catch(x[[y]]), fisheries, catch,
-      SIMPLIFY=FALSE))
+  hspwn <- Reduce('+', hspwn) / length(hspwn)
 
-  hspwn <- expand(hspwn, age=dimnames(ln)$age)
+  # DEBUG
+#  hspwn <- Reduce("+", mapply("*", mapply(function(x, y)
+#    catch(x[[y]]), fisheries, catch, SIMPLIFY=FALSE), hspwn, SIMPLIFY = FALSE)) /
+#    Reduce("+", mapply(function(x, y) catch(x[[y]]), fisheries, catch,
+#      SIMPLIFY=FALSE))
+
+  # hspwn <- expand(hspwn, age=dimnames(ln)$age)
   mspwn <- expand(spwn(object), age=dimnames(ln)$age, fill=TRUE)
   units(hspwn) <- units(mspwn) <- ""
 

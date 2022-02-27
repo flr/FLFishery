@@ -92,18 +92,13 @@ setMethod("plot", signature(x="FLBiol", y="FLFishery"),
   function(x, y) {
 
     # COMPUTE metrics
-
-    b <- tb(x)
+    re <- n(x)[1,]
     sb <- ssb(x, catch.n=Reduce("+", catch.n(y)))
+    c <- catch(y)[[1]]
+    f <- fbar(x, y)
 
-    c <- catch(y)
-    ef <- effort(y)
-    dimnames(ef) <- list(age='all')
-
-    plot(FLQuants(b, sb))
-    
-    # plot(FLQuants(c, ef))
-
+    return(plot(FLQuants(Rec=re, SSB=sb, C=c, F=f)) +
+      ylim(c(0,NA)))
   }
 )
 

@@ -1,11 +1,5 @@
-# FLFishery
+# FLFishery <img src="man/figures/flfishery.png" align="right" width="120" />
 
-- Version: 0.3.7.9003
-- Date: 21-11-2021
-- Author: Iago Mosqueira, EC JRC
-- Maintainer: Iago Mosqueira <iago.mosqueira AT ec.europa.eu>
-- Repository: <https://github.com/iagomosqueira/FLFishery/>
-- Bug reports: <https://github.com/iagomosqueira/FLFishery/issues>
 
 ## Overview
 FLFisheries contains classes that represent a fishery, a group of vessels operating with the same exploitation pattern in terms of gear, space and time.
@@ -33,4 +27,5 @@ You are welcome to:
 
 - Submit suggestions and bug-reports at: <https://github.com/flr/FLFishery/issues>
 - Send a pull request on: <https://github.com/flr/FLFishery/>
-- Compose a friendly e-mail to: <iago.mosqueira AT ec.europa.eu>
+- Author: Iago Mosqueira (WMR)/
+- Maintainer: Iago Mosqueira <iago.mosqueira@wur.nl>
