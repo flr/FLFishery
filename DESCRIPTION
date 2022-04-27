@@ -7,6 +7,7 @@ Authors@R: c(
 Description: A set of classes and methods for modelling of fleet dynamics.
   Fisheries are groups of vessels sharing an effort time series, with static or
   changing spatio-temporal patterns in selectivity.
+X-schema.org-keywords: fisheries, flr, R
 Depends:
   R(>= 4.0),
   methods,

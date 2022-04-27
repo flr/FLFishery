@@ -1,5 +1,4 @@
-# FLFishery <img src="man/figures/flfishery.png" align="right" width="120" />
-
+# FLFishery <img src="man/figures/logo.png" align="right" width="120" />
 
 ## Overview
 FLFisheries contains classes that represent a fishery, a group of vessels operating with the same exploitation pattern in terms of gear, space and time.
