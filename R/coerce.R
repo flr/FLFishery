@@ -90,8 +90,9 @@ setAs("FLFishery", "FLFisherycpp",
 
 # FLBiol,FLFisheries -> FLStock {{{
 setMethod("as.FLStock", signature(object="FLBiol"),
-  function(object, fisheries, full=TRUE, catch=rep(1, length(fisheries)), ...) {
-
+  function(object, fisheries, full=TRUE, catch=rep(1, length(fisheries)),
+    ...) {
+  
   # PARSE FLFishery
   if(is(fisheries, "FLFishery"))
     fisheries <- FLFisheries(F=fisheries)
@@ -103,26 +104,28 @@ setMethod("as.FLStock", signature(object="FLBiol"),
   wt <- wt(object)
 
   # SUM all catches
-  ln <- Reduce("+", mapply(function(x, y) landings.n(x[[y]]), fisheries, catch,
-    SIMPLIFY=FALSE))
-  dn <- Reduce("+", mapply(function(x, y) discards.n(x[[y]]), fisheries, catch,
-    SIMPLIFY=FALSE))
-  cn <- Reduce("+", mapply(function(x, y) catch.n(x[[y]]), fisheries, catch,
-    SIMPLIFY=FALSE))
+  ln <- Reduce("+", Map(function(x, y) landings.n(x[[y]]),
+    fisheries, catch))
+  dn <- Reduce("+", Map(function(x, y) discards.n(x[[y]]),
+    fisheries, catch))
+  cn <- Reduce("+", Map(function(x, y) catch.n(x[[y]]),
+    fisheries, catch))
 
   # WEIGHTED average of wts
-  lw <- Reduce("+", mapply(function(x, y)
-    landings.wt(x[[y]]) * landings.n(x[[y]]) / ln, fisheries, catch, SIMPLIFY=FALSE))
-  dw <- Reduce("+", mapply(function(x, y)
-    discards.wt(x[[y]]) * discards.n(x[[y]]) / dn, fisheries, catch, SIMPLIFY=FALSE))
-  cw <- Reduce("+", mapply(function(x, y)
-    catch.wt(x[[y]]) * catch.n(x[[y]]) / cn, fisheries, catch, SIMPLIFY=FALSE))
+  lw <- Reduce("+", Map(function(x, y)
+    landings.wt(x[[y]]) * landings.n(x[[y]]) / ln, fisheries, catch))
+  dw <- Reduce("+", Map(function(x, y)
+    discards.wt(x[[y]]) * discards.n(x[[y]]) / dn, fisheries, catch))
+  cw <- Reduce("+", Map(function(x, y)
+    catch.wt(x[[y]]) * catch.n(x[[y]]) / cn, fisheries, catch))
 
   # SET harvest.spwn as catch-weighted mean of hperiod
   hspwn <- lapply(fisheries,
     function(x) (hperiod(x)['end',] - hperiod(x)['start',]) %*% spwn(object))
 
   hspwn <- Reduce('+', hspwn) / length(hspwn)
+  dimnames(hspwn) <- list(age='all')
+  hspwn <- expand(hspwn, age=dimnames(ln)$age, fill=TRUE)
 
   # DEBUG
 #  hspwn <- Reduce("+", mapply("*", mapply(function(x, y)
