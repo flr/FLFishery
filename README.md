@@ -19,7 +19,7 @@ or download from the [FLFishery releases page](https://github.com/flr/FLFishery/
 - [All release](https://github.com/flr/FLFishery/releases/)
 
 ## License
-Copyright (c) 2015-2017 European Union. European Commission Joint Research Centre D.02. Released under the [EUPL 1.1](https://joinup.ec.europa.eu/community/eupl/home).
+Copyright (c) 2015-2022 European Union. European Commission Joint Research Centre D.02. Released under the [EUPL 1.1](https://joinup.ec.europa.eu/community/eupl/home).
 
 ## Contact
 You are welcome to:
