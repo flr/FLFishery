@@ -26,7 +26,8 @@ harvests(object, catches, ...)
   fisheries,
   range = unlist(dims(object)[c("min", "max")]),
   minfbar = range[1],
-  maxfbar = range[2]
+  maxfbar = range[2],
+  ...
 )
 }
 \arguments{

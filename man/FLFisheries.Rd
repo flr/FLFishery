@@ -41,6 +41,8 @@ FLFisheries(object, ...)
 
 \item{...}{Other things}
 
+\item{by}{Dimension to aggregate by, "fishery" or "catch".}
+
 \item{desc}{Description}
 }
 \value{
