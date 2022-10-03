@@ -127,13 +127,6 @@ setMethod("as.FLStock", signature(object="FLBiol"),
   dimnames(hspwn) <- list(age='all')
   hspwn <- expand(hspwn, age=dimnames(ln)$age, fill=TRUE)
 
-  # DEBUG
-#  hspwn <- Reduce("+", mapply("*", mapply(function(x, y)
-#    catch(x[[y]]), fisheries, catch, SIMPLIFY=FALSE), hspwn, SIMPLIFY = FALSE)) /
-#    Reduce("+", mapply(function(x, y) catch(x[[y]]), fisheries, catch,
-#      SIMPLIFY=FALSE))
-
-  # hspwn <- expand(hspwn, age=dimnames(ln)$age)
   mspwn <- expand(spwn(object), age=dimnames(ln)$age, fill=TRUE)
   units(hspwn) <- units(mspwn) <- ""
 

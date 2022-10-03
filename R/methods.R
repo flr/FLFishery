@@ -313,3 +313,10 @@ setMethod("combine", signature(x="FLFishery", y="FLFishery"),
   }
 )
 # }}}
+
+# dim {{{
+setMethod("dim", signature(x="FLCatch"),
+  function(x) {
+    return(dim(x@landings.n))
+  }
+) # }}}
