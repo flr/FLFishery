@@ -124,8 +124,7 @@ setMethod("as.FLStock", signature(object="FLBiol"),
     function(x) (hperiod(x)['end',] - hperiod(x)['start',]) %*% spwn(object))
 
   hspwn <- Reduce('+', hspwn) / length(hspwn)
-  dimnames(hspwn) <- list(age='all')
-  hspwn <- expand(hspwn, age=dimnames(ln)$age, fill=TRUE)
+  quant(hspwn) <- "age"
 
   mspwn <- expand(spwn(object), age=dimnames(ln)$age, fill=TRUE)
   units(hspwn) <- units(mspwn) <- ""
@@ -157,11 +156,13 @@ setMethod("as.FLStock", signature(object="FLBiol"),
   # stock.n & harvest
   stock.n(stk) <- n(object)
 	stock(stk) <- computeStock(stk)
-  
+ 
+  # COMPUTE f
   if(full) {
     harvest(stk) <- harvest(stock.n(stk), catch.n(stk), m(stk))
-    units(harvest(stk)) <- "f"
   }
+  
+  units(harvest(stk)) <- "f"
 
   # ADD extra slots in ...
   args <- list(...)
