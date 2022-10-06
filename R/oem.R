@@ -26,14 +26,16 @@ setMethod('cpue', signature(object='FLBiol', index="FLI"),
 setMethod("survey",   signature(object="FLBiol"),
   function(object, index, catch, timing = mean(range(index,
     c('startf', 'endf'))), mass = FALSE) {
-  
+    
     # timing MUST BE 0 - 1
     timing <- pmax(pmin(timing, 1.0), 0.0)
 
     # CORRECT abundances for timing
-    if(timing > 0)
+    if(timing > 0) {
       naa <- n(object) * exp(-0.5 * m(object) * timing) -
         catch.n(catch) * timing
+      naa[naa <= 0] <- 1e-8
+    }
     else
       naa <- n(object)
  
@@ -49,4 +51,3 @@ setMethod("survey",   signature(object="FLBiol"),
     return(survey)
   }
 ) # }}}
-
