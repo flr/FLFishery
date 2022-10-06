@@ -24,23 +24,27 @@ setMethod('cpue', signature(object='FLBiol', index="FLI"),
 # survey (FLBiol) {{{
 
 setMethod("survey",   signature(object="FLBiol"),
-  function(object, index, catch, timing = 0.5, mass = FALSE) {
+  function(object, index, catch, timing = mean(range(index,
+    c('startf', 'endf'))), mass = FALSE) {
   
     # timing MUST BE 0 - 1
     timing <- pmax(pmin(timing, 1.0), 0.0)
 
     # CORRECT abundances for timing
-    stock.n <- stock.n(object) *
-      exp(-(harvest(object) * timing - m(object) * timing))
+    if(timing > 0)
+      naa <- n(object) * exp(-0.5 * m(object) * timing) -
+        catch.n(catch) * timing
+    else
+      naa <- n(object)
  
     # APPLY survey selectivity
-    survey <- stock.n %*% sel.pattern(index)
+    survey <- naa %*% sel.pattern(index)
 
     # SET units as stock.n
-    units(survey) <- units(stock.n)
+    units(survey) <- units(naa)
   
     if (mass)
-      survey <- survey * stock.wt(object)
+      survey <- quantSums(survey * catch.wt(index))
 
     return(survey)
   }
