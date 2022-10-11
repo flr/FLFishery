@@ -66,6 +66,8 @@ setMethod("harvests", signature(object="FLBiol", catches="FLFisheries"),
 setMethod("harvest", signature(object="FLBiol", catch="FLFishery"),
   function(object, catch, fcb=1) {
 
+    caq <- catch.q(catch[[fcb]])
+
     # F = effort * alpha * sel * biomass ^ -beta
     res <- effort(catch) %*% caq$alpha %*% catch.sel(catch[[fcb]]) %*%
       (n(object) * wt(object) ) ^ -caq$beta
@@ -84,9 +86,9 @@ setMethod("harvest", signature(object="FLBiol", catch="FLFishery"),
 
 setMethod("harvest", signature(object="FLBiol", catch="FLFisheries"),
   function(object, catch, fcb=1) {
-    return(harvest(n(object),
-      # GET catch.n of fcbs FLCatches across all fisheries
-      Reduce('+', Map(function(x, y) catch.n(x[[y]]), catch, fcb)), m(object)))
+
+    # SUM of partial Fs
+    return(Reduce('+', lapply(catch, harvest, object=object)))
   }
 ) # }}}
 

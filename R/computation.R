@@ -137,7 +137,7 @@ setMethod("catch.n", signature(object="FLFisheries"),
   function(object, pos=lapply(object, names)) {
 
     if(length(pos) == 1) {
-      FLQuants(mapply("catch.n", object, pos, SIMPLIFY=FALSE))
+      FLQuants(Map("catch.n", object, pos))
     } else {
 
       can <- lapply(object, catch.n)

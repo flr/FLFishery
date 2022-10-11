@@ -159,7 +159,7 @@ setMethod("as.FLStock", signature(object="FLBiol"),
  
   # COMPUTE f
   if(full) {
-    harvest(stk) <- harvest(stock.n(stk), catch.n(stk), m(stk))
+    harvest(stk) <- harvest(object, fisheries)
   }
   
   units(harvest(stk)) <- "f"
