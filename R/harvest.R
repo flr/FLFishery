@@ -66,7 +66,13 @@ setMethod("harvests", signature(object="FLBiol", catches="FLFisheries"),
 setMethod("harvest", signature(object="FLBiol", catch="FLFishery"),
   function(object, catch, fcb=1) {
 
-    return(harvest(n(object), catch.n(catch[[fcb]]), m(object)))
+    # F = effort * alpha * sel * biomass ^ -beta
+    res <- effort(catch) %*% caq$alpha %*% catch.sel(catch[[fcb]]) %*%
+      (n(object) * wt(object) ) ^ -caq$beta
+
+    units(res) <- "f"
+
+    return(res)
   }
 ) # }}}
 
