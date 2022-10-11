@@ -72,6 +72,7 @@ setMethod("harvest", signature(object="FLBiol", catch="FLFishery"),
     res <- effort(catch) %*% caq$alpha %*% catch.sel(catch[[fcb]]) %*%
       (n(object) * wt(object) ) ^ -caq$beta
 
+    quant(res) <- "age"
     units(res) <- "f"
 
     return(res)
