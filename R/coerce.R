@@ -153,11 +153,11 @@ setMethod("as.FLStock", signature(object="FLBiol"),
   discards(stk) <- computeDiscards(stk)
   catch(stk) <- computeCatch(stk)
 
-  # stock.n & harvest
+  # stock.n & stock
   stock.n(stk) <- n(object)
 	stock(stk) <- computeStock(stk)
- 
-  # COMPUTE f
+  
+  # COMPUTE harvest
   if(full) {
     harvest(stk) <- harvest(object, fisheries)
   }
