@@ -101,7 +101,7 @@ setMethod("harvest", signature(object="FLBiol", catch="FLFisheries"),
 
 setMethod("harvest", signature(object="FLBiol", catch="FLCatch"),
   function(object, catch) {
-    return(harvest(n(object), catch.n(catch), m(object)))
+    return(harvest(n(object), catch=catch.n(catch), m=m(object)))
   }
 ) # }}}
 
