@@ -1,5 +1,5 @@
-# computation.R - DESC
-# /computation.R
+# computation.R - Compute quantities aggregated by catch/biol or fishery
+# FLFishery/R/computation.R
 
 # Copyright European Union, 2015 
 # Author: Iago MOSQUEIRA (WMR) <iago.mosqueira@wur.nl>
@@ -78,41 +78,79 @@ setMethod("catch", signature(object="FLFisheries"),
   }
 ) # }}}
 
-# landings.n (FLF, FLFs) {{{
+# landings.n (FLC, FLF, FLFs) {{{
+
+#' @rdname FLCatch
+setMethod("landings.n", signature(object="FLCatch"),
+  function(object) {
+    return(object@landings.n)
+  }
+)
+
+#' @rdname FLFishery
 setMethod("landings.n", signature(object="FLFishery"),
   function(object, pos=names(object)) {
     if(length(pos) == 1)
-      lapply(object, "landings.n")[[pos]]
+      return(lapply(object, "landings.n")[[pos]])
     else
-      lapply(object, "landings.n")[pos]
+      return(lapply(object, "landings.n")[pos])
   }
 )
 
+#' @rdname FLFisheries
 setMethod("landings.n", signature(object="FLFisheries"),
-  function(object, pos=lapply(object, names)) {
-    if(length(pos) == 1)
-      FLQuants(mapply("landings.n", object, pos, SIMPLIFY=FALSE))
-    else
-      mapply("landings.n", object, pos, SIMPLIFY=FALSE)
+  function(object, pos=unique(unlist(lapply(object, names))), reduce=TRUE) {
+
+    if(length(pos) == 1) {
+      res <- FLQuants(Map("landings.n", object, pos))
+      if(reduce)
+        res <- Reduce("%++%", res)
+    } else {
+
+      can <- lapply(object, landings.n, pos=pos)
+
+      res <- FLQuants(lapply(setNames(nm=pos), function(x)
+        Reduce("%++%", lapply(can, function(y) y[[x]]))))
+    }
+    return(res)
   }
 ) # }}}
 
-# discards.n (FLF, FLFs) {{{
-setMethod("discards.n", signature(object="FLFishery"),
-  function(object, pos=names(object)) {
-    if(length(pos) == 1)
-      lapply(object, "discards.n")[[pos]]
-    else
-      lapply(object, "discards.n")[pos]
+# discards.n (FLC, FLF, FLFs) {{{
+
+#' @rdname FLCatch
+setMethod("discards.n", signature(object="FLCatch"),
+  function(object) {
+    return(object@discards.n)
   }
 )
 
-setMethod("discards.n", signature(object="FLFisheries"),
-  function(object, pos=lapply(object, names)) {
+#' @rdname FLFishery
+setMethod("discards.n", signature(object="FLFishery"),
+  function(object, pos=names(object)) {
     if(length(pos) == 1)
-      FLQuants(mapply("discards.n", object, pos, SIMPLIFY=FALSE))
+      return(lapply(object, "discards.n")[[pos]])
     else
-      mapply("discards.n", object, pos, SIMPLIFY=FALSE)
+      return(lapply(object, "discards.n")[pos])
+  }
+)
+
+#' @rdname FLFisheries
+setMethod("discards.n", signature(object="FLFisheries"),
+  function(object, pos=unique(unlist(lapply(object, names))), reduce=TRUE) {
+
+    if(length(pos) == 1) {
+      res <- FLQuants(Map("discards.n", object, pos))
+      if(reduce)
+        res <- Reduce("%++%", res)
+    } else {
+
+      can <- lapply(object, discards.n, pos=pos)
+
+      res <- FLQuants(lapply(setNames(nm=pos), function(x)
+        Reduce("%++%", lapply(can, function(y) y[[x]]))))
+    }
+    return(res)
   }
 ) # }}}
 
@@ -128,27 +166,29 @@ setMethod("catch.n", signature(object="FLCatch"),
 #' @rdname FLFishery
 setMethod("catch.n", signature(object="FLFishery"),
   function(object, pos=names(object)) {
-    return(lapply(object, "catch.n")[pos])
+    if(length(pos) == 1)
+      return(lapply(object, "catch.n")[[pos]])
+    else
+      return(lapply(object, "catch.n")[pos])
   }
 )
 
 #' @rdname FLFisheries
 setMethod("catch.n", signature(object="FLFisheries"),
-  function(object, pos=lapply(object, names)) {
+  function(object, pos=unique(unlist(lapply(object, names))), reduce=TRUE) {
 
     if(length(pos) == 1) {
-      FLQuants(Map("catch.n", object, pos))
+      res <- FLQuants(Map("catch.n", object, pos))
+      if(reduce)
+        res <- Reduce("%++%", res)
     } else {
 
-      can <- lapply(object, catch.n)
-      
-      cans <- Reduce(c, can)
+      can <- lapply(object, catch.n, pos=pos)
 
-      res <- lapply(setNames(nm=unique(names(cans))),
-        function(x) Reduce("%++%", cans[x]))
-
-      return(res)
+      res <- FLQuants(lapply(setNames(nm=pos), function(x)
+        Reduce("%++%", lapply(can, function(y) y[[x]]))))
     }
+    return(res)
   }
 ) # }}}
 
@@ -168,31 +208,9 @@ setMethod("landings.wt", signature(object="FLFishery"),
 setMethod("landings.wt", signature(object="FLFisheries"),
   function(object, pos=lapply(object, names)) {
     if(length(pos) == 1)
-      FLQuants(mapply("landings.wt", object, pos, SIMPLIFY=FALSE))
+      FLQuants(Map("landings.wt", object, pos))
     else
-      mapply("landings.wt", object, pos, SIMPLIFY=FALSE)
-  }
-) # }}}
-
-# catch.wt (FLC, FLF, FLFs) {{{
-
-#' @rdname FLFishery
-setMethod("catch.wt", signature(object="FLFishery"),
-  function(object, pos=names(object)) {
-    if(length(pos) == 1)
-      lapply(object, "catch.wt")[[pos]]
-    else
-      lapply(object, "catch.wt")[pos]
-  }
-)
-
-#' @rdname FLFisheries
-setMethod("catch.wt", signature(object="FLFisheries"),
-  function(object, pos=lapply(object, names)) {
-    if(length(pos) == 1)
-      FLQuants(mapply("catch.wt", object, pos, SIMPLIFY=FALSE))
-    else
-      mapply("catch.wt", object, pos, SIMPLIFY=FALSE)
+      Map("landings.wt", object, pos)
   }
 ) # }}}
 
@@ -233,11 +251,41 @@ setMethod("catch.wt", signature(object="FLFishery"),
 
 #' @rdname FLFisheries
 setMethod("catch.wt", signature(object="FLFisheries"),
-  function(object, pos=lapply(object, names)) {
-    if(length(pos) == 1)
-      FLQuants(mapply("catch.wt", object, pos, SIMPLIFY=FALSE))
-    else
-      mapply("catch.wt", object, pos, SIMPLIFY=FALSE)
+  function(object, pos=unique(unlist(lapply(object, names))), reduce=TRUE) {
+
+    if(length(pos) == 1) {
+
+      res <- FLQuants(Map("catch.wt", object, pos))
+    
+      # REDUCE across fisheries
+
+      if(reduce) {
+        can <- catch.n(object, pos=pos, reduce=FALSE)
+        res <- Reduce("+", can * res) / Reduce("+", can)
+      }
+
+    } else {
+ 
+      # list(FLQuants), fishery(catch)
+
+      res <- lapply(object, function(x) lapply(x, catch.wt)[pos])
+
+      if(reduce) {
+        can <- lapply(object, function(x) lapply(x, catch.n)[pos])
+        res <- Map(function(x, y) (x * y) / y, x = res, y = can)
+
+
+      }
+
+      # reduce, combine as weighted mean by stock across fisheries
+
+      res <- FLQuants(lapply(setNames(nm=pos), function(x) {
+        Reduce("%++%", 
+               Map(function(x, y) (x * y) / y, x=res, y=can))
+    }))
+    }
+
+    return(res)
   }
 ) # }}}
 
