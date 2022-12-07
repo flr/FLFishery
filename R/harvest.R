@@ -65,12 +65,12 @@ setMethod("harvests", signature(object="FLBiol", catches="FLFisheries"),
 
 setMethod("harvest", signature(object="FLBiol", catch="FLFishery"),
   function(object, catch, fcb=1) {
-
+    
     caq <- catch.q(catch[[fcb]])
 
     # F = effort * alpha * sel * biomass ^ -beta
     res <- effort(catch) %*% caq$alpha %*% catch.sel(catch[[fcb]]) %*%
-      (n(object) * wt(object) ) ^ -caq$beta
+      ((n(object) * wt(object)) %^% -caq$beta)
 
     quant(res) <- "age"
     units(res) <- "f"
@@ -93,6 +93,47 @@ setMethod("harvest", signature(object="FLBiol", catch="FLFisheries"),
   }
 ) # }}}
 
+# harvest(FLBiols, FLFishery) {{{
+
+#' @rdname harvest
+#' @examples
+#' bis <- FLBiols(ple=ple, sol=sol)
+#' harvest(bis, nsfleet)
+
+setMethod("harvest", signature(object="FLBiols", catch="FLFisheries"),
+  function(object, catch, fcb=FCB(object, catch)) {
+
+  # GO over biols
+  lapply(setNames(unique(fcb[, 'B']), nm=names(object)), function(bi) {
+
+    # FCB map for this biol
+    ma <- fcb[fcb[,'B'] == bi,, drop=FALSE]
+
+    # ADD partial Fs over fisheries catching the biol
+    Reduce("+", Map(function(fi, ca) {
+      harvest(object[[bi]], fi, fcb=ca)
+    }, fi=catch[c(ma[, 'F'])], ca=ma[, 'C']))
+  })
+  }
+)
+# }}}
+
+# harvest(FLBiols, FLFishery) {{{
+
+#' @rdname harvest
+#' @examples
+#' harvest(bis, nsfleet[[1]])
+
+setMethod("harvest", signature(object="FLBiols", catch="FLFishery"),
+  function(object, catch, fcb=FCB(object, FLFisheries(catch))) {
+  
+    fcb <- FCB(object, FLFisheries(A=catch))
+
+    harvest(object, catch=FLFisheries(A=catch), fcb=fcb)
+  }
+)
+# }}}
+
 # harvest(FLBiol, FLCatch {{{
 
 #' @rdname harvest
@@ -105,7 +146,7 @@ setMethod("harvest", signature(object="FLBiol", catch="FLCatch"),
   }
 ) # }}}
 
-# fbar(FLBiol, FLFisheries) {{{
+# fbar(FLBiol) {{{
 
 #' @rdname harvest
 #' @examples
@@ -113,8 +154,8 @@ setMethod("harvest", signature(object="FLBiol", catch="FLCatch"),
 #' fbar(ple, fisheries=nsfleet[["bt"]], minfbar=3, maxfbar=6)
 
 setMethod("fbar", signature(object="FLBiol"),
-  function(object, fisheries, range=unlist(dims(object)[c("min", "max")]),
-    minfbar=range[1], maxfbar=range[2], ...) {
+  function(object, fisheries, range=dims(object)[c("min", "max")],
+    minfbar=range$min, maxfbar=range$max, ...) {
 
     if(!is.null(names(range)))
      range <- range[pmatch(c("min", "max"), names(range))]
@@ -124,3 +165,21 @@ setMethod("fbar", signature(object="FLBiol"),
     return(quantMeans(harvest[ac(seq(minfbar, maxfbar))]))
   }
 ) # }}}
+
+# fbar(FLBiols) {{{
+
+#' @rdname harvest
+#' @examples
+#' fbar(FLBiols(ple=ple, sol=sol), nsfleet)
+
+setMethod("fbar", signature(object="FLBiols"),
+  function(object, fisheries, range=lapply(object,
+    function(x) dims(x)[c("min", "max")]), ...) {
+
+    har <- harvest(object, fisheries)
+
+    Map(function(x, y) quantMeans(x[ac(seq(y$min, y$max))]),
+      x=har, y=lapply(range, 'as.list'))
+  }
+)
+# }}}
