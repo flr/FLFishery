@@ -52,6 +52,8 @@
 \alias{capacity<-,FLFishery,FLQuant-method}
 \alias{capacity<-,FLFishery,numeric-method}
 \alias{fcost<-,FLFishery,numeric-method}
+\alias{landings.n,FLFishery-method}
+\alias{discards.n,FLFishery-method}
 \alias{landings.wt,FLFishery-method}
 \alias{catch.wt,FLFishery-method}
 \alias{FLFishery,list-method}
@@ -124,11 +126,13 @@ orevenue(object, ...) <- value
 
 \S4method{catch}{FLFishery}(object, catch = seq(object))
 
+\S4method{landings.n}{FLFishery}(object, pos = names(object))
+
+\S4method{discards.n}{FLFishery}(object, pos = names(object))
+
 \S4method{catch.n}{FLFishery}(object, pos = names(object))
 
 \S4method{landings.wt}{FLFishery}(object, pos = names(object))
-
-\S4method{catch.wt}{FLFishery}(object, pos = names(object))
 
 \S4method{catch.wt}{FLFishery}(object, pos = names(object))
 

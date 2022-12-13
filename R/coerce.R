@@ -89,6 +89,33 @@ setAs("FLFishery", "FLFisherycpp",
 ) # }}}
 
 # FLBiol,FLFisheries -> FLStock {{{
+
+
+#' Create an `FLStock` object from `FLBiol` and `FLFishery` or `FLFisheries`
+#'
+#' A coertion method that returns a `FLStock` object by combining biological
+#' information contained in `FLBiol` and catch data from one of more 
+#' `FLFishery` objects.
+#'
+#' Details: Aliquam sagittis feugiat felis eget consequat.
+#'
+#' @param object An object of class `FLBiol`.
+#' @param fisheries An object of classes `FLFishery` or `FLFisheries`.
+#' @param full Should fishing mortality be computed and added? Logical.
+#' @param catch Vector of the same length ad `fisheries`, indicating the
+#' position of the `FLCatch` objects that refer to the `FLBiol`. Defaults to 
+#' the first one along all elements.
+#'
+#' @return An object of class `FLStock`.
+#'
+#' @author The FLR Team
+#' @seealso FLCore::FLStock
+#' @keywords methods
+#' @md
+#' @examples
+#' data(nsfishery)
+#' as.FLStock(sol, nsfleet)
+
 setMethod("as.FLStock", signature(object="FLBiol"),
   function(object, fisheries, full=TRUE, catch=rep(1, length(fisheries)),
     ...) {
@@ -112,12 +139,17 @@ setMethod("as.FLStock", signature(object="FLBiol"),
     fisheries, catch))
 
   # WEIGHTED average of wts
-  lw <- Reduce("+", Map(function(x, y)
-    landings.wt(x[[y]]) * landings.n(x[[y]]) / ln, fisheries, catch))
-  dw <- Reduce("+", Map(function(x, y)
-    discards.wt(x[[y]]) * discards.n(x[[y]]) / dn, fisheries, catch))
-  cw <- Reduce("+", Map(function(x, y)
-    catch.wt(x[[y]]) * catch.n(x[[y]]) / cn, fisheries, catch))
+  lw <- weighted.mean(
+    FLQuants(Map(function(x, y) landings.wt(x[[y]]), x=fisheries, y=catch)),
+    FLQuants(Map(function(x, y) landings.n(x[[y]]), x=fisheries, y=catch)))
+
+  dw <- weighted.mean(
+    FLQuants(Map(function(x, y) discards.wt(x[[y]]), x=fisheries, y=catch)),
+    FLQuants(Map(function(x, y) discards.n(x[[y]]), x=fisheries, y=catch)))
+
+  cw <- weighted.mean(
+    FLQuants(Map(function(x, y) catch.wt(x[[y]]), x=fisheries, y=catch)),
+    FLQuants(Map(function(x, y) catch.n(x[[y]]), x=fisheries, y=catch)))
 
   # SET harvest.spwn as catch-weighted mean of hperiod
   hspwn <- lapply(fisheries,
@@ -125,8 +157,9 @@ setMethod("as.FLStock", signature(object="FLBiol"),
 
   hspwn <- Reduce('+', hspwn) / length(hspwn)
   quant(hspwn) <- "age"
+  hspwn <- expand(hspwn, age=dimnames(m)$age)
 
-  mspwn <- expand(spwn(object), age=dimnames(ln)$age, fill=TRUE)
+  mspwn <- expand(spwn(object), age=dimnames(m)$age, fill=TRUE)
   units(hspwn) <- units(mspwn) <- ""
 
   # BUILD FLStock

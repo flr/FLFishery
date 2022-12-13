@@ -18,6 +18,12 @@ exportClasses(
   "FLFishery",
   "FLFisheries"
 )
+
+export(
+  "guessfcb",
+  "fcb2int"
+)
+
 exportMethods(
   "[",
   "[[<-",
@@ -51,6 +57,7 @@ exportMethods(
   "discards.wt<-",
   "effort",
   "effort<-",
+  "FCB",
   "fcost",
   "fcost<-",
   "fwdWindow",

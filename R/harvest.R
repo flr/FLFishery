@@ -97,6 +97,7 @@ setMethod("harvest", signature(object="FLBiol", catch="FLFisheries"),
 
 #' @rdname harvest
 #' @examples
+#' data(nsfishery)
 #' bis <- FLBiols(ple=ple, sol=sol)
 #' harvest(bis, nsfleet)
 

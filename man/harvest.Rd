@@ -7,8 +7,11 @@
 \alias{harvests,FLBiol,FLFisheries-method}
 \alias{harvest,FLBiol,FLFishery-method}
 \alias{harvest,FLBiol,FLFisheries-method}
+\alias{harvest,FLBiols,FLFisheries-method}
+\alias{harvest,FLBiols,FLFishery-method}
 \alias{harvest,FLBiol,FLCatch-method}
 \alias{fbar,FLBiol-method}
+\alias{fbar,FLBiols-method}
 \title{Methods to calculate fishing mortalities}
 \usage{
 harvests(object, catches, ...)
@@ -19,14 +22,25 @@ harvests(object, catches, ...)
 
 \S4method{harvest}{FLBiol,FLFisheries}(object, catch, fcb = 1)
 
+\S4method{harvest}{FLBiols,FLFisheries}(object, catch, fcb = FCB(object, catch))
+
+\S4method{harvest}{FLBiols,FLFishery}(object, catch, fcb = FCB(object, FLFisheries(catch)))
+
 \S4method{harvest}{FLBiol,FLCatch}(object, catch)
 
 \S4method{fbar}{FLBiol}(
   object,
   fisheries,
-  range = unlist(dims(object)[c("min", "max")]),
-  minfbar = range[1],
-  maxfbar = range[2],
+  range = dims(object)[c("min", "max")],
+  minfbar = range$min,
+  maxfbar = range$max,
+  ...
+)
+
+\S4method{fbar}{FLBiols}(
+  object,
+  fisheries,
+  range = lapply(object, function(x) dims(x)[c("min", "max")]),
   ...
 )
 }
@@ -60,9 +74,14 @@ data(nsfishery)
 harvests(ple, nsfleet)
 harvest(ple, nsfleet[["bt"]], fcb="ple")
 harvest(ple, nsfleet)
+data(nsfishery)
+bis <- FLBiols(ple=ple, sol=sol)
+harvest(bis, nsfleet)
+harvest(bis, nsfleet[[1]])
 harvest(ple, nsfleet[["bt"]][["ple"]])
 fbar(ple, fisheries=nsfleet, minfbar=3, maxfbar=6)
 fbar(ple, fisheries=nsfleet[["bt"]], minfbar=3, maxfbar=6)
+fbar(FLBiols(ple=ple, sol=sol), nsfleet)
 }
 \seealso{
 \code{\link[FLCore:accessors]{FLCore::harvest()}}

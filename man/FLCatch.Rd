@@ -84,6 +84,10 @@ lrevenue(object, ...)
 
 \S4method{catch}{FLCatch}(object)
 
+\S4method{landings.n}{FLCatch}(object)
+
+\S4method{discards.n}{FLCatch}(object)
+
 \S4method{catch.n}{FLCatch}(object)
 
 \S4method{catch.wt}{FLCatch}(object)

@@ -9,6 +9,8 @@
 \alias{landings,FLFisheries-method}
 \alias{discards,FLFisheries-method}
 \alias{catch,FLFisheries-method}
+\alias{landings.n,FLFisheries-method}
+\alias{discards.n,FLFisheries-method}
 \alias{catch.n,FLFisheries-method}
 \alias{landings.wt,FLFisheries-method}
 \alias{catch.wt,FLFisheries-method}
@@ -24,13 +26,15 @@ FLFisheries(object, ...)
 
 \S4method{catch}{FLFisheries}(object, by = c("fishery", "catch"), sum = TRUE)
 
-\S4method{catch.n}{FLFisheries}(object, pos = lapply(object, names))
+\S4method{landings.n}{FLFisheries}(object, pos = unique(unlist(lapply(object, names))), reduce = TRUE)
+
+\S4method{discards.n}{FLFisheries}(object, pos = unique(unlist(lapply(object, names))), reduce = TRUE)
+
+\S4method{catch.n}{FLFisheries}(object, pos = unique(unlist(lapply(object, names))), reduce = TRUE)
 
 \S4method{landings.wt}{FLFisheries}(object, pos = lapply(object, names))
 
-\S4method{catch.wt}{FLFisheries}(object, pos = lapply(object, names))
-
-\S4method{catch.wt}{FLFisheries}(object, pos = lapply(object, names))
+\S4method{catch.wt}{FLFisheries}(object, pos = unique(unlist(lapply(object, names))), reduce = TRUE)
 
 \S4method{FLFisheries}{list}(object, desc = character(1))
 
