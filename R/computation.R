@@ -78,6 +78,71 @@ setMethod("catch", signature(object="FLFisheries"),
   }
 ) # }}}
 
+# accessor functions {{{
+
+.fsaccessor <- function(slot, object, fishery=names(object),
+  pos=unique(unlist(lapply(object, names))), reduce=TRUE) {
+  
+  # PARSE pos/fishery arguments
+  fnms <- names(object)
+  pnms <- unique(unlist(lapply(object, names)))
+
+  if(all(fishery %in% pnms)) {
+    pos <- fishery
+    fishery <- fnms
+  }
+
+  # EXTRACT single pos
+  if(length(pos) == 1) {
+    res <- FLQuants(Map(slot, object[fishery], pos))
+    if(reduce)
+      res <- Reduce("%++%", res)
+  } else {
+
+  # OR multiple
+  can <- lapply(object[fishery], slot, pos=pos)
+    res <- FLQuants(lapply(setNames(nm=pos), function(x)
+    Reduce("%++%", lapply(can, function(y) y[[x]]))))
+  }
+  return(res)
+}
+
+# }}}
+
+# .parseMetrics {{{
+.parseMetrics <- function(object, metric, by, sum) {
+
+    # EXTRACT metric by FLCatch
+    res <- lapply(object, metric)
+
+    # fishery
+    if(by == "fishery" & !sum) {
+      return(res)
+    } else if (by == "fishery" & sum) {
+      return(FLQuants(lapply(res, Reduce, f="+")))
+    # catch
+    } else if(by == "catch" & sum) {
+
+        res <- Reduce("c", res)
+
+        # GET names of FLCatch(es)
+        nms <- unique(names(res))
+
+        # ADD by catch name
+        return(FLQuants(lapply(setNames(nm=nms), function(x)
+          Reduce("+", res[names(res) == x]))))
+    } else if (by == "catch" & !sum) {
+    
+      nms <- unique(unlist(lapply(res, names)))
+
+      return(lapply(setNames(nm=nms), function(x)
+        FLQuants(lapply(res, function(y) y[[x]]))))
+
+    } else {
+      stop("if given, 'by' must be one of 'fishery' or 'catch'")
+    }
+} # }}}
+
 # landings.n (FLC, FLF, FLFs) {{{
 
 #' @rdname FLCatch
@@ -99,22 +164,13 @@ setMethod("landings.n", signature(object="FLFishery"),
 
 #' @rdname FLFisheries
 setMethod("landings.n", signature(object="FLFisheries"),
-  function(object, pos=unique(unlist(lapply(object, names))), reduce=TRUE) {
+  function(object, fishery=names(object),
+    pos=unique(unlist(lapply(object, names))), reduce=TRUE) {
 
-    if(length(pos) == 1) {
-      res <- FLQuants(Map("landings.n", object, pos))
-      if(reduce)
-        res <- Reduce("%++%", res)
-    } else {
-
-      can <- lapply(object, landings.n, pos=pos)
-
-      res <- FLQuants(lapply(setNames(nm=pos), function(x)
-        Reduce("%++%", lapply(can, function(y) y[[x]]))))
-    }
-    return(res)
+    .fsaccessor('landings.n', object, fishery=fishery, pos=pos, reduce=reduce)
   }
-) # }}}
+)
+# }}}
 
 # discards.n (FLC, FLF, FLFs) {{{
 
@@ -137,22 +193,13 @@ setMethod("discards.n", signature(object="FLFishery"),
 
 #' @rdname FLFisheries
 setMethod("discards.n", signature(object="FLFisheries"),
-  function(object, pos=unique(unlist(lapply(object, names))), reduce=TRUE) {
+  function(object, fishery=names(object),
+    pos=unique(unlist(lapply(object, names))), reduce=TRUE) {
 
-    if(length(pos) == 1) {
-      res <- FLQuants(Map("discards.n", object, pos))
-      if(reduce)
-        res <- Reduce("%++%", res)
-    } else {
-
-      can <- lapply(object, discards.n, pos=pos)
-
-      res <- FLQuants(lapply(setNames(nm=pos), function(x)
-        Reduce("%++%", lapply(can, function(y) y[[x]]))))
-    }
-    return(res)
+    .fsaccessor('discards.n', object, fishery=fishery, pos=pos, reduce=reduce)
   }
-) # }}}
+)
+# }}}
 
 # catch.n (FLC, FLF, FLFs) {{{
 
@@ -175,22 +222,13 @@ setMethod("catch.n", signature(object="FLFishery"),
 
 #' @rdname FLFisheries
 setMethod("catch.n", signature(object="FLFisheries"),
-  function(object, pos=unique(unlist(lapply(object, names))), reduce=TRUE) {
+  function(object, fishery=names(object),
+    pos=unique(unlist(lapply(object, names))), reduce=TRUE) {
 
-    if(length(pos) == 1) {
-      res <- FLQuants(Map("catch.n", object, pos))
-      if(reduce)
-        res <- Reduce("%++%", res)
-    } else {
-
-      can <- lapply(object, catch.n, pos=pos)
-
-      res <- FLQuants(lapply(setNames(nm=pos), function(x)
-        Reduce("%++%", lapply(can, function(y) y[[x]]))))
-    }
-    return(res)
+    .fsaccessor('catch.n', object, fishery=fishery, pos=pos, reduce=reduce)
   }
-) # }}}
+)
+# }}}
 
 # landings.wt (FLC, FLF, FLFs) {{{
 
@@ -205,6 +243,13 @@ setMethod("landings.wt", signature(object="FLFishery"),
 )
 
 #' @rdname FLFisheries
+setMethod("landings.wt", signature(object="FLFisheries"),
+  function(object, fishery=names(object),
+    pos=unique(unlist(lapply(object, names))), reduce=TRUE) {
+
+    .fsaccessor('landings.wt', object, fishery=fishery, pos=pos, reduce=reduce)
+  }
+)
 setMethod("landings.wt", signature(object="FLFisheries"),
   function(object, pos=lapply(object, names)) {
     if(length(pos) == 1)
@@ -288,37 +333,3 @@ setMethod("catch.wt", signature(object="FLFisheries"),
     return(res)
   }
 ) # }}}
-
-# .parseMetrics {{{
-.parseMetrics <- function(object, metric, by, sum) {
-
-    # EXTRACT metric by FLCatch
-    res <- lapply(object, metric)
-
-    # fishery
-    if(by == "fishery" & !sum) {
-      return(res)
-    } else if (by == "fishery" & sum) {
-      return(FLQuants(lapply(res, Reduce, f="+")))
-    # catch
-    } else if(by == "catch" & sum) {
-
-        res <- Reduce("c", res)
-
-        # GET names of FLCatch(es)
-        nms <- unique(names(res))
-
-        # ADD by catch name
-        return(FLQuants(lapply(setNames(nm=nms), function(x)
-          Reduce("+", res[names(res) == x]))))
-    } else if (by == "catch" & !sum) {
-    
-      nms <- unique(unlist(lapply(res, names)))
-
-      return(lapply(setNames(nm=nms), function(x)
-        FLQuants(lapply(res, function(y) y[[x]]))))
-
-    } else {
-      stop("if given, 'by' must be one of 'fishery' or 'catch'")
-    }
-} # }}}
