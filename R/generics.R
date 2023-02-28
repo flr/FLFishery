@@ -124,10 +124,6 @@ setGeneric("orevenue<-", function(object, ..., value) standardGeneric("orevenue<
 setGeneric("catch.sel<-", function(object, ..., value) standardGeneric("catch.sel<-"))
 
 #' @rdname FLCatch
-#' @aliases discards.ratio discards.ratio-method
-setGeneric("discards.ratio", function(object, ...) standardGeneric("discards.ratio"))
-
-#' @rdname FLCatch
 #' @aliases lrevenue lrevenue-method
 setGeneric("lrevenue", function(object, ...) standardGeneric("lrevenue"))
 
