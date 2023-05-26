@@ -53,7 +53,12 @@ setMethod("harvests", signature(object="FLBiol", catches="FLFisheries"),
     # COMPUTE proportion
     pca <- lapply(pca, "/", tca)
 
-    return(lapply(pca, "*", e1=harvest(object, catches)))
+    res <- lapply(pca, "*", e1=harvest(object, catches))
+
+    # SET units to 'f'
+    res <- lapply(res, setunits, 'f')
+
+    return(res)
   }
 ) # }}}
 

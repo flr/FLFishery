@@ -249,9 +249,10 @@ setMethod("fwdWindow", signature(x="FLFishery", y="missing"),
     if(length(crewshare(res, FALSE)) > 0) {
       stop("TODO")
     }
-
+    
     # FLCatches
-    res[seq(length(res))] <- lapply(res, fwdWindow, end=end)
+    res[seq(length(res))] <- lapply(res, function(i)
+      fwdWindow(window(i, end=dims(x)$maxyear), end=end))
 
     return(res)
   }
@@ -259,7 +260,7 @@ setMethod("fwdWindow", signature(x="FLFishery", y="missing"),
 
 setMethod("fwdWindow", signature(x="FLCatch", y="missing"),
   function(x, end=dims(x)$maxyear, nsq=3) {
-  
+    
     # CALL window if not to extend
     if(end <= dims(x)$maxyear)
       return(window(x, end=end))
@@ -273,9 +274,10 @@ setMethod("fwdWindow", signature(x="FLCatch", y="missing"),
 
     # AVERAGES for nsq years, only for landings/discards ratio
     lans <- yearMeans(landings.n(x)[, myrs])
-    landings.n(res)[, nyrs] <-  lans %/% (quantSums(lans) + 1e-16)
     dans <- yearMeans(discards.n(x)[, myrs])
-    discards.n(res)[, nyrs] <- dans %/% (quantSums(dans) + 1e-16)
+
+    landings.n(res)[, nyrs] <- lans / (lans + dans)
+    discards.n(res)[, nyrs] <- dans / (lans + dans)
     
     # AVERAGES for nsq years
     landings.wt(res)[, nyrs] <- yearMeans(landings.wt(x)[, myrs])
@@ -320,3 +322,16 @@ setMethod("dim", signature(x="FLCatch"),
     return(dim(x@landings.n))
   }
 ) # }}}
+
+# window {{{
+setMethod("window", signature(x="FLFishery"),
+  function(x, ...) {
+
+    res <- callNextMethod()
+
+    res <- lapply(res, window, ...)
+
+    return(res)
+  }
+)
+# }}}
