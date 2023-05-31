@@ -45,7 +45,8 @@ setMethod("harvests", signature(object="FLBiol", catches="FLFisheries"),
   function(object, catches, fcb=rep(1, length(catches)), units=c("f", "hr")) {
     
     # COMPUTE total catch at age
-    tca <- Reduce("+", catch.n(catches))
+    # tca <- Reduce("+", catch.n(catches))
+    tca <- catch.n(catches)
     
     # COMPUTE partial catch at age
     pca <- catch.n(catches, pos=fcb)
