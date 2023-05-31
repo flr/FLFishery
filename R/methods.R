@@ -276,8 +276,11 @@ setMethod("fwdWindow", signature(x="FLCatch", y="missing"),
     lans <- yearMeans(landings.n(x)[, myrs])
     dans <- yearMeans(discards.n(x)[, myrs])
 
-    landings.n(res)[, nyrs] <- lans / (lans + dans)
-    discards.n(res)[, nyrs] <- dans / (lans + dans)
+    # SET to 1/0 if no data
+    landings.n(res)[, nyrs] <- 
+      ifelse(is.na(lans / (lans + dans)), 1, lans / (lans + dans))
+    discards.n(res)[, nyrs] <-
+      ifelse(is.na(dans / (lans + dans)), 0, dans / (lans + dans))
     
     # AVERAGES for nsq years
     landings.wt(res)[, nyrs] <- yearMeans(landings.wt(x)[, myrs])
