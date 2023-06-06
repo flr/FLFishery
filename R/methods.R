@@ -278,7 +278,7 @@ setMethod("fwdWindow", signature(x="FLCatch", y="missing"),
 
     # SET to 1/0 if no data
     landings.n(res)[, nyrs] <- 
-      ifelse(is.na(lans / (lans + dans)), 1, lans / (lans + dans))
+      ifelse(is.na(lans / (lans + dans)), 0, lans / (lans + dans))
     discards.n(res)[, nyrs] <-
       ifelse(is.na(dans / (lans + dans)), 0, dans / (lans + dans))
     
@@ -331,9 +331,7 @@ setMethod("window", signature(x="FLFishery"),
   function(x, ...) {
 
     res <- callNextMethod()
-
-    res <- lapply(res, window, ...)
-
+    res@.Data <- lapply(res, window, ...)
     return(res)
   }
 )
