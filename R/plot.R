@@ -56,20 +56,21 @@ setMethod("plot", signature(x="FLFishery"),
 setMethod("plot", signature(x="FLFisheries"),
   function(x) {
 
-    # PLOT catch by fleet ~ stock
+    # PLOT catch by fleet ~ catch
+    
+    # GET catch names
+    canms <- unique(unlist(lapply(x, names)))
 
     # EXTRACT FLQuants
     eff <- lapply(x, effort)
     cas <- lapply(x, lapply, catch)
 
-    # ADD units to FLQuants names
-    cas <- lapply(cas, function(x) {
-      names(x) <- paste0(names(x), " (", unlist(lapply(x, units)), ")")
-      return(x)
-    })
+    return(Reduce("/", lapply(canms, function(i) 
+      plot(FLQuants(lapply(cas, function(j) lapply(j, unitSums)[[i]]))) +
+      ggtitle(i))))
 
     # GENERATE metrics as catches + eff
-    mets <- mapply(function(x, y) FLQuants(c(x, list(effort=y))), cas, eff, SIMPLIFY=FALSE)
+    mets <- Map(function(x, y) FLQuants(c(x, list(effort=y))), cas, eff)
     dfs <- lapply(mets, as.data.frame, date=TRUE)
 
     # DATA with qname (eff, SPP) and fishery

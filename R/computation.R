@@ -95,8 +95,9 @@ setMethod("catch", signature(object="FLFisheries"),
   # EXTRACT single pos
   if(length(pos) == 1) {
     res <- FLQuants(Map(slot, object[fishery], pos))
+  # TODO: MIXMATCH in areas
     if(reduce)
-      res <- Reduce("%++%", res)
+     res <- Reduce("%++%", res)
   } else {
 
   # OR multiple
