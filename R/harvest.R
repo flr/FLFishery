@@ -52,7 +52,7 @@ setMethod("harvests", signature(object="FLBiol", catches="FLFisheries"),
     pca <- catch.n(catches, pos=fcb)
     
     # COMPUTE proportion
-    pca <- lapply(pca, "/", tca)
+    pca <- Map(function(x,y) x / y, x=pca, y=tca)
 
     res <- lapply(pca, "*", e1=harvest(object, catches))
 

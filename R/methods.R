@@ -329,7 +329,6 @@ setMethod("dim", signature(x="FLCatch"),
 # window {{{
 setMethod("window", signature(x="FLFishery"),
   function(x, ...) {
-
     res <- callNextMethod()
     res@.Data <- lapply(res, window, ...)
     return(res)
