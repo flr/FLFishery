@@ -341,4 +341,14 @@ setMethod("window", signature(x="FLFishery"),
     return(res)
   }
 )
+
+setMethod("window", signature(x="FLCatch"),
+  function(x, ...) {
+    res <- callNextMethod()
+
+    catch.q(res) <- window(catch.q(res), ...)
+
+    return(res)
+  }
+)
 # }}}

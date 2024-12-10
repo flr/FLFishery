@@ -71,7 +71,7 @@ setMethod("harvests", signature(object="FLBiol", catches="FLFisheries"),
 
 setMethod("harvest", signature(object="FLBiol", catch="FLFishery"),
   function(object, catch, fcb=1) {
-    
+
     caq <- catch.q(catch[[fcb]])
 
     # F = effort * alpha * sel * biomass ^ -beta
