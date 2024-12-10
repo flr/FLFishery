@@ -160,6 +160,8 @@ setMethod("as.FLStock", signature(object="FLBiol"),
   hspwn <- expand(hspwn, age=dimnames(m)$age)
 
   mspwn <- expand(spwn(object), age=dimnames(m)$age, fill=TRUE)
+  # BUG: FIX in expand(FLArray)
+  mspwn[dimnames(m)$age,] <- spwn(object)
   units(hspwn) <- units(mspwn) <- ""
 
   # BUILD FLStock

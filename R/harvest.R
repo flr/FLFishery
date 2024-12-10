@@ -99,7 +99,7 @@ setMethod("harvest", signature(object="FLBiol", catch="FLFisheries"),
   }
 ) # }}}
 
-# harvest(FLBiols, FLFishery) {{{
+# harvest(FLBiols, FLFisheries) {{{
 
 #' @rdname harvest
 #' @examples

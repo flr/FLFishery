@@ -287,6 +287,13 @@ setMethod("fwdWindow", signature(x="FLCatch", y="missing"),
     discards.wt(res)[, nyrs] <- yearMeans(discards.wt(x)[, myrs])
     catch.sel(res)[, nyrs] <- yearMeans(catch.sel(x)[, myrs])
     price(res)[, nyrs] <- yearMeans(price(x)[, myrs])
+    
+    # EXTEND catch.q if annual
+    if("year" %in% names(catch.q(x))) {
+      catch.q(res) <- window(catch.q(res), end=end)
+      catch.q(res)[, nyrs] <- apply(catch.q(x)[, myrs],
+        seq(length(dim(catch.q(x))))[-match("year", names(catch.q(x)))], mean)
+    }
 
     return(res)
   }
