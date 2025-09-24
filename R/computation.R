@@ -279,9 +279,9 @@ setMethod("catch.wt", signature(object="FLCatch"),
   discards.n(object)[is.na(discards.n(object))] <- 1
 
   # WEIGHTED average (+ 1e-16)
-  return(((landings.wt(object) * (landings.n(object) + 1e-16)) +
-    (discards.wt(object) * (discards.n(object) + 1e-16))) /
-      (landings.n(object) + discards.n(object) + 1e-16))
+  return(((landings.wt(object) * (landings.n(object) + .Machine$double.xmin)) +
+    (discards.wt(object) * (discards.n(object) + .Machine$double.xmin))) /
+      (landings.n(object) + discards.n(object) + .Machine$double.xmin))
   }
 )
 
@@ -319,8 +319,6 @@ setMethod("catch.wt", signature(object="FLFisheries"),
       if(reduce) {
         can <- lapply(object, function(x) lapply(x, catch.n)[pos])
         res <- Map(function(x, y) (x * y) / y, x = res, y = can)
-
-
       }
 
       # reduce, combine as weighted mean by stock across fisheries
