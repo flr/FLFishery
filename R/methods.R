@@ -240,7 +240,8 @@ setMethod("fwdWindow", signature(x="FLFishery", y="missing"),
 
     # AVERAGES for nsq years
     capacity(res)[, nyrs] <- yearMeans(capacity(res)[, myrs])
-    effort(res)[, nyrs] <- yearMeans(effort(res)[, myrs])
+    # effort(res)[, nyrs] <- yearMeans(effort(res)[, myrs])
+    effort(res)[, nyrs] <- 10e-8
     hperiod(res)[, nyrs] <- yearMeans(hperiod(res)[, myrs])
     vcost(res)[, nyrs] <- yearMeans(vcost(res)[, myrs])
     fcost(res)[, nyrs] <- yearMeans(fcost(res)[, myrs])
